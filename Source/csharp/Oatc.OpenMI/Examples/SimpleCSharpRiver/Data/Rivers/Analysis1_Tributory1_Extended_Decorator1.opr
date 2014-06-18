@@ -1,0 +1,34 @@
+<opr
+  version="2.0">
+  <model
+    omi="Analysis1_Tributory1_Extension.omi"
+    is_trigger="true"
+    rect_x="211"
+    rect_y="42"
+    rect_width="100"
+    rect_height="51" />
+  <model
+    omi="Analysis1_Tributory1.omi"
+    rect_x="31"
+    rect_y="42"
+    rect_width="100"
+    rect_height="51" />
+  <connection
+    model_index_source="1"
+    model_index_target="0">
+    <exchange
+      output_identifier="Branch flow 2"
+      input_identifier="Node inflow 0">
+      <decorator
+        identifer="Oatc.OpenMI.Sdk.Decorators.LinearConversion"
+        decorated_identifer="Branch flow 2">
+        <argument
+          identifier="LinearConversion.A"
+          value="2" />
+        <argument
+          identifier="LinearConversion.B"
+          value="0" />
+      </decorator>
+    </exchange>
+  </connection>
+</opr>

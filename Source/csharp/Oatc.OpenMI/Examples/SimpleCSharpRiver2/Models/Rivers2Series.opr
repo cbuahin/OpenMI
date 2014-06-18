@@ -1,0 +1,23 @@
+<opr
+  version="2.0">
+  <model
+    omi="River1.omi"
+    rect_x="50"
+    rect_y="48"
+    rect_width="100"
+    rect_height="51" />
+  <model
+    omi="River2.omi"
+    is_trigger="true"
+    rect_x="222"
+    rect_y="51"
+    rect_width="100"
+    rect_height="51" />
+  <connection
+    model_index_source="0"
+    model_index_target="1">
+    <exchange
+      output_identifier="River branch [2]"
+      input_identifier="Inflow location [0]" />
+  </connection>
+</opr>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Product Id="278ea5c0-620b-4b5b-a7ad-4763cc67d6d8" Name="OATC OpenMI Editor 2.0 Alpha X" Language="1033" Version="2.0.0.0" Manufacturer="OpenMI Association Technical Committee" UpgradeCode="f739cda4-e2a9-47b9-a3dd-062f9b4661bf">
+        <Package Description="OATC OpenMI Editor 2.0 Alpha X" Comments="OpenMI Association Technical Committee" InstallerVersion="200" Compressed="yes" />
+        <Media Id="1" Cabinet="Product.cab" EmbedCab="yes" />
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ProgramFilesFolder">
+                <Directory Id="PROGRAMFILELOCATION" Name="OATC OpenMI Editor 2.0 Alpha X">
+                    <!--
+                    <Component Id="i2" Guid="6d9c0ebd-29d4-4ec0-ab67-d6452b9a9c79" DiskId="1">
+                        <File Id="i1" Name="OmiEd.ico" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\bin\OmiEd.ico" />
+                        <RegistryKey Id="i3" Root="HKCU" Key="Software\OpenMI\OATC_Editor" Action="createAndRemoveOnUninstall">
+                            <RegistryValue Name="i4" Value="1" Type="integer" KeyPath="yes" />
+                        </RegistryKey>
+                        <RegistryKey Id="i5" Root="HKCU" Key="Software\OpenMI\OATC_Editor" Action="createAndRemoveOnUninstall">
+                            <RegistryValue Id="i6" Name="Install_Location" Value="[PROGRAMFILELOCATION]" Type="string" />
+                            <RegistryValue Id="i7" Name="Examples_Location" Value="[DESKTOPLOCATION]" Type="string" />
+                        </RegistryKey>
+                    </Component>
+                    -->
+                    <Component Id="i9" Guid="dd3d3c31-1f13-4e50-83ed-56831dbc78d4" DiskId="1">
+                        <File Id="i8" Name="Oatc_OpenMI_ConfigurationEditor.exe" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\bin\Oatc_OpenMI_ConfigurationEditor.exe" />
+                        <File Id="i1" Name="OmiEd.ico" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\bin\OmiEd.ico" />
+                        <RegistryKey Id="i3" Root="HKLM" Key="Software\OpenMI\OATC_Editor" Action="createAndRemoveOnUninstall">
+                            <RegistryValue Name="i4" Value="1" Type="integer" KeyPath="yes" />
+                        </RegistryKey>
+                        <RegistryKey Id="i5" Root="HKLM" Key="Software\OpenMI\OATC_Editor" Action="createAndRemoveOnUninstall">
+                            <RegistryValue Id="i6" Name="Install_Location" Value="[PROGRAMFILELOCATION]" Type="string" />
+                            <RegistryValue Id="i7" Name="Examples_Location" Value="[DESKTOPLOCATION]" Type="string" />
+                        </RegistryKey>
+                        <ProgId Id="i10" Description="OpenMI OPR composition file" Icon="i1">
+                            <Extension Id="opr" ContentType="application/xyz">
+                                <Verb Id="open" Command="Open" TargetFile="i8" Argument="-opr &quot;%1&quot;" />
+                            </Extension>
+                        </ProgId>
+                    </Component>
+                    <Component Id="i12" Guid="101b9cfa-1bee-4f13-a678-d2c9d0beac05" DiskId="1">
+                        <File Id="i11" Name="Oatc_OpenMI_Gui_Controls.dll" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\bin\Oatc_OpenMI_Gui_Controls.dll" />
+                    </Component>
+                    <Component Id="i14" Guid="a977138e-e06a-4c4b-bdd5-340d60491b5a" DiskId="1">
+                        <File Id="i13" Name="Oatc_OpenMI_Gui_Core.dll" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\bin\Oatc_OpenMI_Gui_Core.dll" />
+                    </Component>
+                    <Component Id="i16" Guid="fbdf7de3-8300-4942-8e7d-b0708f1151df" DiskId="1">
+                        <File Id="i15" Name="Oatc.OpenMI.Sdk.dll" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\bin\Oatc.OpenMI.Sdk.dll" />
+                    </Component>
+                    <Component Id="i18" Guid="d61a3d79-67ef-456f-b78b-57d689fd92cf" DiskId="1">
+                        <File Id="i17" Name="OpenMI.Standard2.dll" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\bin\OpenMI.Standard2.dll" />
+                    </Component>
+                    <Component Id="i20" Guid="566c3f41-1441-40b3-9889-60edff472285" DiskId="1">
+                        <File Id="i19" Name="log4net.dll" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\bin\log4net.dll" />
+                    </Component>
+                    <Component Id="i22" Guid="c9311717-93d5-43b4-996f-f7b69c5ea594" DiskId="1">
+                        <File Id="i21" Name="OpenMIEditorHelp_2_0.pdf" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\Help\OpenMIEditorHelp_2_0.pdf" />
+                    </Component>
+                    <Component Id="i24" Guid="d9a0a4c4-689c-452c-8763-f52c12c052b9" DiskId="1">
+                        <File Id="i23" Name="OpenMIEditorHelp_2_0.chm" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\Help\OpenMIEditorHelp_2_0.chm" />
+                    </Component>
+                </Directory>
+            </Directory>
+            <Directory Id="DesktopFolder">
+                <Directory Id="DESKTOPLOCATION" Name="OATC OpenMI Editor 2.0 Alpha X">
+                    <Component Id="i26" Guid="434a572d-316b-4f96-97e0-36aca0a05a58" DiskId="1">
+                        <File Id="i25" Name="SimpleCSharpRiver2_RiverReach1.opr" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\Help\examples\SimpleCSharpRiver2_RiverReach1.opr" />
+                        <RegistryKey Id="i27" Root="HKCU" Key="Software\OpenMI\OATC_Editor" Action="createAndRemoveOnUninstall">
+                            <RegistryValue Name="i28" Value="1" Type="integer" KeyPath="yes" />
+                        </RegistryKey>
+                        <RemoveFolder Id="i29" On="uninstall" />
+                    </Component>
+                    <Component Id="i31" Guid="2b4eeb17-8480-48ae-adce-75773f5e422d" DiskId="1">
+                        <File Id="i30" Name="SimpleCSharpRiver2_RiverReachs1and2.opr" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\Help\examples\SimpleCSharpRiver2_RiverReachs1and2.opr" />
+                        <RegistryKey Id="i32" Root="HKCU" Key="Software\OpenMI\OATC_Editor" Action="createAndRemoveOnUninstall">
+                            <RegistryValue Name="i33" Value="1" Type="integer" KeyPath="yes" />
+                        </RegistryKey>
+                        <RemoveFolder Id="i34" On="uninstall" />
+                    </Component>
+                    <Component Id="i36" Guid="8c2cbf7a-c1cf-44d1-830e-e42823ad8b39" DiskId="1">
+                        <File Id="i35" Name="SimpleCSharpRiver2_Decorators01.opr" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\Help\examples\SimpleCSharpRiver2_Decorators01.opr" />
+                        <RegistryKey Id="i37" Root="HKCU" Key="Software\OpenMI\OATC_Editor" Action="createAndRemoveOnUninstall">
+                            <RegistryValue Name="i38" Value="1" Type="integer" KeyPath="yes" />
+                        </RegistryKey>
+                        <RemoveFolder Id="i39" On="uninstall" />
+                    </Component>
+                    <Component Id="i41" Guid="5ae1f60c-ec11-4505-8deb-d20b74dc955c" DiskId="1">
+                        <File Id="i40" Name="SimpleCSharpRiver2_Decorators02.opr" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\Help\examples\SimpleCSharpRiver2_Decorators02.opr" />
+                        <RegistryKey Id="i42" Root="HKCU" Key="Software\OpenMI\OATC_Editor" Action="createAndRemoveOnUninstall">
+                            <RegistryValue Name="i43" Value="1" Type="integer" KeyPath="yes" />
+                        </RegistryKey>
+                        <RemoveFolder Id="i44" On="uninstall" />
+                    </Component>
+                    <Directory Id="i45" Name="models">
+                        <Component Id="i47" Guid="e5f8df95-78e0-466d-a5e8-7e2810639c0c" DiskId="1">
+                            <File Id="i46" Name="Oatc.OpenMI.Sdk.dll" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\Help\examples\models\Oatc.OpenMI.Sdk.dll" />
+                            <RegistryKey Id="i48" Root="HKCU" Key="Software\OpenMI\OATC_Editor" Action="createAndRemoveOnUninstall">
+                                <RegistryValue Name="i49" Value="1" Type="integer" KeyPath="yes" />
+                            </RegistryKey>
+                            <RemoveFolder Id="i50" On="uninstall" />
+                        </Component>
+                        <Component Id="i52" Guid="b4ae8a72-47c1-4cf8-97b4-bc5003059351" DiskId="1">
+                            <File Id="i51" Name="Oatc_OpenMI_Examples_SimpleCSharpRiver2.exe" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\Help\examples\models\Oatc_OpenMI_Examples_SimpleCSharpRiver2.exe" />
+                            <RegistryKey Id="i53" Root="HKCU" Key="Software\OpenMI\OATC_Editor" Action="createAndRemoveOnUninstall">
+                                <RegistryValue Name="i54" Value="1" Type="integer" KeyPath="yes" />
+                            </RegistryKey>
+                            <RemoveFolder Id="i55" On="uninstall" />
+                        </Component>
+                        <Component Id="i57" Guid="3fd2399b-ed74-48be-8599-646cf0c8cfb3" DiskId="1">
+                            <File Id="i56" Name="Oatc_OpenMI_Sdk_ModelWrapper2.dll" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\Help\examples\models\Oatc_OpenMI_Sdk_ModelWrapper2.dll" />
+                            <RegistryKey Id="i58" Root="HKCU" Key="Software\OpenMI\OATC_Editor" Action="createAndRemoveOnUninstall">
+                                <RegistryValue Name="i59" Value="1" Type="integer" KeyPath="yes" />
+                            </RegistryKey>
+                            <RemoveFolder Id="i60" On="uninstall" />
+                        </Component>
+                        <Component Id="i62" Guid="6db21639-c3bc-41c8-8932-5cee4ea059ec" DiskId="1">
+                            <File Id="i61" Name="OpenMI.Standard2.dll" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\Help\examples\models\OpenMI.Standard2.dll" />
+                            <RegistryKey Id="i63" Root="HKCU" Key="Software\OpenMI\OATC_Editor" Action="createAndRemoveOnUninstall">
+                                <RegistryValue Name="i64" Value="1" Type="integer" KeyPath="yes" />
+                            </RegistryKey>
+                            <RemoveFolder Id="i65" On="uninstall" />
+                        </Component>
+                        <Component Id="i67" Guid="04da43a2-4ea5-483a-bd1c-0b0acf3be4ab" DiskId="1">
+                            <File Id="i66" Name="SimpleCSharpRiver2_BoundaryConditions1.txt" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\Help\examples\models\SimpleCSharpRiver2_BoundaryConditions1.txt" />
+                            <RegistryKey Id="i68" Root="HKCU" Key="Software\OpenMI\OATC_Editor" Action="createAndRemoveOnUninstall">
+                                <RegistryValue Name="i69" Value="1" Type="integer" KeyPath="yes" />
+                            </RegistryKey>
+                            <RemoveFolder Id="i70" On="uninstall" />
+                        </Component>
+                        <Component Id="i72" Guid="d97bc278-be66-4a59-82cd-1d502efb06ca" DiskId="1">
+                            <File Id="i71" Name="SimpleCSharpRiver2_RiverReach1.omi" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\Help\examples\models\SimpleCSharpRiver2_RiverReach1.omi" />
+                            <RegistryKey Id="i73" Root="HKCU" Key="Software\OpenMI\OATC_Editor" Action="createAndRemoveOnUninstall">
+                                <RegistryValue Name="i74" Value="1" Type="integer" KeyPath="yes" />
+                            </RegistryKey>
+                            <RemoveFolder Id="i75" On="uninstall" />
+                        </Component>
+                        <Component Id="i77" Guid="171b8b8a-fbc1-4b70-b039-0dd12ca6378f" DiskId="1">
+                            <File Id="i76" Name="SimpleCSharpRiver2_RiverReach1.txt" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\Help\examples\models\SimpleCSharpRiver2_RiverReach1.txt" />
+                            <RegistryKey Id="i78" Root="HKCU" Key="Software\OpenMI\OATC_Editor" Action="createAndRemoveOnUninstall">
+                                <RegistryValue Name="i79" Value="1" Type="integer" KeyPath="yes" />
+                            </RegistryKey>
+                            <RemoveFolder Id="i80" On="uninstall" />
+                        </Component>
+                        <Component Id="i82" Guid="ead043a9-f9c6-490e-9403-0a4eb1696592" DiskId="1">
+                            <File Id="i81" Name="SimpleCSharpRiver2_RiverReach2.omi" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\Help\examples\models\SimpleCSharpRiver2_RiverReach2.omi" />
+                            <RegistryKey Id="i83" Root="HKCU" Key="Software\OpenMI\OATC_Editor" Action="createAndRemoveOnUninstall">
+                                <RegistryValue Name="i84" Value="1" Type="integer" KeyPath="yes" />
+                            </RegistryKey>
+                            <RemoveFolder Id="i85" On="uninstall" />
+                        </Component>
+                        <Component Id="i87" Guid="cb74cdf6-fc36-4714-b3a8-d7481e9b2d40" DiskId="1">
+                            <File Id="i86" Name="SimpleCSharpRiver2_RiverReach2.txt" Source="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\Help\examples\models\SimpleCSharpRiver2_RiverReach2.txt" />
+                            <RegistryKey Id="i88" Root="HKCU" Key="Software\OpenMI\OATC_Editor" Action="createAndRemoveOnUninstall">
+                                <RegistryValue Name="i89" Value="1" Type="integer" KeyPath="yes" />
+                            </RegistryKey>
+                            <RemoveFolder Id="i90" On="uninstall" />
+                        </Component>
+                    </Directory>
+                </Directory>
+            </Directory>
+            <Directory Id="ProgramMenuFolder" Name="PMFolder">
+                <Directory Id="ApplicationProgramsFolder" Name="OATC OpenMI Editor 2.0 Alpha X" />
+            </Directory>
+        </Directory>
+        <DirectoryRef Id="ApplicationProgramsFolder">
+            <Component Id="i91" Guid="45eff540-d311-4998-822e-73b2dff7a67d" DiskId="1">
+                <Shortcut Id="i92" Name="Editor" Description="OATC OpenMI Editor" Target="[PROGRAMFILELOCATION][!i8]" Directory="ApplicationProgramsFolder" WorkingDirectory="PROGRAMFILELOCATION" />
+                <RemoveFolder Id="i93" On="uninstall" />
+                <RegistryValue Root="HKCU" Key="Software\OpenMI\OATC_Editor" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+            </Component>
+            <Component Id="i94" Guid="58535897-b839-456d-8658-159dedc13ed3" DiskId="1">
+                <Shortcut Id="i95" Name="Help (PDF)" Description="Help (PDF)" Target="[PROGRAMFILELOCATION][!i21]" Directory="ApplicationProgramsFolder" WorkingDirectory="PROGRAMFILELOCATION" />
+                <RemoveFolder Id="i96" On="uninstall" />
+                <RegistryValue Root="HKCU" Key="Software\OpenMI\OATC_Editor" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+            </Component>
+            <Component Id="i97" Guid="0e6ae7c9-d261-4253-b76d-8f9b8d84776d" DiskId="1">
+                <Shortcut Id="i98" Name="Help (CHM)" Description="Help (CHM)" Target="[PROGRAMFILELOCATION][!i23]" Directory="ApplicationProgramsFolder" WorkingDirectory="PROGRAMFILELOCATION" />
+                <RemoveFolder Id="i99" On="uninstall" />
+                <RegistryValue Root="HKCU" Key="Software\OpenMI\OATC_Editor" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+            </Component>
+        </DirectoryRef>
+        <Feature Id="FeatureProgramFiles" Title="Editor" Level="1" Display="expand" ConfigurableDirectory="PROGRAMFILELOCATION">
+            <ComponentRef Id="i91" />
+            <ComponentRef Id="i94" />
+            <ComponentRef Id="i97" />
+            <ComponentRef Id="i9" />
+            <ComponentRef Id="i12" />
+            <ComponentRef Id="i14" />
+            <ComponentRef Id="i16" />
+            <ComponentRef Id="i18" />
+            <ComponentRef Id="i20" />
+            <ComponentRef Id="i22" />
+            <ComponentRef Id="i24" />
+        </Feature>
+        <Feature Id="FeatureDesktopFiles" Title="Examples" Level="1" Display="expand" ConfigurableDirectory="DESKTOPLOCATION">
+            <ComponentRef Id="i26" />
+            <ComponentRef Id="i31" />
+            <ComponentRef Id="i36" />
+            <ComponentRef Id="i41" />
+            <ComponentRef Id="i47" />
+            <ComponentRef Id="i52" />
+            <ComponentRef Id="i57" />
+            <ComponentRef Id="i62" />
+            <ComponentRef Id="i67" />
+            <ComponentRef Id="i72" />
+            <ComponentRef Id="i77" />
+            <ComponentRef Id="i82" />
+            <ComponentRef Id="i87" />
+        </Feature>
+        <WixVariable Id="WixUILicenseRtf" Value="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\Installers\License.rtf" />
+        <WixVariable Id="WixUIBannerBmp" Value="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\Installers\Bitmaps\bannrbmp.bmp" />
+        <WixVariable Id="WixUIDialogBmp" Value="D:\Source\OpenMI\Trunk1\src\csharp\Oatc.OpenMI\Gui\Installers\Bitmaps\dlgbmp.bmp" />
+        <Condition Message="This setup requires the .NET Framework 2.0 or higher."><![CDATA[MsiNetAssemblySupport >= "2.0.50727"]]></Condition>
+        <UIRef Id="WixUI_FeatureTree" />
+        <UIRef Id="WixUI_ErrorProgressText" />
+        <UI />
+    </Product>
+</Wix>

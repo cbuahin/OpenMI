@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<LinkableComponent Type="DHI.OpenMI.TestModels.GroundWaterModel.GWModelLC" Assembly="..\DHI.OpenMI.TestModels.GroundWaterModel\bin\Debug\DHI.OpenMI.TestModels.GroundWaterModel.dll">
+  <Arguments>
+    <Argument Key="modelID" ReadOnly="true" Value="GW 4E" />
+    <Argument Key="simulationStart" ReadOnly="true" Value="1990,1,1,0,0,0" />
+    <Argument Key="simulationEnd" ReadOnly="true" Value="1993,1,1,0,0,0" />
+    <Argument Key="nx" ReadOnly="true" Value="2" />
+    <Argument Key="ny" ReadOnly="true" Value="3" />
+    <Argument Key="ox" ReadOnly="true" Value="1000" />
+    <Argument Key="oy" ReadOnly="true" Value="1000" />
+    <Argument Key="cellSize" ReadOnly="true" Value="1000" />
+    <Argument Key="groundWaterLevel" ReadOnly="true" Value="3.0" />
+    <Argument Key="gridAngle" ReadOnly="true" Value="0.0" />
+   </Arguments>
+</LinkableComponent>

@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Oatc.OpenMI.Sdk.Spatial.SpatialMeshWrapper">
+    <Position X="2.25" Y="4" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="_mesh" Type="Oatc.OpenMI.Sdk.Spatial.ISpatialMesh">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.723" Y="1.112" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>ACAQBCAMAAAEAAAAABAAAAAAgAACAAEAABAAAAAAAAA=</HashCode>
+      <FileName>Spatial\SpatialMesh.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_mesh" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Oatc.OpenMI.Sdk.Spatial.Spatial2DGridWrapper" Collapsed="true">
+    <Position X="4.25" Y="4" Width="2" />
+    <AssociationLine Name="_grid" Type="Oatc.OpenMI.Sdk.Spatial.ISpatial2DGrid">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.661" Y="-1.836" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>ACAQBCAMAAAEAAAAAJCAAAAAAAgCAAEAABAAAAAAAAA=</HashCode>
+      <FileName>Spatial\Spatial2DGridWrapper.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_grid" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Oatc.OpenMI.Sdk.Spatial.LineStringWrapper" Collapsed="true">
+    <Position X="6.75" Y="4" Width="1.75" />
+    <AssociationLine Name="_lineString" Type="Oatc.OpenMI.Sdk.Spatial.ILineString">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-1.223" Y="0.331" Height="0.182" Width="0.878" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>ACAwBCAMAAAEAAAAABAAAAAAAAACAAEAABAAAAAAAAA=</HashCode>
+      <FileName>Spatial\LineString.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_lineString" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Oatc.OpenMI.Sdk.Spatial.MultiPointWrapper" Collapsed="true">
+    <Position X="6.75" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAQBCAMAAAEAAAAABAAAAAAAAACAAEAABAAAAAIAAA=</HashCode>
+      <FileName>Spatial\MultiPoint.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_multiPoint" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Oatc.OpenMI.Sdk.Spatial.ISpatialMesh" Collapsed="true">
+    <Position X="2.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIiAAAoAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Spatial\ISpatialMesh.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.TimeSpace.ISpatialDefinition" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Oatc.OpenMI.Sdk.Spatial.ISpatial2DRegularGrid" Collapsed="true">
+    <Position X="4.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAQAAAAgAAAAAAAAAAAAAAAAAYAAAAAAAAAA=</HashCode>
+      <FileName>Spatial\ISpatial2DRegularGrid.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Oatc.OpenMI.Sdk.Spatial.ISpatial2DGrid" Collapsed="true">
+    <Position X="4.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIIAAAAAAQAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Spatial\ISpatial2DGrid.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Oatc.OpenMI.Sdk.Spatial.ILineString" Collapsed="true">
+    <Position X="6.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIQAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Spatial\ILineString.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Oatc.OpenMI.Sdk.Spatial.IMultiPoint" Collapsed="true">
+    <Position X="6.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Spatial\IMultiPoint.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.TimeSpace.IElementSet" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<LinkableComponent Type="org.OpenMI.Utilities.AdvancedControl.SumSquaredDifference" 
+  Assembly="C:\HarmonIT\SourceCode\DotNet\OpenMI\Bin\org.OpenMI.Utilities.AdvancedControl.dll">
+  <Arguments>
+  <Argument Key="BeginTime" ReadOnly="true" Value="0.0" />
+  		<Argument Key="EndTime" ReadOnly="true" Value="1.0" />
+		<Argument Key="TimeStep" ReadOnly="true" Value="0.041666666666666666666" />
+  </Arguments>
+</LinkableComponent>

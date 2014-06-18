@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<LinkableComponent Type="MyName.RiverModelWrapper.RiverModelLinkableComponent" Assembly="..\bin\Debug\MyName.RiverModelWrapper.dll">
+  <Arguments>
+    <Argument Key="Path" ReadOnly="true" Value="" />
+    </Arguments>
+</LinkableComponent>

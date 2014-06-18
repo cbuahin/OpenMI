@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E768C562-3A5A-40C5-ADF1-1957AE4BCD27}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>OpenMI.Standard2</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>OpenMI.Standard2</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <SignAssembly>false</SignAssembly>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>bin/Debug/OpenMI.Standard2.XML</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\bin\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>..\bin\OpenMI.Standard2.XML</DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExchangeItemChangeEventArgs.cs" />
+    <Compile Include="IArgument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IByteStateConverter.cs" />
+    <Compile Include="ICategory.cs" />
+    <Compile Include="IAdaptedOutputFactory.cs" />
+    <Compile Include="IDescribable.cs" />
+    <Compile Include="IDimension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IBaseExchangeItem.cs" />
+    <Compile Include="IIdentifiable.cs" />
+    <Compile Include="IBaseInput.cs" />
+    <Compile Include="IBaseLinkableComponent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IManageState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IBaseAdaptedOutput.cs" />
+    <Compile Include="IBaseOutput.cs" />
+    <Compile Include="IQuality.cs" />
+    <Compile Include="IQuantity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IUnit.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IValueDefinition.cs" />
+    <Compile Include="IBaseValueSet.cs" />
+    <Compile Include="LinkableComponentStatusChangeEventArgs.cs" />
+    <Compile Include="LinkableComponentStatus.cs" />
+    <Compile Include="TimeSpace\ElementType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TimeSpace\IElementSet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TimeSpace\ISpatialDefinition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TimeSpace\ITime.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TimeSpace\ITimeExtension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TimeSpace\ITimeSet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TimeSpace\ITimeSpaceAdaptedOutput.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TimeSpace\ITimeSpaceComponent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TimeSpace\ITimeSpaceExchangeItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TimeSpace\ITimeSpaceInput.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TimeSpace\ITimeSpaceOutput.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TimeSpace\ITimeSpaceValueSet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <None Include="Uml\AllInterfaces.cd" />
+    <None Include="Uml\ExchangeItems.cd" />
+    <None Include="Uml\OpenMIStandard.cd" />
+    <None Include="Uml\QualityQuantity.cd" />
+    <None Include="Uml\LinkableComponent.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Generic\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

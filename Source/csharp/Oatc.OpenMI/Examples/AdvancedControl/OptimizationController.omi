@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<LinkableComponent Type="org.OpenMI.Utilities.AdvancedControl.OptimizationController" 
+  Assembly="C:\HarmonIT\SourceCode\DotNet\OpenMI\Bin\org.OpenMI.Utilities.AdvancedControl.dll">
+  <Arguments>
+  <Argument Key="Parameter" ReadOnly="true" Value="P0,-100,100,3.5" />
+ 	<Argument Key="Parameter" ReadOnly="true" Value="P1,-100,100,3.5" />
+  </Arguments>
+</LinkableComponent>

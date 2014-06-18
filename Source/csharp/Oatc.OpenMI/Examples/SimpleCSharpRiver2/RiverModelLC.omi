@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<LinkableComponent xmlns="http://www.openmi.org" Type="Oatc.OpenMI.Sdk.ModelWrapper.UnitTest1.RiverModelLC" Assembly="bin\debug\Oatc.OpenMI.Sdk.ModelWrapper.UnitTest1.dll">
+  <Arguments>
+    <Argument Key="Dummy" ReadOnly="true" Value="DummyValue" />
+   </Arguments>
+</LinkableComponent>

@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "River", "River\River.csproj", "{9F08EE88-B93C-477F-9055-FAB95045566C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroundWater", "GroundWater\GroundWater.csproj", "{2BE0FBE1-B957-4F96-968A-6A360250E54D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PossibleSDK", "PossibleSDK\PossibleSDK.csproj", "{088E06AB-54A9-425E-B6D1-2AB3C4563BA9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Simple Examples", "Simple Examples", "{FC88400E-92F4-48D5-B87D-BD0296DF4611}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common Code", "Common Code", "{083436EA-638C-473C-B6D7-AAD78E7846DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMI.Standard", "..\..\..\..\..\OpenMI.Standard\src\csharp\OpenMI.Standard\OpenMI.Standard.csproj", "{E768C562-3A5A-40C5-ADF1-1957AE4BCD27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oatc.OpenMI.Sdk.Backbone", "..\..\Sdk\Backbone\Oatc.OpenMI.Sdk.Backbone.csproj", "{23C206AE-CBEF-4FD1-9928-BF04147B62B2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F08EE88-B93C-477F-9055-FAB95045566C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F08EE88-B93C-477F-9055-FAB95045566C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F08EE88-B93C-477F-9055-FAB95045566C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F08EE88-B93C-477F-9055-FAB95045566C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BE0FBE1-B957-4F96-968A-6A360250E54D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BE0FBE1-B957-4F96-968A-6A360250E54D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BE0FBE1-B957-4F96-968A-6A360250E54D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BE0FBE1-B957-4F96-968A-6A360250E54D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{088E06AB-54A9-425E-B6D1-2AB3C4563BA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{088E06AB-54A9-425E-B6D1-2AB3C4563BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{088E06AB-54A9-425E-B6D1-2AB3C4563BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{088E06AB-54A9-425E-B6D1-2AB3C4563BA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E768C562-3A5A-40C5-ADF1-1957AE4BCD27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E768C562-3A5A-40C5-ADF1-1957AE4BCD27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E768C562-3A5A-40C5-ADF1-1957AE4BCD27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E768C562-3A5A-40C5-ADF1-1957AE4BCD27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23C206AE-CBEF-4FD1-9928-BF04147B62B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23C206AE-CBEF-4FD1-9928-BF04147B62B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23C206AE-CBEF-4FD1-9928-BF04147B62B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23C206AE-CBEF-4FD1-9928-BF04147B62B2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2BE0FBE1-B957-4F96-968A-6A360250E54D} = {FC88400E-92F4-48D5-B87D-BD0296DF4611}
+		{9F08EE88-B93C-477F-9055-FAB95045566C} = {FC88400E-92F4-48D5-B87D-BD0296DF4611}
+		{088E06AB-54A9-425E-B6D1-2AB3C4563BA9} = {083436EA-638C-473C-B6D7-AAD78E7846DD}
+		{E768C562-3A5A-40C5-ADF1-1957AE4BCD27} = {083436EA-638C-473C-B6D7-AAD78E7846DD}
+		{23C206AE-CBEF-4FD1-9928-BF04147B62B2} = {083436EA-638C-473C-B6D7-AAD78E7846DD}
+	EndGlobalSection
+EndGlobal

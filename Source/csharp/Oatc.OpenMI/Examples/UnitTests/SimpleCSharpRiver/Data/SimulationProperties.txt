@@ -1,0 +1,13 @@
+-- Simple River Simulation File --
+
+-- Setup ID --
+The river Rhine
+
+-- Simulation Start Time [YYYY-MM-DD HH:MM:SS] --
+2004-10-07 16:38:32
+
+-- Time Step Length [Sec] --
+86400.0
+
+-- Leakage coefficient --
+0.1

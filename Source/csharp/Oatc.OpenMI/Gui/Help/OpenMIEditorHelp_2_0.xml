@@ -1,0 +1,993 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book version="5.0" xmlns="http://docbook.org/ns/docbook"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:svg="http://www.w3.org/2000/svg"
+      xmlns:m="http://www.w3.org/1998/Math/MathML"
+      xmlns:html="http://www.w3.org/1999/xhtml"
+      xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+    <title>OATC OpenMI Editor 2.0</title>
+
+    <author>
+      <personname><firstname>Adrian</firstname><surname>Harper</surname></personname>
+
+      <affiliation>
+        <orgname>OpenMI Association Technical Committee</orgname>
+      </affiliation>
+    </author>
+
+    <pubdate>January 2010</pubdate>
+  </info>
+
+  <chapter>
+    <title>Overview</title>
+
+    <section>
+      <title>Why it exists</title>
+
+      <para>The “OpenMI Association” is responsible for the OpenMI standard.
+      However, it also commits to providing an open source user interface (UI)
+      that is easily obtainable. It is not intended that this UI be “complex”
+      or “advanced”, its primary goals are</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Provide a simple demonstration of OpenMI functionality</para>
+        </listitem>
+
+        <listitem>
+          <para>Allow a basic means of connection and running OpenMI
+          components interactively</para>
+        </listitem>
+
+        <listitem>
+          <para>Minimize complexity of maintenance e.g. Make bug fixing as
+          simple as possible by anyone</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>The association assumes, and indeed actively supports, the
+      development of 3rd party editors that provide advanced or more
+      specialized functionality. The development of this UI is managed by the
+      "OpenMI Association Technical Committee" (OATC).</para>
+
+      <para>However, whenever a new version of the standard is released (or
+      proposed) then this editor is the simplest way of demonstrating and
+      providing examples of any new features.</para>
+    </section>
+
+    <section>
+      <title>What it cannot do</title>
+
+      <para>It can only run compositions where all models implement the pull
+      approach<itemizedlist>
+          <listitem>
+            <para>i.e ILinkableComponent.CascadingUpdateCallsDisabled =
+            false</para>
+          </listitem>
+        </itemizedlist></para>
+    </section>
+
+    <section>
+      <title>Where to get it</title>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>The OpenMI Association web site <link
+            xlink:href="http://www.openmi.org">http://www.openmi.org</link>
+            will provide an link to where it can be downloaded.</para>
+          </listitem>
+
+          <listitem>
+            <para>As it is open source, the installers and code can de
+            downloaded from the Source Forge web site<link
+            xlink:href="http://sourceforge.net/projects/openmi/">http://sourceforge.net/projects/openmi/</link></para>
+          </listitem>
+
+          <listitem>
+            <para>Additional up to date information can also be found on the
+            OpenMI Association Technical Committee Wiki at <link
+            xlink:href="http://wiki.openmi.org">http://wiki.openmi.org</link></para>
+          </listitem>
+        </itemizedlist></para>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Tutorials</title>
+
+    <section>
+      <title>Quick Start</title>
+
+      <para>This section provides a quick example of building a simple
+      composition and running it. It is intended for people<itemizedlist>
+          <listitem>
+            <para>Who have used and know version 1.0 and wish to quickly get
+            acquainted with new features</para>
+          </listitem>
+
+          <listitem>
+            <para>Who want to run an example as quickly as possible to check
+            their implementation works as expected</para>
+          </listitem>
+        </itemizedlist></para>
+
+      <section>
+        <title>Basic Application and Help</title>
+
+        <figure>
+          <title>Basic Application</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_app_helpmenu.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>The basic application should appear as above. The latest version
+        of this document can be obtained from the help menu [F1]. The "Wiki
+        ..." menu item will send a URI for the OpenMI OATC Wiki pages to the
+        default Internet browser.</para>
+
+        <figure>
+          <title>Wiki Pages</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_wikipages.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>"About ..." provides release information about this application
+        e.g. EULA and current release version number.</para>
+      </section>
+
+      <section>
+        <title>Adding Models</title>
+
+        <para>Either via main menu</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Composition</para>
+
+            <itemizedlist>
+              <listitem>
+                <para>Add Model(s) ...</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+        </itemizedlist>
+
+        <para>Or right click mouse within panel for context menu as
+        follows</para>
+
+        <figure>
+          <title>Context Menu</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_contextaddmodels.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>Which brings up a Open file dialog. Search for and select OpenMI
+        models (typically files with 'omi' file extension)</para>
+
+        <figure>
+          <title>Add Model(s) Dialog</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_addmodelsdlg.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>If the files contain valid OpenMI XML and all the underlying
+        dll's are visible. Something like the following should appear</para>
+
+        <figure>
+          <title>Loaded Models</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_addedmodels.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>In this example, two OMI files were selected and loaded
+        together. The last loaded model will appear blue, and all others
+        appear yellow. Blue indicates the model within the composition that is
+        connected to the trigger, i.e. the model that will drive the
+        composition using the pull driven approach. Only one model within a
+        composition can have a trigger, to change this use the main
+        menu<itemizedlist>
+            <listitem>
+              <para>Composition</para>
+
+              <itemizedlist>
+                <listitem>
+                  <para>Attach Trigger ...</para>
+                </listitem>
+              </itemizedlist>
+            </listitem>
+          </itemizedlist></para>
+
+        <para>Which then allows the user to select a model to move the trigger
+        too. Alternatively, select a model first and use the right click
+        context menu item "Attach Trigger ..."</para>
+
+        <figure>
+          <title>Attach Trigger</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_attachtrigger.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <note>
+          <para>In version 1 the trigger was a separate blue rectangle on the
+          display. In version 2 we have combined the trigger with the model to
+          which it is attached and turned that model blue.</para>
+        </note>
+
+        <para>Models can be moved around the screen by holding down the left
+        mouse button over a model and dragging the mouse to a new
+        location.</para>
+      </section>
+
+      <section>
+        <title>Adding a Connection</title>
+
+        <para>Either use main menu</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Composition</para>
+
+            <itemizedlist>
+              <listitem>
+                <para>Add Connection ...</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+        </itemizedlist>
+
+        <para>Which will require the user to select the source model followed
+        by the target model. Or use the corresponding men item on the context
+        menu for the source model. To escape from cursor 'selection mode'
+        without completing the operation use the 'Esc' key. The connection
+        should appear as follows.</para>
+
+        <figure>
+          <title>Connection</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_connectioncontext.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>Also shown above is the right click context menu off of the
+        connection with the "Edit Links ..." option selected.</para>
+      </section>
+
+      <section>
+        <title>Editing Links</title>
+
+        <para>The previous figure showed the context route to the edit dialog.
+        This can also be displayed via the main menu</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Composition</para>
+
+            <itemizedlist>
+              <listitem>
+                <para>Edit Links ...</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+        </itemizedlist>
+
+        <figure>
+          <title>Edit Links dialog</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_editlinksdlg.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>To create a link check both a source and target item. This
+        should enable the "Add" button below which, when also clicked, adds a
+        link. Currently added links are shown in the Links view pane as
+        follows.</para>
+
+        <figure>
+          <title>Links added to Connection</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_linksinconnection.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>Selecting a link enables the "Remove" button which can be used
+        to remove the link from the connection.</para>
+      </section>
+
+      <section>
+        <title>Saving Compositions</title>
+
+        <para>If a composition is unsaved the title bar will appear as
+        follows</para>
+
+        <figure>
+          <title>Unsaved Composition</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_unsavedcomposition.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>Compositions are saved to files with the '.opr' extension. The
+        highlighted text '[?.opr]' shows the model is unsaved and if the
+        application is closed any work will be lost. Use the File menu to save
+        the file. Whenever a '*' appears in the title bar then the composition
+        contains unsaved changes.</para>
+      </section>
+
+      <section>
+        <title>Running Compositions</title>
+
+        <para>Use the main menu item<itemizedlist>
+            <listitem>
+              <para>Composition<itemizedlist>
+                  <listitem>
+                    <para>Run ... F5</para>
+                  </listitem>
+                </itemizedlist></para>
+            </listitem>
+          </itemizedlist></para>
+
+        <para>To open the run dialog</para>
+
+        <figure>
+          <title>Run Dialog</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_rundlg.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>The main table has a row for each model in the composition.
+        Pressing run button results in following.<figure>
+            <title>Run in progress</title>
+
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="resources/help_runinprogress.png"></imagedata>
+              </imageobject>
+            </mediaobject>
+          </figure></para>
+
+        <para>The "Run" button changes to "Abort" to allow the user to
+        terminate a run before it has been completed. Progress is shown by
+        progress bar, text percentage and values within the grid. The grid
+        columns refer too</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Component</para>
+
+            <para>The name of the Model</para>
+          </listitem>
+
+          <listitem>
+            <para>Status</para>
+
+            <para>The last status event change by the component</para>
+          </listitem>
+
+          <listitem>
+            <para>Progress</para>
+
+            <para>The percentage progress of the component with respect to its
+            own time horizon</para>
+          </listitem>
+
+          <listitem>
+            <para>Last event updated</para>
+
+            <para>The actual time the last event change occurred. Useful for
+            indicating progress of large slow computations.</para>
+          </listitem>
+
+          <listitem>
+            <para>Events</para>
+
+            <para>The current total number of events monitored</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>On successful completion</para>
+
+        <figure>
+          <title>Run completed</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_runcompleted.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>The "Run/Abort" button has now changed to "Reload" which allows
+        a user to reload the composition so another run can immediately be
+        executed.</para>
+
+        <para>For a successful run the model component with trigger attached
+        must have reached 100%. However, it is not necessary for all the other
+        models to have reached 100% as the pull driven approach only progress
+        those models as far as necessary to satisfy the successful completion
+        of the triggered component.</para>
+
+        <para>If the run fails; the text in the bottom left corner of the
+        dialog gives information indicating this.</para>
+
+        <para>The status change information that appear in the table during
+        the run are also written to a log. This log can be viewed from the
+        main menu<itemizedlist>
+            <listitem>
+              <para>View<itemizedlist>
+                  <listitem>
+                    <para>Log Ctrl+L</para>
+                  </listitem>
+                </itemizedlist></para>
+            </listitem>
+          </itemizedlist></para>
+
+        <para>This opens</para>
+
+        <figure>
+          <title>Run log</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_runlog.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>The contents of this grid can be selected and pasted into the
+        users clipboard.</para>
+      </section>
+    </section>
+
+    <section>
+      <title>Adapted sources</title>
+
+      <para>"Adapted sources" are source exchange items that have been
+      modified. They replace "Data Operations" which were used in version 1 of
+      the OpenMI standard. They can be used to modify an existing source to
+      modify either its spatial or temporal values before they are passed
+      through the link to the target.</para>
+
+      <para>A very simple example of a adapted source is a Linear equation,
+      i.e. an equation that modifies provided values according to the equation
+      y = A*x + B where A and B are user adjustable coefficients.</para>
+
+      <para>Looking at the link dialog from the previous dialog</para>
+
+      <figure>
+        <title>Connection Dialog</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="resources/help_adapted1_1.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>The dialog above shows the "Add Sources ..." button highlighted.
+      As the tool-tip indicates, this will only be active if you have ticked
+      both a source and target exchange item. Clicking this button will
+      produce the following dialog.</para>
+
+      <figure>
+        <title>Add Sources Dialog</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="resources/help_adapted1_2.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>This dialog shows the available sources that can be chosen to
+      adapt the current ticked source =&gt; target pair. Source adapters are
+      accessed from dll's (assemblies) that implement the appropriate OpenMI
+      standard interfaces. Collectively these different dll's of source
+      adapters are referred to as factories since they create source adapters
+      based on the source and target. The implementer of the source model can
+      provide access to 'recommended' factories and by default the above
+      dialog defaults to the first recommended factory of the source model;
+      other composition model factories are also loaded into the drop down
+      combo box. So for the example of a composition with two simple river
+      models (same component but different models) the drop down combo could
+      as follows.</para>
+
+      <figure>
+        <title>Preloaded factories from composition</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="resources/help_adapted1_5.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>Here both models in the composition have two factories with
+      identical Ids Factory1 and Factory2, hence, the ids are also prefixed
+      with the model id. It is possible that the model ids might also not be
+      unique, so further information can be obtained by selecting the factory
+      in question and clicking on the "Details ..." button.</para>
+
+      <para>The user is not restricted to using composition loaded factories,
+      third party factories can also be added (see later).</para>
+
+      <para>In the example shown above; the first source recommended factory
+      contains only one adapter. If the user ticks this item and then clicks
+      the add button. The dialog is closed and the underlying connection
+      dialog is modified as shown in the following figure (ringed
+      area).</para>
+
+      <figure>
+        <title>Added Source Adapter</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="resources/help_adapted1_3.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>An additional source has been added, below the source item it
+      adapts. This source can be used, and adapted, in the same way as any
+      other source.</para>
+
+      <para>When an adapted source is ticked the "Edit Args ..." button
+      becomes active; this is shown in the above figure where the buttons
+      tool-tip is also shown. Clicking on this button will allow the user to
+      edit any arguments that are associated with the adapted source. As shown
+      in the next figure.</para>
+
+      <figure>
+        <title>Edit Arguments dialog</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="resources/help_adapted1_4.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>This dialog allows the user to edit argument values. The columns
+      in the table are</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Caption</para>
+
+          <para>The name of the argument</para>
+        </listitem>
+
+        <listitem>
+          <para>Value</para>
+
+          <para>The value that the argument is currently set to. This column
+          is the only editable column and a specific value might not be
+          editable if the argument is specified as "read only".</para>
+        </listitem>
+
+        <listitem>
+          <para>Type</para>
+
+          <para>The type that the value should be convertible into</para>
+
+          <para>i.e. if (as in this case) the type is "System.Double" the
+          value must be in a valid format to convert into a double.</para>
+        </listitem>
+
+        <listitem>
+          <para>Default</para>
+
+          <para>The default value for this argument.</para>
+        </listitem>
+
+        <listitem>
+          <para>Description</para>
+
+          <para>Further information about the argument.</para>
+        </listitem>
+      </itemizedlist>
+
+      <section>
+        <title>Third party factories</title>
+
+        <para>As mentioned earlier, the user is not restricted to using
+        composition loaded factories, third party factories can also be
+        added.</para>
+
+        <para>In the "Add Sources ..." dialog, click on the "..." button to
+        open a "Open File" dialog. Use this to search for either a dll or exe
+        file that implement adapter factories.</para>
+      </section>
+    </section>
+
+    <section>
+      <title>Examples</title>
+
+      <para>On installation, there is an option to install examples</para>
+
+      <figure>
+        <title>Examples Installer</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="resources/help_examples_1.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>If you do not select the ''Entire feature will be unavailable"
+      option above, the examples will also be installed. They can be found
+      under the Help menu.</para>
+
+      <figure>
+        <title>Examples location</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="resources/help_examples_2.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>The examples are actually installed in the examples folder</para>
+
+      <figure>
+        <title>Examples location</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="resources/help_examples_5.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>With the corresponding models and data in the models
+      folder.</para>
+
+      <figure>
+        <title>Models</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="resources/help_examples_6.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>The Oatc_OpenMI_Examples_SimpleCSharp2.exe source code can be
+      found on the OpenMI source forge site</para>
+
+      <figure>
+        <title>Source forge site</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="resources/help_examples_7.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>It models a simple river reach with a polyline. Inflow velocities
+      are allowed on the polyline nodes (targets) and channel flows can be
+      extracted from the polyline line segments (sources). The geometry
+      (element sets) is defined in the model data file
+      SimpleCSharpRiver2_RiverReach1.txt which contains</para>
+
+      <figure>
+        <title>SimpleCSharpRiver2_RiverReach1.txt</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="resources/help_examples_9.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>Which will appear in the editor as</para>
+
+      <figure>
+        <title>River Reach Model Properties</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="resources/help_examples_8.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>To run this model, one additional file is needed, which provides
+      the boundary conditions
+      SimpleCSharpRiver2_BoundaryConditions1.txt</para>
+
+      <figure>
+        <title> SimpleCSharpRiver2_BoundaryConditions1.txt</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="resources/help_examples_10.png"></imagedata>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <section>
+        <title>One river reach</title>
+
+        <figure>
+          <title>One river reach</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_examples_3.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>The loaded composition above is from
+        SimpleCSharpRiver2_RiverReach1.opr</para>
+
+        <figure>
+          <title>SimpleCSharpRiver2_RiverReach1.opr</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_examples_15.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>Which references an OpenMI omi file for the model in question
+        SimpleCSharpRiver2_RiverReach1.omi</para>
+
+        <figure>
+          <title>SimpleCSharpRiver2_RiverReach1.omi</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_examples_16.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>In this file are listed values specific to the model in
+        question, this example defines the location of the input and output
+        files used and generated during a run.</para>
+
+        <para>This very simple composition consists of only one river reach
+        model. Although we are running it using OpenMI there are no OpenMI
+        connections. Running it produces a results file</para>
+
+        <figure>
+          <title>SimpleCSharpRiver2_RiverReach1.out</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_examples_11.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>The lines starting with "Section:" show the flow rates after
+        each time step. The time step is a constant 86400 s (1 day) and is
+        specified in the SimpleCSharpRiver2_BoundaryConditions1.txt file. So
+        we can see that this run for 6 days duration. The values are volume
+        flow rates [litres/s]. Section refers to each line segment in the
+        reaches polyline, so there are three values. Leakage is also along the
+        section, again 3 values. The Boundary conditions indicate the flow in
+        at each node (4 along the polyline), these values are also specified
+        in the SimpleCSharpRiver2_BoundaryConditions1.txt file. The OpenMI
+        values are also inflows</para>
+
+        <para>The last line in this file shows a volume balance. As the model
+        is not connected to anything else there is no OpenMI contribution and
+        the inflows should equal the outflows. The leakage is also zero as the
+        leakage coefficient is set to zero in the boundary conditions input
+        file.</para>
+
+        <para>The value 5754240 is obtained by summing the flow rates along
+        the last segment and multiplying by the time step.</para>
+
+        <para>(3.6 + 6.6 + 9.6 + 12.6 + 15.6 + 18.6) * 86400 = 66.6 * 86400 =
+        575424</para>
+
+        <para>It is often worth testing a new model by running it in stand
+        alone mode first and checking the results. This can often highlight
+        any issues in the OpenMI implementation and also any issues with
+        missing or incorrect model data. Clearly if model data is missing or
+        incorrect; this will give clear indications as to what kind of
+        composition and linkages will be required.</para>
+      </section>
+
+      <section>
+        <title>Two river reaches</title>
+
+        <para>Two models of river reaches are added to the composition; both
+        using the same linkable component. </para>
+
+        <figure>
+          <title>Two river reaches</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_examples_12.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>The corresponding model file (OMI)
+        SimpleCSharpRiver2_RiverReach2.omi contains</para>
+
+        <figure>
+          <title>SimpleCSharpRiver2_RiverReach2.omi</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_examples_17.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>From which can be seen that the same boundary conditions file is
+        used as in Reach 1 (same time step, time horizon and default inflows
+        and leakage). The geometry is different, defined in
+        SimpleCSharpRiver2_RiverReach2.txt and there is a different results
+        file SimpleCSharpRiver2_RiverReach2.out.</para>
+
+        <para>The composition contains a single uni-directional link</para>
+
+        <figure>
+          <title>Two river reaches linkage</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_examples_13.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>Which takes the flow out of the last channel of the first reach
+        and adds it to the first node of the second reach. Effectively joining
+        two river reaches together. Running this composition produces two
+        output files SimpleCSharpRiver2_RiverReach1.out and
+        SimpleCSharpRiver2_RiverReach2.out. SimpleCSharpRiver2_RiverReach1.out
+        will contain the same values as for the stand alone example run
+        (described in previous section) as it is acting as a OpenMI source in
+        this composition i.e. links leave this model but none enter it.
+        However, the downstream reach will be different, looking in
+        SimpleCSharpRiver2_RiverReach2.out</para>
+
+        <figure>
+          <title>SimpleCSharpRiver2_RiverReach2.out</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_examples_14.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>Reviewing the volume balance (last line). There is now an OpenMI
+        contribution of 4147200 litres which should match the Outflow value in
+        SimpleCSharpRiver2_RiverReach1.out</para>
+
+        <para>The value 147200 is obtained by summing the flow rates along the
+        last segment of SimpleCSharpRiver2_RiverReach1.out and multiplying by
+        the time step. Note that the last time step value is omitted as this
+        value would be used by reach 2 on iteration 7 (if there had been one).
+        These values are also in SimpleCSharpRiver2_RiverReach2.out; shown as
+        OpenMI inflows.</para>
+
+        <para>(3.6 + 6.6 + 9.6 + 12.6 + 15.6) * 86400 = 48 * 86400 =
+        4147200</para>
+      </section>
+
+      <section>
+        <title>Two reaches + 1 adapter</title>
+
+        <para>This example is the same as the previous example except that the
+        link is replaced with a link with an adapter applied to the source.
+        </para>
+
+        <figure>
+          <title>Two reaches + 1 adapter</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_examples_18.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>The adapter is a linear equation y = Ax + B where A and B are
+        arguments can be specified by the composition builder. In this example
+        the values are A = 2 and B = 0 which results the reach 1 source values
+        being doubled before being passed onto the reach 2 target. When run
+        SimpleCSharpRiver2_RiverReach2.out contains</para>
+
+        <figure>
+          <title>SimpleCSharpRiver2_RiverReach2.out (with adapter)</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_examples_19.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>These values are twice those in the previous example.</para>
+      </section>
+
+      <section>
+        <title>Two reaches + 2 adapters</title>
+
+        <para>This example is the same as the previous example except that the
+        link is replaced with a link with two adapters applied to the source.
+        </para>
+
+        <figure>
+          <title>Two reaches + 2 adapters</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/help_examples_20.png"></imagedata>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>Both adapters are linear equations y = Ax + B where A and B are
+        arguments can be specified by the composition builder. In this example
+        the values are A = 2 and B = 0 for the first adapter and A = 0.5 and B
+        = 0 for the second adapter. This results in the reach 1 source values
+        being doubled and then halved before being passed onto the reach 2
+        target. As a consequence the results in
+        SimpleCSharpRiver2_RiverReach2.out will be the same as for the example
+        without any adapters at all.</para>
+
+        <para>The second adapter is different from the first in that the first
+        is obtained from the source factory (reach 1) whilst the second is
+        obtained from a third party factory, Oatc_OpenMI_Sdk_ModelWrapper2.dll
+        </para>
+      </section>
+    </section>
+  </chapter>
+</book>

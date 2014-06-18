@@ -1,0 +1,25 @@
+-- Simple River Simulation File --
+
+-- Setup ID --
+RiverModel Default Model ID
+
+-- Simulation Start Time [YYYY-MM-DD HH:MM::SS] --
+2005-01-01 00:00:00
+
+-- Time Step Length [Sec] --
+86400.0
+
+-- Initial flow [???] --
+7
+
+-- Global runoff [???] --
+10
+
+-- Leakage factor --
+0.5
+
+-- ntw filename (network) --
+SimpleRiver.ntw
+
+-- bnd filename (inflows) --
+SimpleRiverUT.bnd

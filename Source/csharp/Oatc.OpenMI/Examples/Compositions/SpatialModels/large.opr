@@ -1,0 +1,23 @@
+<guiComposition version="1.0">
+  <models>
+    <model omi="org.OpenMI.Tools.GUI.Trigger" rect_x="241" rect_y="9" rect_width="100" rect_height="51" />
+    <model omi="C:\SourceForge\Version_1_1\Source\MyOpenSource\DHI\TestModels\DHI.OpenMI.TestModels.UnitTest\LargeGroundWaterModel.omi" rect_x="21" rect_y="166" rect_width="100" rect_height="51" />
+    <model omi="C:\SourceForge\Version_1_1\Source\MyOpenSource\DHI\TestModels\DHI.OpenMI.TestModels.UnitTest\LargeRiverModel.omi" rect_x="20" rect_y="9" rect_width="100" rect_height="51" />
+  </models>
+  <links>
+    <uilink model_providing="River 5E" model_accepting="GW 4E">
+      <link id="2" source_elementset="WholeRiver" source_quantity="Leakage" target_elementset="BaseGrid" target_quantity="Storage">
+        <dataoperation id="ElementMapper500" />
+      </link>
+    </uilink>
+    <uilink model_providing="GW 4E" model_accepting="River 5E">
+      <link id="4" source_elementset="BaseGrid" source_quantity="Water Level" target_elementset="WholeRiver" target_quantity="GroundWaterLevel">
+        <dataoperation id="ElementMapper700" />
+      </link>
+    </uilink>
+    <uilink model_providing="River 5E" model_accepting="org.OpenMI.Tools.GUI.Trigger">
+      <link id="6" source_elementset="Branch:0" source_quantity="Leakage" target_elementset="TriggerElementID" target_quantity="TriggerQuantityID" />
+    </uilink>
+  </links>
+  <runproperties listenedeventtypes="11111111111" triggerinvoke="6/1/1990 12:00:00 AM" runinsamethread="0" showeventsinlistbox="1" logfilename="" />
+</guiComposition>

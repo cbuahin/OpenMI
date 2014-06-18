@@ -1,0 +1,30 @@
+<opr
+  version="2.0">
+  <models>
+    <model
+      omi=".\models\SimpleCSharpRiver2_RiverReach2.omi"
+      rect_x="225"
+      rect_y="111"
+      rect_width="100"
+      rect_height="51"
+      is_trigger="true" />
+    <model
+      omi=".\models\SimpleCSharpRiver2_RiverReach1.omi"
+      rect_x="45"
+      rect_y="109"
+      rect_width="100"
+      rect_height="51" />
+  </models>
+  <connections>
+    <connection
+      source_model_index="1"
+      target_model_index="0">
+      <links>
+        <link
+          source_item_id="River branch [2]"
+          target_item_id="Inflow location [0]" />
+      </links>
+      <decorators />
+    </connection>
+  </connections>
+</opr>

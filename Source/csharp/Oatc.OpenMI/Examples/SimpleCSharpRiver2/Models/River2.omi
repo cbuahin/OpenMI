@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<LinkableComponent xmlns="http://www.openmi.org"
+  Type="Oatc.SimpleRiver.LinkableComponent" 
+  Assembly="..\River\bin\Oatc_SimpleRiver.exe">
+  <Arguments>
+    <!-- Following 2 arguments are readonly as specifiy LC info. 
+         Hence, LC would require reloading after these had been modified -->
+    <Argument Key="FileInNetwork" ReadOnly="true" Value=".\RiverNetwork2.txt" />
+    <Argument Key="FileInBoundaryConditions" ReadOnly="true" Value=".\RiverBoundaryConditions1.txt" />
+    <Argument Key="FileOut" Value=".\River2.out" />
+    <Argument Key="MonitorExchangeEvents" Value="true" />
+  </Arguments>
+</LinkableComponent>

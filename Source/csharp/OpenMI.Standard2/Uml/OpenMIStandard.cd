@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="OpenMI.Standard2.ExchangeItemChangeEventArgs">
+    <Position X="5.5" Y="1.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>ExchangeItemChangeEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenMI.Standard2.LinkableComponentStatusChangeEventArgs">
+    <Position X="5.5" Y="3.25" Width="3.25" />
+    <AssociationLine Name="NewStatus" Type="OpenMI.Standard2.LinkableComponentStatus">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.442" Y="0.362" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="OldStatus" Type="OpenMI.Standard2.LinkableComponentStatus">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.506" Y="0.352" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAACAAAAAAACAAAAAAAIAAAAAA=</HashCode>
+      <FileName>LinkableComponentStatusChangeEventArgs.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="NewStatus" />
+      <Property Name="OldStatus" />
+    </ShowAsAssociation>
+  </Class>
+  <Interface Name="OpenMI.Standard2.IBaseExchangeItem">
+    <Position X="0.75" Y="1.25" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>IBaseExchangeItem.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.IBaseLinkableComponent">
+    <Position X="0.75" Y="3.25" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEAACAQQAAAAAAAAAAAEAAAAAAoAEAAAEAAAg=</HashCode>
+      <FileName>IBaseLinkableComponent.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="OpenMI.Standard2.LinkableComponentStatus">
+    <Position X="6" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACBAEAAAUAAAAAAAAARAIAAAAAEAAAQAUBAABAAAAAA=</HashCode>
+      <FileName>LinkableComponentStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

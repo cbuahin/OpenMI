@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<LinkableComponent Type="DHI.OpenMI.TestModels.RiverModel.RiverModelLC" Assembly="..\DHI.OpenMI.TestModels.RiverModel\bin\Debug\DHI.OpenMI.TestModels.RiverModel.dll">
+  <Arguments>
+    <Argument Key="modelID"             ReadOnly="true" Value="River 5E" />
+    <Argument Key="simulationStart"     ReadOnly="true" Value="1990,1,1,0,0,0" />
+    <Argument Key="simulationEnd"       ReadOnly="true" Value="1990,6,1,0,0,0" />
+    <Argument Key="xCoordinate"         ReadOnly="true" Value="1500, 1500, 1750, 2500, 2500, 2750" />
+    <Argument Key="yCoordinate"         ReadOnly="true" Value="1500, 2500, 2750, 2750, 1500, 1500" />
+    <Argument Key="TimeStepLength"      ReadOnly="true" Value="3600" />
+    <Argument Key="riverBedLevel"       ReadOnly="true" Value="10.0" />
+    <Argument Key="leakageCoefficient"  ReadOnly="true" Value="10.0" />
+   </Arguments>
+</LinkableComponent>

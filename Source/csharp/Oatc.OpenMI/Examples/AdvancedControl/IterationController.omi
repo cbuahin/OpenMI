@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<LinkableComponent Type="org.OpenMI.Utilities.AdvancedControl.IterationController" 
+  Assembly="C:\HarmonIT\SourceCode\DotNet\OpenMI\Bin\org.OpenMI.Utilities.AdvancedControl.dll">
+  <Arguments>
+  </Arguments>
+</LinkableComponent>

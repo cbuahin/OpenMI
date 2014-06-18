@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{95FE2AA2-60C6-4459-8DCA-3132B7D74D5F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Oatc.OpenMI.Sdk</RootNamespace>
+    <AssemblyName>Oatc.OpenMI.Sdk</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OpenMI.Standard2, Version=2.0.0.0, Culture=neutral, PublicKeyToken=82bbb00ca5ab39e4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\OpenMI.Standard2.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Backbone\Argument.cs" />
+    <Compile Include="Backbone\Coordinate.cs" />
+    <Compile Include="Backbone\AbstractAdaptedOutput.cs" />
+    <Compile Include="Backbone\Describable.cs" />
+    <Compile Include="Backbone\Dimension.cs" />
+    <Compile Include="Backbone\Element.cs" />
+    <Compile Include="Backbone\ElementSet.cs" />
+    <Compile Include="Backbone\ExchangeItem.cs" />
+    <Compile Include="Backbone\ExchangeItemHelper.cs" />
+    <Compile Include="Backbone\ExtensionMethods.cs" />
+    <Compile Include="Backbone\Generic\Input.cs" />
+    <Compile Include="Backbone\Generic\Output.cs" />
+    <Compile Include="Backbone\Generic\TimeSpaceValueSet.cs" />
+    <Compile Include="Backbone\Generic\ValueSetValues.cs" />
+    <Compile Include="Backbone\IComponentUpdater.cs" />
+    <Compile Include="Backbone\Identifier.cs" />
+    <Compile Include="Backbone\IMultiAdaptedOutput.cs" />
+    <Compile Include="Backbone\IMultiInput.cs" />
+    <Compile Include="Backbone\Input.cs" />
+    <Compile Include="Backbone\LinkableComponent.cs" />
+    <Compile Include="Backbone\MultiInputAdaptorFactory.cs" />
+    <Compile Include="Backbone\OpenMIException.cs" />
+    <Compile Include="Backbone\Output.cs" />
+    <Compile Include="Backbone\Quantity.cs" />
+    <Compile Include="Backbone\Time.cs" />
+    <Compile Include="Backbone\TimeSet.cs" />
+    <Compile Include="Backbone\Unit.cs" />
+    <Compile Include="Backbone\ValueSet.cs" />
+    <Compile Include="Buffer\SmartBuffer.cs" />
+    <Compile Include="Buffer\BufferHelper.cs" />
+    <Compile Include="Buffer\TimeBufferer.cs" />
+    <Compile Include="Buffer\TimeBufferFactory.cs" />
+    <Compile Include="Buffer\TimeExtrapolator.cs" />
+    <Compile Include="Buffer\TimeInterpolator.cs" />
+    <Compile Include="DevelopmentSupport\ComponentConnector.cs" />
+    <Compile Include="DevelopmentSupport\GenericWrappers.cs" />
+    <Compile Include="DevelopmentSupport\Utils.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Spatial\AbstractSpatialDefinition.cs" />
+    <Compile Include="Spatial\AbstractTimeSpaceAdaptor.cs" />
+    <Compile Include="Spatial\ElementAreaOperationAdaptor.cs" />
+    <Compile Include="Spatial\ElementLineLengthOperationAdaptor.cs" />
+    <Compile Include="Spatial\ElementMapper.cs" />
+    <Compile Include="Spatial\ElementMapperAdaptedOutput.cs" />
+    <Compile Include="Spatial\ElementSetChecker.cs" />
+    <Compile Include="Spatial\IMatrix.cs" />
+    <Compile Include="Spatial\GeometryFactory.cs" />
+    <Compile Include="Spatial\ILineString.cs" />
+    <Compile Include="Spatial\IMultiPoint.cs" />
+    <Compile Include="Spatial\ISpatial2DGrid.cs" />
+    <Compile Include="Spatial\ISpatial2DRegularGrid.cs" />
+    <Compile Include="Spatial\ISpatialMesh.cs" />
+    <Compile Include="Spatial\LinearOperationAdaptedOutput.cs" />
+    <Compile Include="Spatial\LineString.cs" />
+    <Compile Include="Spatial\MultiPoint.cs" />
+    <Compile Include="Spatial\Spatial2DCurveLinearGrid.cs" />
+    <Compile Include="Spatial\Spatial2DGridWrapper.cs" />
+    <Compile Include="Spatial\Spatial2DRegularGrid.cs" />
+    <Compile Include="Spatial\SpatialAdaptedOutputFactory.cs" />
+    <Compile Include="Spatial\SpatialExtensionElementSetAdaptor.cs" />
+    <Compile Include="Spatial\SpatialExtensionAdaptorFactory.cs" />
+    <Compile Include="Spatial\SpatialMesh.cs" />
+    <Compile Include="Spatial\XYElementSearchTree.cs" />
+    <Compile Include="Spatial\XYExtent.cs" />
+    <Compile Include="Spatial\XYExtentUtil.cs" />
+    <Compile Include="Spatial\XYGeometryTools.cs" />
+    <Compile Include="Spatial\XYLine.cs" />
+    <Compile Include="Spatial\XYPoint.cs" />
+    <Compile Include="Spatial\XYPolygon.cs" />
+    <Compile Include="Spatial\XYPolyline.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UML\SpatialDefinitions.cd" />
+    <None Include="UML\SpatialDefinitionsDetails.cd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

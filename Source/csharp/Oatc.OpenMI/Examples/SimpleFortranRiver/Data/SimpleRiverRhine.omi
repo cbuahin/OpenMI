@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<LinkableComponent Type="Oatc.OpenMI.Examples.ModelComponents.SimpleRiver.Wrapper.SimpleRiverOpenMIComponent" Assembly="..\Wrapper\bin\Debug\Oatc.OpenMI.Examples.ModelComponents.SimpleRiver.Wrapper.dll">
+  <Arguments>
+    <Argument Key="FilePath" ReadOnly="true" Value= "" />
+    <Argument Key="Caption" ReadOnly="false" Value= "Simple River 1" />
+   </Arguments>
+</LinkableComponent>

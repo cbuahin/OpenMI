@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleRiverCSharp", "SimpleRiverCSharp\SimpleRiverCSharp.csproj", "{E3C4B9C1-3459-4040-B4B5-40D91CAA1253}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oatc.OpenMI.Sdk.Backbone", "..\..\..\Sdk\Backbone\Oatc.OpenMI.Sdk.Backbone.csproj", "{23C206AE-CBEF-4FD1-9928-BF04147B62B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMI.Standard", "..\..\..\..\..\..\OpenMI.Standard\src\csharp\OpenMI.Standard\OpenMI.Standard.csproj", "{E768C562-3A5A-40C5-ADF1-1957AE4BCD27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCSharpRiver_UnitTests", "UnitTest\SimpleCSharpRiver_UnitTests.csproj", "{C99E435D-84EA-4593-907C-492E19B15944}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleGroundModel", "SimpleGroundModel\SimpleGroundModel.csproj", "{EE21F6B3-A50C-4C30-BCF7-BE8D0D4DF60E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PossibleSDK", "PossibleSDK\PossibleSDK.csproj", "{EE48ABCE-07C2-4F95-9CD4-2AB99A3CB5C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E3C4B9C1-3459-4040-B4B5-40D91CAA1253}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3C4B9C1-3459-4040-B4B5-40D91CAA1253}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3C4B9C1-3459-4040-B4B5-40D91CAA1253}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3C4B9C1-3459-4040-B4B5-40D91CAA1253}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23C206AE-CBEF-4FD1-9928-BF04147B62B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23C206AE-CBEF-4FD1-9928-BF04147B62B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23C206AE-CBEF-4FD1-9928-BF04147B62B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23C206AE-CBEF-4FD1-9928-BF04147B62B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E768C562-3A5A-40C5-ADF1-1957AE4BCD27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E768C562-3A5A-40C5-ADF1-1957AE4BCD27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E768C562-3A5A-40C5-ADF1-1957AE4BCD27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E768C562-3A5A-40C5-ADF1-1957AE4BCD27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C99E435D-84EA-4593-907C-492E19B15944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C99E435D-84EA-4593-907C-492E19B15944}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C99E435D-84EA-4593-907C-492E19B15944}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C99E435D-84EA-4593-907C-492E19B15944}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE21F6B3-A50C-4C30-BCF7-BE8D0D4DF60E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE21F6B3-A50C-4C30-BCF7-BE8D0D4DF60E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE21F6B3-A50C-4C30-BCF7-BE8D0D4DF60E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE21F6B3-A50C-4C30-BCF7-BE8D0D4DF60E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE48ABCE-07C2-4F95-9CD4-2AB99A3CB5C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE48ABCE-07C2-4F95-9CD4-2AB99A3CB5C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE48ABCE-07C2-4F95-9CD4-2AB99A3CB5C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE48ABCE-07C2-4F95-9CD4-2AB99A3CB5C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

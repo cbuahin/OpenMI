@@ -1,0 +1,19 @@
+== River model network file ==
+
+-- Setup ID --
+River Reach 1 GW
+
+-- Number of nodes --
+4
+
+-- x-Coordinate, y-coordinate --
+1000.0,					9000.0
+7000.0,					6000.0
+9000.0,					3000.0
+14000.0,				1000.0
+
+-- Bed levels
+0.0
+0.0
+0.0
+0.0

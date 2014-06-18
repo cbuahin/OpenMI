@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E638C37C-367D-4866-A922-D968492D3A15}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Oatc.OpenMI.Sdk.UnitTests</RootNamespace>
+    <AssemblyName>Oatc.OpenMI.Sdk.UnitTests</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NetTopologySuite, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\NetTopologySuite\NetTopologySuite.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.5.1.9189, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Externals\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenMI.Standard2, Version=2.0.0.0, Culture=neutral, PublicKeyToken=82bbb00ca5ab39e4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\bin\OpenMI.Standard2.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Backbone\ArgumentTest.cs" />
+    <Compile Include="Backbone\DimensionTest.cs" />
+    <Compile Include="Backbone\ElementSetTest.cs" />
+    <Compile Include="Backbone\ElementTest.cs" />
+    <Compile Include="Backbone\ExchangeItemTest.cs" />
+    <Compile Include="Backbone\LinkableComponentTest.cs" />
+    <Compile Include="Backbone\QuantityTest.cs" />
+    <Compile Include="Backbone\TimeSpanTest.cs" />
+    <Compile Include="Backbone\TimeStampTest.cs" />
+    <Compile Include="Backbone\UnitTest.cs" />
+    <Compile Include="Backbone\VertexTest.cs" />
+    <Compile Include="Buffer\SmartBufferTest.cs" />
+    <Compile Include="Buffer\BufferHelperTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Spatial\ElementCheckerTest.cs" />
+    <Compile Include="Spatial\ElementMapperTest.cs" />
+    <Compile Include="Spatial\ElementOperationAdaptorTest.cs" />
+    <Compile Include="Spatial\LineStringTest.cs" />
+    <Compile Include="Spatial\MultiPointTest.cs" />
+    <Compile Include="Spatial\Spatial2DCurveLinearGridTest.cs" />
+    <Compile Include="Spatial\Spatial2DRegularGridTest.cs" />
+    <Compile Include="Spatial\SpatialAdaptedOutputFactoryTest.cs" />
+    <Compile Include="Spatial\SpatialMeshTest.cs" />
+    <Compile Include="Spatial\XYElementSearchTreeTest.cs" />
+    <Compile Include="Spatial\XYGeometryToolsTest.cs" />
+    <Compile Include="Spatial\XYLineTest.cs" />
+    <Compile Include="Spatial\XYPointTest.cs" />
+    <Compile Include="Spatial\XYPolygonTest.cs" />
+    <Compile Include="Spatial\XYPolylineTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Sdk\Oatc.OpenMI.Sdk.csproj">
+      <Project>{95FE2AA2-60C6-4459-8DCA-3132B7D74D5F}</Project>
+      <Name>Oatc.OpenMI.Sdk</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,10 @@
+<opr
+  version="2.0">
+  <model
+    omi="RhineModel1.omi"
+    is_trigger="true"
+    rect_x="-70"
+    rect_y="49"
+    rect_width="100"
+    rect_height="51" />
+</opr>

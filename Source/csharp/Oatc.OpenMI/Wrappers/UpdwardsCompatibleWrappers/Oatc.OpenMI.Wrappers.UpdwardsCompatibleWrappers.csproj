@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C9BCCDB0-5A7B-4266-8996-BFB18B8515D8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Oatc.OpenMI.Wrappers.UpdwardsCompatibleWrappers</RootNamespace>
+    <AssemblyName>Oatc.OpenMI.Wrappers.UpdwardsCompatibleWrappers</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Externals\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenMI.Standard2, Version=2.0.0.0, Culture=neutral, PublicKeyToken=82bbb00ca5ab39e4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\bin\OpenMI.Standard2.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Backbone\DataOperation.cs" />
+    <Compile Include="Backbone\ExchangeItem.cs" />
+    <Compile Include="Backbone\InputExchangeItem.cs" />
+    <Compile Include="Backbone\Link.cs" />
+    <Compile Include="Backbone\OutputExchangeItem.cs" />
+    <Compile Include="Backbone\ScalarSet.cs" />
+    <Compile Include="Backbone\TimeSpan.cs" />
+    <Compile Include="Backbone\TimeStamp.cs" />
+    <Compile Include="Backbone\Vertex.cs" />
+    <Compile Include="EngineWrapper\IAdvancedEngine.cs" />
+    <Compile Include="EngineWrapper\IEngine.cs" />
+    <Compile Include="EngineWrapper\InputItem.cs" />
+    <Compile Include="EngineWrapper\LinearConversionDataOperation.cs" />
+    <Compile Include="EngineWrapper\LinkableEngine.cs" />
+    <Compile Include="EngineWrapper\LinkableEngine1_4.cs" />
+    <Compile Include="EngineWrapper\OutputItem.cs" />
+    <Compile Include="EngineWrapper\SmartBufferDataOperation.cs" />
+    <Compile Include="EngineWrapper\TimeValueSet.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Spatial\DataOperation.cs" />
+    <Compile Include="Spatial\ElementMapper.cs" />
+    <Compile Include="Spatial\ElementSetChecker.cs" />
+    <Compile Include="Spatial\XYGeometryTools.cs" />
+    <Compile Include="Spatial\XYLine.cs" />
+    <Compile Include="Spatial\XYPoint.cs" />
+    <Compile Include="Spatial\XYPolygon.cs" />
+    <Compile Include="Spatial\XYPolyline.cs" />
+    <Compile Include="Standard\IDataOperation.cs" />
+    <Compile Include="Standard\IExchangeItem.cs" />
+    <Compile Include="Standard\IInputExchangeItem.cs" />
+    <Compile Include="Standard\ILink.cs" />
+    <Compile Include="Standard\IOutputExchangeItem.cs" />
+    <Compile Include="Standard\IScalarSet.cs" />
+    <Compile Include="Standard\ITime.cs" />
+    <Compile Include="Standard\ITimeSpan.cs" />
+    <Compile Include="Standard\ITimeStamp.cs" />
+    <Compile Include="Standard\IValueSet.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Sdk\Oatc.OpenMI.Sdk.csproj">
+      <Project>{95FE2AA2-60C6-4459-8DCA-3132B7D74D5F}</Project>
+      <Name>Oatc.OpenMI.Sdk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EngineWrapper\Oatc.OpenMI.Wrappers.EngineWrapper.csproj">
+      <Project>{20823D6B-2464-46C8-8C43-19BD5B80C732}</Project>
+      <Name>Oatc.OpenMI.Wrappers.EngineWrapper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

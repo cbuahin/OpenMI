@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="OpenMI.Standard2.ExchangeItemChangeEventArgs">
+    <Position X="22.75" Y="2" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>ExchangeItemChangeEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenMI.Standard2.LinkableComponentStatusChangeEventArgs">
+    <Position X="22.75" Y="6" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAACAAAAAAACAAAAAAAIAAAAAA=</HashCode>
+      <FileName>LinkableComponentStatusChangeEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="OpenMI.Standard2.IArgument" HideInheritanceLine="true">
+    <Position X="16" Y="12" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAQAAAAAgAAAABAAAAAIAAgAAAAEAA=</HashCode>
+      <FileName>IArgument.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.IDimension">
+    <Position X="4.75" Y="14" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAACAAAAAAAA=</HashCode>
+      <FileName>IDimension.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.IElementSet" HideInheritanceLine="true">
+    <Position X="15" Y="3" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>ACAQBAAMAAAEAAAAABAAAAAAAAACAAEAABAAAAAAAAA=</HashCode>
+      <FileName>IElementSet.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ElementType" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.IDescribable">
+    <Position X="4.75" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>IDescribable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.IBaseInput">
+    <Position X="16" Y="10" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>IBaseInput.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.IBaseLinkableComponent" HideInheritanceLine="true">
+    <Position X="20.25" Y="9.5" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEAACAQQAAAAAAAAAAAEAAAAAAoAEAAAEAAAg=</HashCode>
+      <FileName>IBaseLinkableComponent.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Status" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Arguments" />
+      <Property Name="InputItems" />
+    </ShowAsCollectionAssociation>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.IManageState">
+    <Position X="19.25" Y="14" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgABAAA=</HashCode>
+      <FileName>IManageState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.IQuality">
+    <Position X="4" Y="10" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAIA=</HashCode>
+      <FileName>IQuality.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.ICategory" HideInheritanceLine="true">
+    <Position X="3.75" Y="11.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>ICategory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.IQuantity">
+    <Position X="6.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IQuantity.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Unit" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.ITimeSet">
+    <Position X="11" Y="5.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEgAIBAAAAAAAAAAA=</HashCode>
+      <FileName>ITimeSet.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Times" />
+    </ShowAsCollectionAssociation>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.ITime">
+    <Position X="5.5" Y="5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>ITime.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.IUnit" HideInheritanceLine="true">
+    <Position X="6.5" Y="11.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAQAIAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IUnit.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Dimension" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.IValueDefinition" HideInheritanceLine="true">
+    <Position X="4" Y="7.25" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAEAA=</HashCode>
+      <FileName>IValueDefinition.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.IByteStateConverter">
+    <Position X="22.25" Y="14" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IByteStateConverter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.IIdentifiable">
+    <Position X="5.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IIdentifiable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.IAdaptedOutput" Collapsed="true">
+    <Position X="12.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAIAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>IAdaptedOutput.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.IBaseOutput" Collapsed="true">
+    <Position X="12.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAAQAAAQAAAAAAAAgAAAqAAAAAAA=</HashCode>
+      <FileName>IBaseOutput.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.IAdaptedOutputFactory" Collapsed="true">
+    <Position X="12.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>IAdaptedOutputFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="OpenMI.Standard2.ElementType">
+    <Position X="20.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAgAAACAAAAAAEAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>ElementType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="OpenMI.Standard2.LinkableComponentStatus">
+    <Position X="26.5" Y="10" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACBAEAAAUAAAAAAAAARAIAAAAAEAAAQAUBAABAAAAAA=</HashCode>
+      <FileName>LinkableComponentStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="OpenMI.Standard2.DimensionBase">
+    <Position X="2.75" Y="13.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAABABACAAAAAAQAAAAAACEAQA=</HashCode>
+      <FileName>IDimension.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

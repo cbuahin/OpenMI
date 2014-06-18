@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<!--
+	~ Copyright (c) 2005-2010, OpenMI Association
+	~ <http://www.openmi.org/>
+	~
+	~ This file is part of openmi-standard2-2.0.0-beta1.jar
+	~
+	~ openmi-standard2.jar is free software; you can redistribute it and/or
+	~ modify it under the terms of the Lesser GNU General Public License as
+	~ published by the Free Software Foundation; either version 3 of the
+	~ License, or (at your option) any later version.
+	~
+	~ openmi-standard2.jar is distributed in the hope that it will be useful,
+	~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+	~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the Lesser GNU
+	~ General Public License for more details.
+	~
+	~ You should have received a copy of the Lesser GNU General Public License
+	~ along with this program. If not, see <http://www.gnu.org/licenses/>.
+	-->
+<!-- OpenMI Linkable component entry point to instantiate the object-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.openmi.org/v2_0" targetNamespace="http://www.openmi.org/v2_0"
+		elementFormDefault="qualified" attributeFormDefault="unqualified"
+			version="2.0.0.0">
+	<xsd:simpleType name="supportedPlatformEnum">
+		<xsd:annotation>
+			<xsd:documentation>
+				Enumeration of all possible operating system platforms a LinkableComponent can be run on.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Win"/>
+			<xsd:enumeration value="Unix"/>
+			<xsd:enumeration value="Linux"/>
+			<xsd:enumeration value="Mac"/>
+			<xsd:enumeration value="Win32"/>
+			<xsd:enumeration value="Win64"/>
+			<xsd:enumeration value="Unix32"/>
+			<xsd:enumeration value="Unix64"/>
+			<xsd:enumeration value="Linux32"/>
+			<xsd:enumeration value="Linux64"/>
+			<xsd:enumeration value="Mac32"/>
+			<xsd:enumeration value="Mac64"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="LinkableComponent" type="LinkableComponentComplexType"/>
+	<xsd:complexType name="LinkableComponentComplexType">
+		<xsd:all>
+			<xsd:element name="Arguments" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Argument" minOccurs="0" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>
+									Arguments used for component instantiation
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:attribute name="Key" type="xsd:string" use="required" form="unqualified">
+									<xsd:annotation>
+										<xsd:documentation>
+											Attribute key for which a value is provided
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:attribute>
+								<xsd:attribute name="ReadOnly" type="xsd:boolean" use="optional" form="unqualified">
+									<xsd:annotation>
+										<xsd:documentation>
+											Flag indicating if the value of the attribute may be edited by the user
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:attribute>
+								<xsd:attribute name="Value" type="xsd:string" use="required" form="unqualified">
+									<xsd:annotation>
+										<xsd:documentation>
+											Attribute value for the associated attribute key
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:attribute>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Platforms" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						Optional list of operating systems the LinkableComponent can be run on.
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Platform" type="supportedPlatformEnum" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:all>
+		<xsd:attribute name="Type" type="xsd:string" form="unqualified">
+			<xsd:annotation>
+				<xsd:documentation>
+					Class to be instantiated to create a LinkableComponent-object
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="Assembly" type="xsd:string" use="optional" form="unqualified">
+			<xsd:annotation>
+				<xsd:documentation>
+					DotNet assembly that can instantiate the class
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="JavaArchive" type="xsd:string" use="optional" form="unqualified">
+			<xsd:annotation>
+				<xsd:documentation>
+					JavaArchive that can instantiate the class
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+</xsd:schema>

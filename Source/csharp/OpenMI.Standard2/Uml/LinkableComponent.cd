@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="OpenMI.Standard2.LinkableComponentStatusChangeEventArgs" Collapsed="true">
+    <Position X="1.75" Y="4.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAACAAAAAAACAAAAAAAIAAAAAA=</HashCode>
+      <FileName>LinkableComponentStatusChangeEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="OpenMI.Standard2.IManageState">
+    <Position X="7.25" Y="0.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgABAAA=</HashCode>
+      <FileName>IManageState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.IBaseLinkableComponent">
+    <Position X="4.75" Y="1.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEAACAQQAAAAAAAAAAAEAAAAAAoAEAAAEAAAg=</HashCode>
+      <FileName>IBaseLinkableComponent.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Status" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.TimeSpace.ITimeSpaceComponent" Collapsed="true">
+    <Position X="5.5" Y="7" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TimeSpace\ITimeSpaceComponent.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.TimeSpace.ITimeExtension">
+    <Position X="7.25" Y="3.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TimeSpace\ITimeExtension.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.IByteStateConverter">
+    <Position X="7.25" Y="2.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IByteStateConverter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="OpenMI.Standard2.LinkableComponentStatus">
+    <Position X="1.75" Y="1.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACBAEAAAUAAAAAAAAARAIAAAAAEAAAQAUBAABAAAAAA=</HashCode>
+      <FileName>LinkableComponentStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<LinkableComponent xmlns="http://www.openmi.org"
+  Type="Oatc.OpenMI.Examples.SimpleCSharpRiver2.LinkableComponent" 
+  Assembly=".\Oatc_OpenMI_Examples_SimpleCSharpRiver2.exe">
+  <Arguments>
+    <Argument Key="FileInNetwork" 
+    	Value=".\SimpleCSharpRiver2_RiverReach2_GW.txt" />
+    <Argument Key="FileInBoundaryConditions" 
+    	Value=".\SimpleCSharpRiver2_BoundaryConditions1.txt" />
+    <Argument Key="FileOut" 
+    	Value=".\SimpleCSharpRiver2_RiverReach2_GW.out" />
+    <Argument Key="MonitorExchangeEvents" 
+    	Value="true" />
+    <Argument Key="ShowGroundWaterLevelTargets" 
+    	Value="true" />
+  </Arguments>
+</LinkableComponent>
+

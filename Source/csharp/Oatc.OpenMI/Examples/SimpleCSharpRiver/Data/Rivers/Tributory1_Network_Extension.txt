@@ -1,0 +1,13 @@
+== River model network file ==
+
+-- Setup ID --
+Tributory 1 Extension
+
+-- Number of nodes --
+4
+
+-- x-Coordinate, y-coordinate --
+14000.0,				1000.0
+17000.0,				900.0
+19000.0,				600.0
+24000.0,				300.0

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="C8A79130-D90E-4337-B06A-01C76B2503BB" 
+           Name="OATC OpenMI Editor 2.0 Alpha 4" 
+           Language="1033" 
+           Version="2.0.0.0" 
+           Manufacturer="OpenMI Association Technical Committee"
+           UpgradeCode="E342B14E-A62F-4e52-9F02-C3B61466E5C2">
+    <Package Description="OATC OpenMI Editor" 
+             Comments="Open source OpenMI composition editor" 
+             InstallerVersion="200" 
+             Compressed="yes" />
+
+    <Media Id="1" Cabinet="Product.cab" EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLLOCATION" 
+                   Name="OATC OpenMI Editor 2.0 Alpha 4">
+
+          <Component Id="ProductComponent" 
+                     Guid="9046F27E-F12A-4027-8076-D0BFE9CF0FE2"
+                     DiskId="1">                       
+            <File
+              Id="Oatc_OpenMI_Editor_exe"
+              Name="Oatc_OpenMI_Editor.exe" 
+              Source="..\bin\Oatc_OpenMI_ConfigurationEditor.exe"/>
+            <File
+              Id="Oatc_OpenMI_Gui_Controls_dll"
+              Name="Oatc_OpenMI_Gui_Controls.dll" 
+              Source="..\bin\Oatc_OpenMI_Gui_Controls.dll"/>
+            <File
+              Id="Oatc_OpenMI_Gui_Core_dll"
+              Name="Oatc_OpenMI_Gui_Core.dll" 
+              Source="..\bin\Oatc_OpenMI_Gui_Core.dll"/>
+            <File
+              Id="Oatc_OpenMI_Sdk_dll"
+              Name="Oatc.OpenMI.Sdk.dll" 
+              Source="..\bin\Oatc.OpenMI.Sdk.dll"/>
+            <File
+              Id="OpenMI_Standard2_dll"
+              Name="OpenMI.Standard2.dll" 
+              Source="..\bin\OpenMI.Standard2.dll"/>
+            <File
+              Id="log4net_dll"
+              Name="log4net.dll" 
+              Source="..\bin\log4net.dll"/>
+            <File
+              Id="Help_pdf"
+              Name="Help.pdf" 
+              Source="..\bin\OpenMIEditorHelp_2_0.pdf"/>
+            <File
+              Id="Help_chm"
+              Name="Help.chm" 
+              Source="..\bin\OpenMIEditorHelp_2_0.chm"/>
+            <File
+              Id="OmiEd_ico"
+              Name="OmiEd.ico" 
+              Source="..\ConfigurationEditor\OmiEd.ico"/>
+						<ProgId 
+							Id='OpenMI_OATC_UI_opr' 
+							Description='OpenMI OPR composition file'
+							Icon='OmiEd_ico' >
+							<Extension 
+								Id='opr' 
+								ContentType='application/xyz'>
+								<Verb 
+									Id='open' 
+									Command='Open' 
+									TargetFile='Oatc_OpenMI_Editor_exe' 						  
+									Argument='-opr "%1"' />
+							</Extension>
+						</ProgId>              
+          </Component> 
+        </Directory>  
+      </Directory>  
+      <Directory Id="DesktopFolder">
+          <Directory Id="EXAMPLESLOCATION" 
+                     Name="OATC OpenMI Examples 2.0 Alpha 4">                       
+            <Component Id="Example_oprs" 
+                       Guid="921FD436-CF27-4a08-A254-DB37BC7A59D6"
+                       DiskId="1">
+              <RegistryKey Root="HKCU" Key="Software\OpenMI\OATC_Editor" Action="createAndRemoveOnUninstall">
+                <RegistryValue Name="ExampleOprs" Value="1" Type="integer" KeyPath="yes"/>
+              </RegistryKey>
+              <RegistryKey Id="ExamplesInstallInfo" Root="HKCU" Key="Software\OpenMI\OATC_Editor"
+                Action="createAndRemoveOnUninstall">
+                <RegistryValue Name="Install_Location" Value="[INSTALLLOCATION]" Type="string"/>
+                <RegistryValue Name="Examples_Location" Value="[EXAMPLESLOCATION]" Type="string"/>
+              </RegistryKey>
+              
+              <RemoveFolder 
+						    Id="EXAMPLESLOCATION" 
+								On="uninstall"/>
+
+              <File Id="SimpleCSharpRiver2_RiverReach1_opr"
+              			ReadOnly="yes"
+              			Name="SimpleCSharpRiver2_RiverReach1.opr" 
+              			Source="..\help\examples\SimpleCSharpRiver2_RiverReach1.opr"/>
+              <File Id="SimpleCSharpRiver2_RiverReachs1and2_opr"
+              			ReadOnly="yes"
+              			Name="SimpleCSharpRiver2_RiverReachs1and2.opr" 
+              			Source="..\help\examples\SimpleCSharpRiver2_RiverReachs1and2.opr"/>
+              <File Id="SimpleCSharpRiver2_Decorators01.opr"
+              			ReadOnly="yes"
+              			Name="SimpleCSharpRiver2_Decorators01.opr" 
+              			Source="..\help\examples\SimpleCSharpRiver2_Decorators01.opr"/>
+              <File Id="SimpleCSharpRiver2_Decorators02_opr"
+              			ReadOnly="yes"
+              			Name="SimpleCSharpRiver2_Decorators02.opr" 
+              			Source="..\help\examples\SimpleCSharpRiver2_Decorators02.opr"/>
+            </Component>  
+            <Directory Id="ExampleModels" 
+                       Name="models">          
+              <Component Id="Example_models" 
+                         Guid="7E3E19D3-3AB9-4bf7-8DC7-65F93FA66111"
+                         DiskId="1">
+                <RegistryKey 
+                  						Root="HKCU" 
+                  						Key="Software\OpenMI\OATC_Editor" 
+                  						Action="createAndRemoveOnUninstall">
+                  <RegistryValue 
+                    					Name="Example_Models" 
+                    					Value="1" 
+                    					Type="integer" 
+                    					KeyPath="yes"/>
+                </RegistryKey>
+                <RemoveFolder Id="ExampleModels" 
+  														On="uninstall"/>
+
+                <File Id="TUT_Oatc_OpenMI_Sdk_dll"
+                			Name="Oatc.OpenMI.Sdk.dll" 
+                			Source="..\help\examples\models\Oatc.OpenMI.Sdk.dll"/>
+                <File Id="TUT_Oatc_OpenMI_Examples_SimpleCSharpRiver2_exe"
+                			Name="Oatc_OpenMI_Examples_SimpleCSharpRiver2.exe" 
+                			Source="..\help\examples\models\Oatc_OpenMI_Examples_SimpleCSharpRiver2.exe"/>
+                <File Id="TUT_Oatc_OpenMI_Sdk_ModelWrapper2_dll"
+                			Name="Oatc_OpenMI_Sdk_ModelWrapper2.dll" 
+                			Source="..\help\examples\models\Oatc_OpenMI_Sdk_ModelWrapper2.dll"/>
+                <File Id="TUT_OpenMI.Standard2_dll"
+                			Name="OpenMI.Standard2.dll" 
+                			Source="..\help\examples\models\OpenMI.Standard2.dll"/>
+                <File Id="TUT_SimpleCSharpRiver2_BoundaryConditions1_txt"
+                			ReadOnly="yes"
+                			Name="SimpleCSharpRiver2_BoundaryConditions1.txt" 
+                			Source="..\help\examples\models\SimpleCSharpRiver2_BoundaryConditions1.txt"/>
+                <File Id="TUT_SimpleCSharpRiver2_RiverReach1_omi"
+                			ReadOnly="yes"
+                			Name="SimpleCSharpRiver2_RiverReach1.omi" 
+                			Source="..\help\examples\models\SimpleCSharpRiver2_RiverReach1.omi"/>
+                <File Id="TUT_SimpleCSharpRiver2_RiverReach1_txt"
+                			ReadOnly="yes"
+                			Name="SimpleCSharpRiver2_RiverReach1.txt" 
+                			Source="..\help\examples\models\SimpleCSharpRiver2_RiverReach1.txt"/>
+                <File Id="TUT_SimpleCSharpRiver2_RiverReach2_omi"
+                			ReadOnly="yes"
+                			Name="SimpleCSharpRiver2_RiverReach2.omi" 
+                			Source="..\help\examples\models\SimpleCSharpRiver2_RiverReach2.omi"/>
+                <File Id="TUT_SimpleCSharpRiver2_RiverReach2_txt"
+                			ReadOnly="yes"
+                			Name="SimpleCSharpRiver2_RiverReach2.txt" 
+                			Source="..\help\examples\models\SimpleCSharpRiver2_RiverReach2.txt"/>
+              </Component>  
+            </Directory>            
+          </Directory>
+      </Directory>
+      <Directory Id="ProgramMenuFolder" Name="PMFolder">
+        <Directory Id="ApplicationProgramsFolder" 
+                   Name='OATC OpenMI Editor 2.0 Alpha 4' />                   
+      </Directory>
+    </Directory>
+    
+		<DirectoryRef Id="ApplicationProgramsFolder">
+			<Component 
+				Id="ApplicationShortcuts" 
+				Guid="CCDF2B2D-2AEB-417a-A388-8DC5F3A9CD05">
+				<Shortcut 
+					Id="Shortcut_Editor"                      
+					Name="Editor"                    
+					Description="OATC OpenMI Editor"                    
+					Target="[INSTALLLOCATION][!Oatc_OpenMI_Editor_exe]"
+					Directory="ApplicationProgramsFolder"
+				  WorkingDirectory="INSTALLLOCATION"/>  
+				<Shortcut 
+					Id="Shortcut_Help_PDF"                      
+					Name="Help (PDF)"                    
+					Description="Help (PDF)"                    
+					Target="[INSTALLLOCATION][!Help_pdf]"
+					Directory="ApplicationProgramsFolder"
+				  WorkingDirectory="INSTALLLOCATION"/>  
+				<Shortcut 
+					Id="Shortcut_Help_CHM"                      
+					Name="Help (CHM)"                    
+					Description="Help (CHM)"                    
+					Target="[INSTALLLOCATION][!Help_chm]"
+					Directory="ApplicationProgramsFolder"
+				  WorkingDirectory="INSTALLLOCATION"/>  
+			  <RemoveFolder 
+				  Id="ApplicationProgramsFolder" 
+				  On="uninstall"/>
+				<RegistryValue 
+					Root="HKCU" 
+					Key="Software\OpenMI\OATC_Editor" 
+					Name="installed" 
+					Type="integer" 
+					Value="1" 
+					KeyPath="yes"/>   					
+			</Component>
+		</DirectoryRef>  
+
+    <Feature Id="FeatureEditor" Title="Editor" Level="1"
+    	Display='expand' ConfigurableDirectory='INSTALLLOCATION'>
+      <ComponentRef Id="ProductComponent" />
+      <ComponentRef Id="ApplicationShortcuts" />
+    </Feature>
+    
+    <Feature Id="FeatureExamples" Title="Examples" Level="1"
+    	Display='expand' ConfigurableDirectory='EXAMPLESLOCATION'>
+      <ComponentRef Id="Example_oprs" />
+      <ComponentRef Id="Example_models" />
+    </Feature>
+
+	  <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+	  <WixVariable Id="WixUIBannerBmp" Value=".\Bitmaps\bannrbmp.bmp" />
+	  <WixVariable Id="WixUIDialogBmp" Value=".\Bitmaps\dlgbmp.bmp" />
+
+    <Condition Message='This setup requires the .NET Framework 2.0 or higher.'>
+      <![CDATA[MsiNetAssemblySupport >= "2.0.50727"]]>
+    </Condition>
+    
+    <UIRef Id="WixUI_FeatureTree" />
+    <UIRef Id="WixUI_ErrorProgressText" />
+
+  </Product>
+</Wix>

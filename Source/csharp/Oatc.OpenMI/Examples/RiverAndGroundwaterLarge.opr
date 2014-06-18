@@ -1,0 +1,23 @@
+<guiComposition version="1.0">
+  <models>
+    <model omi="LargeRiverModel.omi" rect_x="177" rect_y="27" rect_width="100" rect_height="51" />
+    <model omi="LargeGroundWaterModel.omi" rect_x="177" rect_y="149" rect_width="100" rect_height="51" />
+    <model omi="Oatc.OpenMI.Gui.Trigger" rect_x="14" rect_y="147" rect_width="100" rect_height="51" />
+  </models>
+  <links>
+    <uilink model_providing="RiverModel" model_accepting="GW 60E">
+      <link id="2" source_elementset="WholeRiver" source_quantity="Leakage" target_elementset="BaseGrid" target_quantity="Storage">
+        <dataoperation id="ElementMapper501" />
+      </link>
+    </uilink>
+    <uilink model_providing="GW 60E" model_accepting="RiverModel">
+      <link id="4" source_elementset="BaseGrid" source_quantity="Water Level" target_elementset="WholeRiver" target_quantity="GroundWaterLevel">
+        <dataoperation id="ElementMapper700" />
+      </link>
+    </uilink>
+    <uilink model_providing="GW 60E" model_accepting="Oatc.OpenMI.Gui.Trigger">
+      <link id="6" source_elementset="BaseGrid" source_quantity="Water Level" target_elementset="TriggerElementID" target_quantity="TriggerQuantityID" />
+    </uilink>
+  </links>
+  <runproperties listenedeventtypes="11111111111" triggerinvoke="06/01/1990 00:00:00" runinsamethread="0" showeventsinlistbox="1" logfilename="CompositionRun.log" />
+</guiComposition>

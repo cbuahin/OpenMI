@@ -1,0 +1,23 @@
+<opr
+  version="2.0">
+  <model
+    omi="RhineModel1.omi"
+    is_trigger="true"
+    rect_x="30"
+    rect_y="30"
+    rect_width="100"
+    rect_height="51" />
+  <model
+    omi="RhineModel2.omi"
+    rect_x="198"
+    rect_y="31"
+    rect_width="100"
+    rect_height="51" />
+  <connection
+    model_index_source="1"
+    model_index_target="0">
+    <exchange
+      output_identifier="Flow in Branch 1"
+      input_identifier="Inflow to Node 1" />
+  </connection>
+</opr>

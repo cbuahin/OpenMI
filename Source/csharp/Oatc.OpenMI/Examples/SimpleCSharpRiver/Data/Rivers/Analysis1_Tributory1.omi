@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<LinkableComponent xmlns="http://www.openmi.org"
+  Type="Oatc.SimpleCSharpRiver.RiverModelLinkableComponent" 
+  Assembly="..\..\SimpleRiverCSharp\bin\Debug\Oatc_SimpleCSharpRiver.exe">
+  <Arguments>
+    <Argument Key="FileInNetwork" Value=".\Tributory1_Network.txt" />
+    <Argument Key="FileInBoundaryConditions" Value=".\Analysis1_BoundaryConditions.txt" />
+    <Argument Key="FileOut" Value=".\Analysis1_Tributory1.out" />
+    <Argument Key="MonitorExchangeEvents" Value="true" />
+  </Arguments>
+</LinkableComponent>

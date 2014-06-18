@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7D7BD732-374E-48AD-A200-099C3A9BD553}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Oatc.OpenMI.Wrappers.UpdwardsCompatibleWrappers.UnitTests</RootNamespace>
+    <AssemblyName>Oatc.OpenMI.Wrappers.UpdwardsCompatibleWrappers.UnitTests</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.5.1.9189, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Externals\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenMI.Standard2, Version=2.0.0.0, Culture=neutral, PublicKeyToken=82bbb00ca5ab39e4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\bin\OpenMI.Standard2.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Components\GWModelEngine.cs" />
+    <Compile Include="Components\GWModelLC.cs" />
+    <Compile Include="Components\RiverModelEngine.cs" />
+    <Compile Include="Components\RiverModelLC.cs" />
+    <Compile Include="Components\RiverModelState.cs" />
+    <Compile Include="LinkableEnginesTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Examples\SimpleCSharpRiver\Oatc.OpenMI.Examples.SimpleCSharpRiver.csproj">
+      <Project>{6A0307F0-8E2E-4E44-B919-AF88657BC538}</Project>
+      <Name>Oatc.OpenMI.Examples.SimpleCSharpRiver</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Gui\Controls\Oatc.OpenMI.Gui.Controls.csproj">
+      <Project>{FC8850E1-3C5A-4B6D-8012-A7411B06F863}</Project>
+      <Name>Oatc.OpenMI.Gui.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Sdk\Oatc.OpenMI.Sdk.csproj">
+      <Project>{95FE2AA2-60C6-4459-8DCA-3132B7D74D5F}</Project>
+      <Name>Oatc.OpenMI.Sdk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Wrappers\EngineWrapper\Oatc.OpenMI.Wrappers.EngineWrapper.csproj">
+      <Project>{20823D6B-2464-46C8-8C43-19BD5B80C732}</Project>
+      <Name>Oatc.OpenMI.Wrappers.EngineWrapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Wrappers\UpdwardsCompatibleWrappers\Oatc.OpenMI.Wrappers.UpdwardsCompatibleWrappers.csproj">
+      <Project>{C9BCCDB0-5A7B-4266-8996-BFB18B8515D8}</Project>
+      <Name>Oatc.OpenMI.Wrappers.UpdwardsCompatibleWrappers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EngineWrapper\Oatc.OpenMI.Wrappers.EngineWrapper.UnitTest.csproj">
+      <Project>{5ECC5AD9-494C-4A9D-85F4-8CD586EC25C3}</Project>
+      <Name>Oatc.OpenMI.Wrappers.EngineWrapper.UnitTest</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

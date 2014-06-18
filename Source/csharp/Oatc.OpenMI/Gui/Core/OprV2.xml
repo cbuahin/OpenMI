@@ -1,0 +1,103 @@
+<!--
+  Invent schema here, then use
+    ./xsd {this}.xml
+  to create {this}.xsd
+  then edit {this}.xsd for minOccurs, xs:int etc...
+               <xs:attribute name="is_trigger" type="xs:boolean" default="false"/>
+               <xs:element name="factory" minOccurs="1" maxOccurs="1">
+  	then use             
+  ./xsd /c {this}.xsd
+  to create {this}.cs 
+-->
+<opr
+  version="2.0">
+  <models>
+		<model
+			omi="River1.omi"
+			rect_x="50"
+			rect_y="48"
+			rect_width="100"
+			rect_height="51" />
+		<model
+			omi="River2.omi"
+			is_trigger="true"
+			rect_x="222"
+			rect_y="51"
+			rect_width="100"
+			rect_height="51" />
+  </models>
+  <connections>
+		<connection
+			source_model_index="0"
+			target_model_index="1">
+			<links>
+				<link
+					source_item_id="River branch [2]"
+					target_item_id="Inflow location [0]" />
+				<link
+					source_item_id="River branch [2]"
+					target_item_id="Inflow location [0]">
+					<decorated index="0" />
+				</link>
+				<link
+					source_item_id="River branch [2]"
+					target_item_id="Inflow location [0]">
+					<decorated index="0" />
+					<decorated index="1" />
+				</link>
+				<link
+					source_item_id="River branch [2]"
+					target_item_id="Inflow location [0]">
+					<decorated index="2" />
+				</link>
+			</links>
+			<decorators>
+				<decorator
+					item_id="Oatc.OpenMI.Sdk.Decorators.LinearConversion">
+					<factory
+						id="RiverFactory"
+						assembly="ILinkableComponent"
+						type="Oatc.PossibleSdk.DecoratorFactory" />
+					<arguments>
+						<argument
+							id="A"
+							value="1" />
+						<argument
+							id="B"
+							value="0" />
+					</arguments>
+				</decorator>
+				<decorator
+					item_id="Oatc.OpenMI.Sdk.Decorators.LinearConversion">
+					<factory
+						id="RiverFactory"
+						assembly="ILinkableComponent"
+						type="Oatc.PossibleSdk.DecoratorFactory" />
+					<arguments>
+						<argument
+							id="A"
+							value="1" />
+						<argument
+							id="B"
+							value="0" />
+					</arguments>
+			  </decorator>
+				<decorator
+					item_id="Oatc.OpenMI.Sdk.Decorators.LinearConversion">
+					<factory
+						id="RiverFactory"
+						assembly="ILinkableComponent"
+						type="Oatc.PossibleSdk.DecoratorFactory" />
+					<arguments>
+						<argument
+							id="A"
+							value="1" />
+						<argument
+							id="B"
+							value="0" />
+					</arguments>
+				</decorator>      
+			</decorators>
+		</connection>
+  </connections>
+</opr>

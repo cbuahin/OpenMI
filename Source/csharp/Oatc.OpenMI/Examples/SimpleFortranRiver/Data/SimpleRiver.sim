@@ -1,0 +1,25 @@
+-- Simple River Simulation File --
+
+-- Setup ID --
+The river Rhine
+
+-- Simulation Start Time [YYYY-MM-DD HH:MM::SS] --
+2004-10-07 16:38:32
+
+-- Time Step Length [Sec] --
+172800.0
+
+--- Initial flow [???] --
+0.0
+
+- Global runoff [???] --
+0.0
+
+-- Leakage factor --
+0.0
+
+-- ntw filename (network) --
+SimpleRiver.ntw
+
+-- bnd filename (inflows) --
+SimpleRiver.bnd

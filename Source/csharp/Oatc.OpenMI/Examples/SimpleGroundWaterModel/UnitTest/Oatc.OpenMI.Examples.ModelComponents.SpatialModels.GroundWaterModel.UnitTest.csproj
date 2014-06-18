@@ -1,0 +1,81 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{77066595-74E1-41D6-B5D0-5A3264AAE102}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Oatc.OpenMI.Examples.ModelsComponents.SpatialModels.GroundWaterModel.UnitTest</RootNamespace>
+    <AssemblyName>GroundWaterModel.UnitTest</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Externals\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenMI.Standard, Version=1.4.0.0, Culture=neutral, PublicKeyToken=82bbb00ca5ab39e4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\..\..\OpenMI.Standard\src\csharp\bin\OpenMI.Standard.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="BaseGridTest.cs" />
+    <Compile Include="GWModelEngineTest.cs" />
+    <Compile Include="GwModelLCTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Sdk\Backbone\Oatc.OpenMI.Sdk.Backbone.csproj">
+      <Project>{23C206AE-CBEF-4FD1-9928-BF04147B62B2}</Project>
+      <Name>Oatc.OpenMI.Sdk.Backbone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Sdk\DevelopmentSupport\Oatc.OpenMI.Sdk.DevelopmentSupport.csproj">
+      <Project>{B7BE8C7F-0679-4022-81A5-6A314C058429}</Project>
+      <Name>Oatc.OpenMI.Sdk.DevelopmentSupport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Sdk\Wrapper\Oatc.OpenMI.Sdk.Wrapper.csproj">
+      <Project>{3DF52260-A727-405B-88A8-630BCE9085AC}</Project>
+      <Name>Oatc.OpenMI.Sdk.Wrapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DummyLC\Oatc.OpenMI.Examples.ModelComponents.SpatialModels.DummyLC.csproj">
+      <Project>{9A16D9B8-C447-430B-99D1-6343A3694973}</Project>
+      <Name>Oatc.OpenMI.Examples.ModelComponents.SpatialModels.DummyLC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Oatc.OpenMI.Examples.ModelComponents.SpatialModels.GroundWaterModel.csproj">
+      <Project>{0111F4C9-01CD-49DC-86A5-C631A3DDC0F1}</Project>
+      <Name>Oatc.OpenMI.Examples.ModelComponents.SpatialModels.GroundWaterModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<LinkableComponent xmlns="http://www.openmi.org"
+  Type="Oatc.OpenMI.Examples.SimpleGroundModel2.LinkableComponent" 
+  Assembly=".\Oatc_OpenMI_Examples_SimpleGroundModel2.dll">  
+  <Arguments>
+    <Argument Key="ModelID" 
+    	Value="Ground Water 1" />
+    <Argument Key="FileOut" 
+    	Value="..\SimpleGroundWater2_Corse1.out" />    	
+    <Argument Key="SimulationStart" 
+    	Value="1990-01-01 0:00:00.000Z" />
+    <Argument Key="SimulationEnd" 
+    	Value="1990-02-01 0:00:00.000Z" />
+    <Argument Key="NX" 
+    	Value="2" />
+    <Argument Key="NY" 
+    	Value="3" />
+    <Argument Key="OriginX" 
+    	Value="1000" />
+    <Argument Key="OriginY" 
+    	Value="1000" />
+    <Argument Key="CellSize" 
+    	Value="1000" />
+    <Argument Key="GroundWaterLevel" 
+    	Value="3.0" />
+    <Argument Key="GridAngle" 
+    	Value="0.0" />
+    <Argument Key="MonitorExchangeEvents" 
+    	Value="true" />
+  </Arguments>
+</LinkableComponent>

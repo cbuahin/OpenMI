@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Oatc.OpenMI.Sdk.ModelWrapper.EngineInputItem" Collapsed="true">
+    <Position X="6.75" Y="3.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAYBAAAAAAAEBAAAAQAAQAAAAAAAAIAAAEAgAAAAAAA=</HashCode>
+      <FileName>EngineInputItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Oatc.OpenMI.Sdk.ModelWrapper.EngineOutputItem" Collapsed="true">
+    <Position X="2.75" Y="3.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAYBAAAAIAAABgAAAQQAAAQAAAAAAIAgEAAgAAAAAAA=</HashCode>
+      <FileName>EngineOutputItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Oatc.OpenMI.Sdk.Backbone.ExchangeItem" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Oatc.OpenMI.Sdk.ModelWrapper.EngineDInputItem" Collapsed="true">
+    <Position X="7.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAIAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>EngineDInputItem.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="ValueSetter" />
+      <Field Name="ValueGetter" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Oatc.OpenMI.Sdk.ModelWrapper.EngineDOutputItem" Collapsed="true">
+    <Position X="2.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EngineDOutputItem.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="ValueGetter" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Oatc.OpenMI.Sdk.ModelWrapper.EngineEInputItem" Collapsed="true">
+    <Position X="9.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAIAAAEAAAAAAAAA=</HashCode>
+      <FileName>EngineEInputItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Oatc.OpenMI.Sdk.ModelWrapper.EngineEOutputItem" Collapsed="true">
+    <Position X="4" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>EngineEOutputItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Oatc.OpenMI.Sdk.ModelWrapper.EngineIInputItem" Collapsed="true">
+    <Position X="6" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAIAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>EngineIInputItem.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="ValueSetter" />
+      <Field Name="ValueGetter" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Oatc.OpenMI.Sdk.ModelWrapper.EngineIOutputItem" Collapsed="true">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EngineIOutputItem.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="ValueGetter" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Oatc.OpenMI.Sdk.Backbone.Output" Collapsed="true">
+    <Position X="2.75" Y="2.25" Width="2.25" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Oatc.OpenMI.Sdk.Backbone.Input" Collapsed="true">
+    <Position X="6.75" Y="2.25" Width="2" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Oatc.OpenMI.Sdk.ModelWrapper.IValueGetter" Collapsed="true">
+    <Position X="1.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IValueGetter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Oatc.OpenMI.Sdk.ModelWrapper.IValueSetter" Collapsed="true">
+    <Position X="3.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IValueSetter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Delegate Name="Oatc.OpenMI.Sdk.ModelWrapper.DValueSetter" Collapsed="true">
+    <Position X="8.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>EngineDInputItem.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Oatc.OpenMI.Sdk.ModelWrapper.DValueGetter" Collapsed="true">
+    <Position X="7" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EngineDOutputItem.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<!--Main OPR file definition-->
+	<xs:element name="guiComposition">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="models" minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<!--N number of OMI models-->
+							<xs:element name="model" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attribute name="omi" type="xs:string" use="required"/>
+									<xs:attribute name="rect_x" type="xs:integer" use="required"/>
+									<xs:attribute name="rect_y" type="xs:integer" use="required"/>
+									<xs:attribute name="rect_width" type="xs:integer" use="required"/>
+									<xs:attribute name="rect_height" type="xs:integer" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="links" minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<!--A List of links-->
+							<xs:element name="uilink" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="link" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="dataoperation" minOccurs="0" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="argument" minOccurs="0" maxOccurs="unbounded">
+																	<xs:complexType>
+																		<xs:attribute name="key" type="xs:string" use="required"/>
+																		<xs:attribute name="value" type="xs:string" use="required"/>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute name="id" type="xs:string" use="required"/>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="id" type="xs:string" use="required"/>
+												<xs:attribute name="source_elementset" type="xs:string" use="required"/>
+												<xs:attribute name="source_quantity" type="xs:string" use="required"/>
+												<xs:attribute name="target_elementset" type="xs:string" use="required"/>
+												<xs:attribute name="target_quantity" type="xs:string" use="required"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="model_providing" type="xs:string" use="required"/>
+									<xs:attribute name="model_accepting" type="xs:string" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="runproperties" minOccurs="1" maxOccurs="1">
+					<xs:complexType>
+						<xs:attribute name="listenedeventtypes" type="xs:string" use="required"/>
+						<xs:attribute name="triggerinvoke" type="xs:string" use="required"/>
+						<xs:attribute name="runinsamethread" type="xs:integer" use="required"/>
+						<xs:attribute name="showeventsinlistbox" type="xs:integer" use="required"/>
+						<xs:attribute name="logfilename" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

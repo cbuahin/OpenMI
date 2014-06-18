@@ -1,0 +1,10 @@
+<opr
+  version="2.0">
+  <model
+    omi="River1.omi"
+    is_trigger="true"
+    rect_x="100"
+    rect_y="47"
+    rect_width="100"
+    rect_height="51" />
+</opr>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<LinkableComponent xmlns="http://www.openmi.org" Type="Oatc.OpenMI.Examples.SimpleSCharpRiver.RiverModelLC" Assembly="..\Examples\SimpleCSharpRiver\bin\Debug\Oatc.OpenMI.Examples.SimpleSCharpRiver.dll">
+  <Arguments>
+  </Arguments>
+   	<Platforms>
+		<Platform>Win</Platform>
+	</Platforms>
+</LinkableComponent>

@@ -1,0 +1,27 @@
+<guiComposition version="1.0">
+  <models>
+    <model omi="RiverModelLC.omi" rect_x="204" rect_y="18" rect_width="100" rect_height="51" />
+    <model omi="GWModelLC.omi" rect_x="13" rect_y="17" rect_width="100" rect_height="51" />
+    <model omi="Oatc.OpenMI.Gui.Trigger" rect_x="204" rect_y="128" rect_width="100" rect_height="51" />
+  </models>
+  <links>
+    <uilink model_providing="GWModelEngineModelID" model_accepting="TestRiverModel Model ID">
+      <chain>
+        <providerExchangeItem id="RegularGrid.Storage" />
+        <DataOperation id="ElementMapper700" />
+        <DataOperation id="Linear Conversion">
+          <argument key="A" value="8" />
+          <argument key="B" value="0.0" />
+        </DataOperation>
+        <acceptorExchangeItem id="WholeRiver.Flow" />
+      </chain>
+    </uilink>
+    <uilink model_providing="TestRiverModel Model ID" model_accepting="Oatc.OpenMI.Gui.Trigger">
+      <chain>
+        <providerExchangeItem id="Branch:1.Flow" />
+        <acceptorExchangeItem id="trig.ES.trig.Quant" />
+      </chain>
+    </uilink>
+  </links>
+  <runproperties listenedeventtypes="11111111111" triggerinvoke="02/10/2005 00:00:00" runinsamethread="0" showeventsinlistbox="1" logfilename="CompositionRun.log" />
+</guiComposition>

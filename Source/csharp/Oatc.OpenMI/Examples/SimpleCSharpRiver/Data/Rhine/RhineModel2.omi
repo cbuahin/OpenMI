@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<LinkableComponent xmlns="http://www.openmi.org"
+  Type="Oatc.OpenMI.Examples.ModelComponents.SimpleCSharpRiver.Wrapper.RiverModelLinkableComponent" 
+  Assembly="..\..\Wrapper\bin\Debug\Oatc.OpenMI.Examples.ModelComponents.SimpleCSharpRiver.Wrapper.dll">
+  <Arguments>
+    <Argument Key="Path" ReadOnly="true" Value=".\RhineRiver2\" />
+    </Arguments>
+</LinkableComponent>

@@ -1,0 +1,48 @@
+<opr
+  version="2.0">
+  <models>
+    <model
+      omi="SimpleCSharpRiver2_RiverReach2.omi"
+      rect_x="225"
+      rect_y="111"
+      rect_width="100"
+      rect_height="51"
+      is_trigger="true" />
+    <model
+      omi="SimpleCSharpRiver2_RiverReach1.omi"
+      rect_x="45"
+      rect_y="109"
+      rect_width="100"
+      rect_height="51" />
+  </models>
+  <connections>
+    <connection
+      source_model_index="1"
+      target_model_index="0">
+      <links>
+        <link
+          source_item_id="River branch [2]"
+          target_item_id="Inflow location [0]">
+          <decorated
+            index="0" />
+        </link>
+      </links>
+      <decorators>
+        <decorator
+          item_id="Oatc.OpenMI.Sdk.ModelWrapper2.SourceAdapters.Linear">
+          <factory
+            id="Factory2"
+            type="Oatc.OpenMI.Examples.SimpleCSharpRiver2.LinkableComponent+Factory2" />
+          <arguments>
+            <argument
+              id="A"
+              value="2" />
+            <argument
+              id="B"
+              value="0" />
+          </arguments>
+        </decorator>
+      </decorators>
+    </connection>
+  </connections>
+</opr>

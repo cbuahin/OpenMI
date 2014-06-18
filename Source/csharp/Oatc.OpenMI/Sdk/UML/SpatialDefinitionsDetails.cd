@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Interface Name="Oatc.OpenMI.Sdk.Spatial.ISpatialMesh">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIiAAAoAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Spatial\ISpatialMesh.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Oatc.OpenMI.Sdk.Spatial.IMultiPoint">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Spatial\IMultiPoint.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Oatc.OpenMI.Sdk.Spatial.ILineString">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIQAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Spatial\ILineString.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Oatc.OpenMI.Sdk.Spatial.ISpatial2DGrid">
+    <Position X="2.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIIAAAAAAQAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Spatial\ISpatial2DGrid.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Oatc.OpenMI.Sdk.Spatial.ISpatial2DRegularGrid">
+    <Position X="4.5" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAQAAAAgAAAAAAAAAAAAAAAAAYAAAAAAAAAA=</HashCode>
+      <FileName>Spatial\ISpatial2DRegularGrid.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
