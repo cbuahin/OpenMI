@@ -63,18 +63,18 @@ namespace Oatc.OpenMI.Sdk.Spatial
             if (tsadaptee == null || !(tsadaptee.SpatialDefinition is IElementSet))
                 return new IIdentifiable[0];
             
-            List<IIdentifiable> methods = new List<IIdentifiable>();
+            IList<IIdentifiable> methods = new List<IIdentifiable>();
             
-            GetAvailableOperationMethods(methods, tsadaptee.ElementSet().ElementType);
+            GetAvailableOperationMethods(ref methods, tsadaptee.ElementSet().ElementType);
 
             // Check if the target is there and is a timespace input
             ITimeSpaceInput tstarget = target as ITimeSpaceInput;
             if (target == null || tstarget == null || !(tstarget.SpatialDefinition is IElementSet))
-                return (methods.ToArray());
+                return ((List<IIdentifiable>)methods).ToArray();
 
-            GetAvailableMappingMethods(methods, tsadaptee.ElementSet().ElementType, tstarget.ElementSet().ElementType);
+            GetAvailableMappingMethods(ref methods, tsadaptee.ElementSet().ElementType, tstarget.ElementSet().ElementType);
 
-            return (methods.ToArray());
+            return ((List<IIdentifiable>)methods).ToArray();
         }
 
         public static ITimeSpaceAdaptedOutput CreateAdaptedOutputMethod(IIdentifiable adaptedOutputId, IBaseOutput adaptee, IBaseInput target)
@@ -401,10 +401,10 @@ namespace Oatc.OpenMI.Sdk.Spatial
         ///	<p>ArrayList of method descriptions</p>
         public static IIdentifiable[] GetAvailableMethods(ElementType sourceElementType, ElementType targetElementType)
         {
-            var methods = new List<IIdentifiable>();
-            GetAvailableOperationMethods(methods, sourceElementType);
-            GetAvailableMappingMethods(methods, sourceElementType, targetElementType);
-            return methods.ToArray();
+            IList<IIdentifiable> methods = new List<IIdentifiable>();
+            GetAvailableOperationMethods(ref methods, sourceElementType);
+            GetAvailableMappingMethods(ref methods, sourceElementType, targetElementType);
+            return ((List < IIdentifiable>)methods).ToArray();
         }
 
         /// <summary>
@@ -419,7 +419,7 @@ namespace Oatc.OpenMI.Sdk.Spatial
         /// 
         /// <returns>
         ///	<p>ArrayList of method descriptions</p>
-        public static void GetAvailableMappingMethods(IList<IIdentifiable> methods, ElementType sourceElementType, ElementType targetElementType)
+        public static void GetAvailableMappingMethods(ref IList<IIdentifiable> methods, ElementType sourceElementType, ElementType targetElementType)
         {
             for (int i = 0; i < _AvailableMethods.Count; i++)
             {
@@ -446,7 +446,7 @@ namespace Oatc.OpenMI.Sdk.Spatial
         /// </summary>
         /// <param name="sourceElementType">Element type of the elements in the source Elementset</param>
         /// <returns>
-        public static void GetAvailableOperationMethods(IList<IIdentifiable> methods, ElementType sourceElementType)
+        public static void GetAvailableOperationMethods(ref IList<IIdentifiable> methods, ElementType sourceElementType)
         {
             for (int i = 0; i < _AvailableMethods.Count; i++)
             {

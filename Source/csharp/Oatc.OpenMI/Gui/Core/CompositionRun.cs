@@ -209,6 +209,13 @@ namespace Oatc.OpenMI.Gui.Core
 				}
 			}
 
+            //prepare
+
+            foreach (ITimeSpaceComponent iComponent in _components)
+            {
+                iComponent.Prepare();
+            }
+
 			if (triggered == null)
 				throw new InvalidOperationException("No trigger specified");
 
@@ -222,7 +229,7 @@ namespace Oatc.OpenMI.Gui.Core
 				if (Canceled)
 					return;
 
-				Thread.Sleep(1000); // TODO: Remove
+				//Thread.Sleep(1000); // TODO: Remove
 				triggered.Update();
 			}
 
@@ -280,6 +287,7 @@ namespace Oatc.OpenMI.Gui.Core
             {
                 get
                 {
+
                     if (_statusArgs == null || _statusArgs.LinkableComponent == null)
                         return null;
 
@@ -293,27 +301,38 @@ namespace Oatc.OpenMI.Gui.Core
                     double end = start + iLC.TimeExtent().TimeHorizon.DurationInDays;
 
                     double last = start;
-                    ITime iTime;
+                    ITime iTime = null;
 
                     // Try the TimeExtent (if implemented), this will provide values for Stand alone runs
                     // ie that have no output exchange items 
+                    IList<ITime> times = iLC.TimeExtent().Times ;
 
-                    if (iLC.TimeExtent().Times != null && iLC.TimeExtent().Times.Count > 0)
+                    lock (times)
                     {
-                        iTime = iLC.TimeExtent().Times[iLC.TimeExtent().Times.Count - 1];
-
-                        if (iTime.StampAsModifiedJulianDay > last)
-                            last = iTime.StampAsModifiedJulianDay;
-                    }
-
-                    foreach (ITimeSpaceOutput item in iLC.Outputs)
-                    {
-                        if (item.TimeSet != null && item.TimeSet.Times != null && item.TimeSet.Times.Count > 0)
+                        if (times != null && times.Count > 0)
                         {
-                            iTime = item.TimeSet.Times[item.TimeSet.Times.Count - 1];
+                            iTime = iLC.TimeExtent().Times[iLC.TimeExtent().Times.Count - 1];
 
                             if (iTime.StampAsModifiedJulianDay > last)
+                            {
                                 last = iTime.StampAsModifiedJulianDay;
+                            }
+                        }
+                    }
+
+                    if (iTime == null)
+                    {
+                        foreach (ITimeSpaceOutput item in iLC.Outputs)
+                        {
+                            if (item.TimeSet != null && item.TimeSet.Times != null && item.TimeSet.Times.Count > 0)
+                            {
+                                iTime = item.TimeSet.Times[item.TimeSet.Times.Count - 1];
+
+                                if (iTime.StampAsModifiedJulianDay > last)
+                                {
+                                    last = iTime.StampAsModifiedJulianDay;
+                                }
+                            }
                         }
                     }
         

@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QOpenMI.Standard2", "Source\QOpenMI.Standard2\QOpenMI.Standard2.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QOpenMI.Standard2.SDK", "Source\QOpenMI.Standard2.SDK\QOpenMI.Standard2.SDK.vcxproj", "{2746045A-5F11-467E-B944-0287587B6859}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Win32.Build.0 = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x64.ActiveCfg = Debug|x64
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x64.Build.0 = Debug|x64
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.ActiveCfg = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.Build.0 = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.ActiveCfg = Release|x64
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.Build.0 = Release|x64
+		{2746045A-5F11-467E-B944-0287587B6859}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2746045A-5F11-467E-B944-0287587B6859}.Debug|Win32.Build.0 = Debug|Win32
+		{2746045A-5F11-467E-B944-0287587B6859}.Debug|x64.ActiveCfg = Debug|x64
+		{2746045A-5F11-467E-B944-0287587B6859}.Debug|x64.Build.0 = Debug|x64
+		{2746045A-5F11-467E-B944-0287587B6859}.Release|Win32.ActiveCfg = Release|Win32
+		{2746045A-5F11-467E-B944-0287587B6859}.Release|Win32.Build.0 = Release|Win32
+		{2746045A-5F11-467E-B944-0287587B6859}.Release|x64.ActiveCfg = Release|x64
+		{2746045A-5F11-467E-B944-0287587B6859}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

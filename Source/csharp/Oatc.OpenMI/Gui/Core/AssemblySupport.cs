@@ -63,14 +63,23 @@ namespace Oatc.OpenMI.Gui.Core
             if (!_assemblyFile.Exists)
                 throw new FileNotFoundException(_assemblyFile.FullName);
 
-            Assembly ass = System.Reflection.Assembly.LoadFile(_assemblyFile.FullName);
-
-            if (ass == null)
-                throw new ArgumentException("Cannot load assembly " + _assemblyFile.FullName);
+            object obj = null;
+         
 
             try
             {
+                Assembly ass = System.Reflection.Assembly.LoadFile(_assemblyFile.FullName);
                 Type[] types = ass.GetTypes();
+
+                Type type = ass.GetType(typename, true, true);
+
+                obj = Activator.CreateInstance(type);
+
+                if (obj == null)
+                    throw new ArgumentException("Cannot create instance " + type.FullName);
+
+                return obj;
+                 
             }
             catch (ReflectionTypeLoadException etl)
             {
@@ -91,14 +100,9 @@ namespace Oatc.OpenMI.Gui.Core
                 string s = e.Message;
             }
 
-            Type type = ass.GetType(typename, true, true);
-
-            object obj = Activator.CreateInstance(type);
-
-            if (obj == null)
-                throw new ArgumentException("Cannot create instance " + type.FullName);
 
             return obj;
+
         }
 
         Assembly FindAssemblies(object sender, ResolveEventArgs args)

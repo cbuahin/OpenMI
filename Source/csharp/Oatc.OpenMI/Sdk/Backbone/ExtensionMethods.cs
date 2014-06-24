@@ -463,7 +463,7 @@ namespace Oatc.OpenMI.Sdk.Backbone
         }
         else
         {
-            if (componentArg.Value.GetType() == inarg.Value.GetType())
+            //if (componentArg.Value.GetType() == inarg.Value.GetType())
             componentArg.Value = inarg.Value;
         }
       }

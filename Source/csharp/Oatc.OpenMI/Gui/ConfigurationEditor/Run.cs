@@ -269,8 +269,8 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 
             AssemblySupport.ReleaseAll();
 
-            progressBar1.Value = 0;
-            progressBar1.Invalidate();
+            progressBarRun.Value = 0;
+            progressBarRun.Invalidate();
             UpdateTitleText(null);
 
 			Initialise(oprFile.FullName);
@@ -280,9 +280,9 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 		{
 			Status = RunStatus.Running;
 
-            progressBar1.Minimum = 0;
-            progressBar1.Maximum = 100;
-            progressBar1.Value = 0;
+            progressBarRun.Minimum = 0;
+            progressBarRun.Maximum = 100;
+            progressBarRun.Value = 0;
             UpdateTitleText(0);
 
             _startTime = DateTime.Now;
@@ -307,12 +307,12 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 					case RunStatus.Aborted:
 						btnOk.Text = "Reload";
                         labelMessage.Text = string.Format("Aborted [{0}%]\r\nElapsed {1}",
-                            progressBar1.Value, elapsed);
+                            progressBarRun.Value, elapsed);
                         break;
 					case RunStatus.Failed:
 						btnOk.Text = "Reload";
                         labelMessage.Text = string.Format("Failed [{0}%]\r\nElapsed {1}",
-                            progressBar1.Value, elapsed);
+                            progressBarRun.Value, elapsed);
                         break;
 					case RunStatus.Done:
 						btnOk.Text = "Reload";
@@ -405,10 +405,10 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
                         dataGridView1.InvalidateCell(cellProgress);
 
                         if (state.OprIndex == _nOprIndexTrigger
-                            && progressBar1.Value != progress.Value)
+                            && progressBarRun.Value != progress.Value)
                         {
-                            progressBar1.Value = progress.Value;
-                            progressBar1.Invalidate();
+                            progressBarRun.Value = progress.Value;
+                            progressBarRun.Invalidate();
 
                             UpdateTitleText(progress);
 

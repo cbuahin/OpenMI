@@ -193,6 +193,7 @@ namespace Oatc.OpenMI.Wrappers.EngineWrapper
         //}
 
       }
+
       if (!ExchangeItemHelper.OutputAndInputTimeSetsFit(this, querySpecifier))
       {
         throw new Exception("Could not update engine \"" + _linkableEngine.Id + "\" to required time for output item \"" + Id +

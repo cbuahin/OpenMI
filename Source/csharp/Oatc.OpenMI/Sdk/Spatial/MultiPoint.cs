@@ -39,7 +39,13 @@ namespace Oatc.OpenMI.Sdk.Spatial
   /// </summary>
   public class MultiPoint : AbstractSpatialDefinition, IMultiPoint
   {
-    public virtual int ElementCount { get { return (Coordinates.Count); } }
+    public virtual int ElementCount 
+    { 
+        get 
+        { 
+            return (Coordinates.Count);
+        }
+    }
 
     public bool HasZ { get; set; }
     public bool HasM { get; set; }
