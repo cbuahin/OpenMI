@@ -37,6 +37,10 @@ namespace Oatc.OpenMI.Sdk.Buffer
   {
     private readonly string id;
 
+    public TimeBufferFactory()
+    {
+       
+    }
     public TimeBufferFactory(string id)
     {
       this.id = id;

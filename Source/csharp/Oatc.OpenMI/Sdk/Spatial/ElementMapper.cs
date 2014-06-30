@@ -124,9 +124,9 @@ namespace Oatc.OpenMI.Sdk.Spatial
         /// <returns>
         /// The method has no return value.
         /// </returns>
-        public void Initialise(IIdentifiable method, IElementSet fromElements, IElementSet toElements)
+        public void Initialise(ref IIdentifiable method,ref IElementSet fromElements,ref IElementSet toElements)
         {
-            UpdateMappingMatrix(method, fromElements, toElements);
+            UpdateMappingMatrix(ref method,ref fromElements,ref toElements);
             _isInitialised = true;
         }
 
@@ -139,7 +139,7 @@ namespace Oatc.OpenMI.Sdk.Spatial
         /// <returns>
         /// A IValueSet found by mapping of the inputValues on to the toElementSet.
         /// </returns>
-        public TimeSpaceValueSet<double> MapValues(ITimeSpaceValueSet inputValues)
+        public TimeSpaceValueSet<double> MapValues(ref ITimeSpaceValueSet inputValues)
         {
             if (!_isInitialised)
             {
@@ -152,11 +152,11 @@ namespace Oatc.OpenMI.Sdk.Spatial
             }
 
             // Make a time-space value set of the correct size
-            TimeSpaceValueSet<double> result = CreateResultValueSet(inputValues.TimesCount(), _numberOfToRows);
+            ITimeSpaceValueSet<double> result = CreateResultValueSet(inputValues.TimesCount(), _numberOfToRows);
 
-            MapValues(result, inputValues);
+            MapValues(ref result,ref inputValues);
 
-            return result;
+            return (TimeSpaceValueSet<double>)result;
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Oatc.OpenMI.Sdk.Spatial
         /// </summary>
         /// <param name="outputValues">IValueset of mapped values, of the correct size</param>
         /// <param name="inputValues">IValueSet of values to be mapped.</param>
-        public void MapValues(ITimeSpaceValueSet<double> outputValues, ITimeSpaceValueSet inputValues)
+        public void MapValues(ref ITimeSpaceValueSet<double> outputValues,ref ITimeSpaceValueSet inputValues)
         {
             for (int i = 0; i < inputValues.Values2D.Count; i++)
             {
@@ -213,7 +213,7 @@ namespace Oatc.OpenMI.Sdk.Spatial
         /// <returns>
         /// The method has no return value.
         /// </returns>
-        private void UpdateMappingMatrix(IIdentifiable methodIdentifier, IElementSet fromElements, IElementSet toElements)
+        private void UpdateMappingMatrix(ref IIdentifiable methodIdentifier,ref IElementSet fromElements,ref IElementSet toElements)
         {
             try
             {

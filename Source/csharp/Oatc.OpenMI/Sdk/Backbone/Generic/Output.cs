@@ -46,8 +46,6 @@ namespace Oatc.OpenMI.Sdk.Backbone.Generic
             this._description = description;
         }
 
-        public event EventHandler<ExchangeItemChangeEventArgs> ItemChanged;
-
         ITimeSpaceValueSet ITimeSpaceOutput.Values
         {
             get { return _values; }

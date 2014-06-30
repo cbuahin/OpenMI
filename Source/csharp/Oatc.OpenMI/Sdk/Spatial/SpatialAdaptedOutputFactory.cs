@@ -458,7 +458,10 @@ namespace Oatc.OpenMI.Sdk.Spatial
                     // In case of an operation, the target is not important
                     if (sourceElementType == _AvailableMethods[i].FromElementsShapeType)
                     {
-                        methods.Add(new Identifier(_AvailableMethods[i].Id) { Description = _AvailableMethods[i].Description });
+                        methods.Add(new Identifier(_AvailableMethods[i].Id) 
+                        {
+                            Description = _AvailableMethods[i].Description 
+                        });
                     }
                 }
             }

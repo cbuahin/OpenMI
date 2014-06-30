@@ -46,9 +46,18 @@ namespace Oatc.OpenMI.Sdk.Backbone.Generic
     /// </remarks>
     public class ListIList<T> : List<IList<T>>, IList<IList>
     {
-        public ListIList() { }
-        public ListIList(int count) : base(count) { }
-        public ListIList(IList<T> elementValues) : base(1)
+        public ListIList() 
+        {
+        
+        }
+
+        public ListIList(int count) 
+            : base(count) 
+        {
+        
+        }
+        public ListIList(IList<T> elementValues) 
+            : base(1)
         {
             this.Add(elementValues);
         }

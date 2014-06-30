@@ -53,7 +53,7 @@ namespace Oatc.OpenMI.Gui.Core
 			_item = item;
 		}
 
-		public ITimeSpaceExchangeItem IExchangeItem
+		public ITimeSpaceExchangeItem ExchangeItem
 		{
 			get { return _item; }
 		}
@@ -153,38 +153,22 @@ namespace Oatc.OpenMI.Gui.Core
 
 	public class UIOutputItem : UIExchangeItem, ITimeSpaceOutput
 	{
-		UIAdaptedFactory _factory;
-		IIdentifiable _decoratorId;
         UIOutputItem _parent;
 
-		public UIOutputItem(ITimeSpaceOutput item)
+        public UIOutputItem(ITimeSpaceOutput item, UIOutputItem parent =null)
 			: base(item)
 		{
-		}
-
-		public UIOutputItem(UIAdaptedFactory factory, IIdentifiable decoratorId,
-			ITimeSpaceOutput item, UIOutputItem parent)
-			: base(item)
-		{
-			_factory = factory;
-            _decoratorId = decoratorId;
             _parent = parent;
 		}
 
         public UIOutputItem Parent
         {
-            get { return _parent; }
+            get 
+            {
+                return _parent;
+            }
         }
 
-		public UIAdaptedFactory Factory
-		{
-			get { return _factory; }
-		}
-
-		public IIdentifiable DecoratorId
-		{
-			get { return _decoratorId; }
-		}
 
 		public ITimeSpaceOutput Output
 		{
@@ -235,7 +219,10 @@ namespace Oatc.OpenMI.Gui.Core
 
 	    public ITimeSpaceValueSet Values
 		{
-			get { return ((ITimeSpaceOutput)_item).Values; }
+			get 
+            {
+                return ((ITimeSpaceOutput)_item).Values;
+            }
 		}
 
 		public ITimeSpaceValueSet GetValues(IBaseExchangeItem querySpecifier)
@@ -245,4 +232,62 @@ namespace Oatc.OpenMI.Gui.Core
 
 		#endregion
 	}
+
+    public class UIAdaptedOutputItem : UIOutputItem , ITimeSpaceAdaptedOutput
+    {
+        UIAdaptedFactory _factory;
+        IIdentifiable _decoratorId;
+
+       public UIAdaptedOutputItem(UIAdaptedFactory factory, IIdentifiable decoratorId,  ITimeSpaceAdaptedOutput item, UIOutputItem parent)
+			: base(item , parent)
+		{
+			_factory = factory;
+            _decoratorId = decoratorId;
+		}
+
+ 
+       public UIAdaptedFactory Factory
+       {
+           get { return _factory; }
+       }
+
+       public IIdentifiable DecoratorId
+       {
+           get { return _decoratorId; }
+       }
+
+        public IBaseOutput Adaptee
+        {
+            get {return ((ITimeSpaceAdaptedOutput) _item).Adaptee; }
+        }
+
+        public IList<IArgument> Arguments
+        {
+            get { return ((ITimeSpaceAdaptedOutput)_item).Arguments; }
+        }
+
+        public void Initialize()
+        {
+            ((ITimeSpaceAdaptedOutput)_item).Initialize();
+        }
+
+        public void Refresh()
+        {
+            ((ITimeSpaceAdaptedOutput)_item).Refresh();
+        }
+
+
+        public new IBaseValueSet GetValues(IBaseExchangeItem querySpecifier)
+        {
+           return ((ITimeSpaceAdaptedOutput)_item).GetValues(querySpecifier);
+        }
+
+        public new IBaseValueSet Values
+        {
+            get
+            {
+                return ((ITimeSpaceAdaptedOutput)_item).Values; 
+            }
+        }
+    }
 }

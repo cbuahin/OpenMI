@@ -42,6 +42,23 @@ namespace Oatc.OpenMI.Sdk.Backbone
     private ITime _timeHorizon = new Time();
     private double _offsetFromUtcInHours;
 
+    public TimeSet()
+    {
+
+    }
+
+    public TimeSet(TimeSet timeSet)
+    {
+        _hasDurations = timeSet.HasDurations;
+        _timeHorizon = new Time(timeSet.TimeHorizon);
+        _offsetFromUtcInHours = timeSet.OffsetFromUtcInHours;
+
+        for(int i =0 ; i < timeSet.Times.Count ; i++)
+        {
+            _times.Add(new Time(timeSet.Times[i]));
+        }
+    }
+
     IList<ITime> ITimeSet.Times
     {
       get { return _times; }

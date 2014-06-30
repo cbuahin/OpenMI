@@ -237,6 +237,5 @@ namespace Oatc.OpenMI.Wrappers.EngineWrapper
       }
       return true;
     }
-
   }
 }

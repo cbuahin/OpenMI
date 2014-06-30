@@ -61,13 +61,14 @@ namespace Oatc.OpenMI.Sdk.Backbone.Generic
   /// <remarks>
   /// Values are stored based on an <see cref="ListIList{T}"/>.
   /// </remarks>
-  public class TimeSpaceValueSet<T> : TimeSpaceValueSetBase<T>, ITimeSpaceValueSet<T>
+  public class TimeSpaceValueSet<T> : TimeSpaceValueSetBase<T> , ITimeSpaceValueSet<T>
   {
     protected ListIList<T> _values2D;
 
     public TimeSpaceValueSet()
       : this(new List<IList<T>>())
     {
+
     }
 
     /// <summary>
@@ -145,16 +146,13 @@ namespace Oatc.OpenMI.Sdk.Backbone.Generic
 
   }
 
-
-
-
   /// <summary>
   /// An <see cref="ITimeSpaceValueSet{T}"/> implementation.
   /// </summary>
   /// <remarks>
   /// Values are stored based on an <see cref="ListArray{T}"/>.
   /// </remarks>
-  public class ValueSetArray<T> : TimeSpaceValueSetBase<T>, ITimeSpaceValueSet<T>
+  public class ValueSetArray<T> : TimeSpaceValueSetBase<T> , ITimeSpaceValueSet<T>
   {
     private ListArray<T> _values2D;
 
@@ -253,10 +251,6 @@ namespace Oatc.OpenMI.Sdk.Backbone.Generic
     }
 
   }
-
-
-
-
 
   /// <summary>
   /// Abstract base implementation for a <see cref="ITimeSpaceValueSet{T}"/>.
@@ -402,7 +396,5 @@ namespace Oatc.OpenMI.Sdk.Backbone.Generic
       SetValue((T)value, indices[0], indices[1]);
     }
   }
-
-
 
 }

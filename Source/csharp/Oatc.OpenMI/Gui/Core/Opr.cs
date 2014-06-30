@@ -79,6 +79,152 @@ namespace Oatc.OpenMI.Gui.Core
             }
         }
 
+        static oprModel[] Models(UIModel[] models)
+        {
+            oprModel[] oprModels
+                = new oprModel[models.Length];
+
+            for (int n = 0; n < models.Length; ++n)
+            {
+                oprModels[n] = new oprModel();
+                oprModels[n].omi = models[n].OmiFilename;
+                oprModels[n].rect_x = models[n].Rect.X.ToString();
+                oprModels[n].rect_y = models[n].Rect.Y.ToString();
+                oprModels[n].rect_width = models[n].Rect.Width.ToString();
+                oprModels[n].rect_height = models[n].Rect.Height.ToString();
+
+                if (models[n].IsTrigger)
+                    oprModels[n].is_trigger = true;
+            }
+
+            return oprModels;
+        }
+
+        static oprConnection[] Connections(List<UIModel> models, UIConnection[] connections, DirectoryInfo oprPath)
+        {
+            oprConnection[] oprConnections = new oprConnection[connections.Length];
+
+            for (int n = 0; n < connections.Length; ++n)
+            {
+                oprConnections[n] = new oprConnection();
+                oprConnections[n].source_model_indexSpecified = true;
+                oprConnections[n].target_model_indexSpecified = true;
+                oprConnections[n].source_model_index = models.IndexOf(connections[n].SourceModel);
+                oprConnections[n].target_model_index = models.IndexOf(connections[n].TargetModel);
+
+                List<UIAdaptedOutputItem> allAdaptersInConnection;
+
+                oprConnections[n].decorators = Decorators(connections[n], oprPath, out allAdaptersInConnection);
+                oprConnections[n].links = Links(connections[n], allAdaptersInConnection);
+            }
+
+            return oprConnections;
+        }
+
+        static oprConnectionDecorator[] Decorators(UIConnection connection, DirectoryInfo oprPath, out List<UIAdaptedOutputItem> allAdaptersInConnection)
+        {
+            allAdaptersInConnection = new List<UIAdaptedOutputItem>();
+
+            UIOutputItem adapter = null;
+
+            foreach (Link link in connection.Links)
+            {
+                adapter = link.Source;
+
+                while (adapter != null && adapter.ExchangeItem is UIAdaptedOutputItem)
+                {
+                    if (!allAdaptersInConnection.Contains((UIAdaptedOutputItem)adapter))
+                        allAdaptersInConnection.Add((UIAdaptedOutputItem)adapter);
+
+                    adapter = adapter.Parent;
+                }
+            }
+
+            oprConnectionDecorator[] oprDecorators = new oprConnectionDecorator[allAdaptersInConnection.Count];
+
+            for (int n = 0; n < allAdaptersInConnection.Count; ++n)
+            {
+                oprDecorators[n] = new oprConnectionDecorator();
+                oprDecorators[n].item_id = allAdaptersInConnection[n].Id;
+                oprDecorators[n].factory = allAdaptersInConnection[n].Factory.Persist(oprPath);
+
+                IList<IArgument> ars = ((ITimeSpaceAdaptedOutput)allAdaptersInConnection[n].Output).Arguments;
+              
+                oprDecorators[n].arguments = DecoratorArgs(new List<IArgument>(ars).ToArray());
+            }
+
+            return oprDecorators;
+        }
+
+        static oprConnectionDecoratorArgument[] DecoratorArgs(IArgument[] arguments)
+        {
+            oprConnectionDecoratorArgument[] args = new oprConnectionDecoratorArgument[arguments.Length];
+
+            for (int n = 0; n < arguments.Length; ++n)
+            {
+                args[n] = new oprConnectionDecoratorArgument();
+                args[n].id = arguments[n].Id;
+                args[n].value = arguments[n].ValueAsString;
+            }
+
+            return args;
+        }
+
+        static oprConnectionLink[] Links(UIConnection connection, List<UIAdaptedOutputItem> allAdaptersInConnection)
+        {
+            oprConnectionLink[] links = new oprConnectionLink[connection.Links.Count];
+
+			UIOutputItem source;
+
+            for (int n = 0; n < connection.Links.Count; ++n)
+            {
+				source = connection.Links[n].Source;
+
+                while (source.Parent != null && source.Parent != source)
+                {
+                    source = source.Parent;
+                }
+
+                links[n] = new oprConnectionLink();
+                links[n].target_item_id = connection.Links[n].Target.Id;
+				links[n].source_item_id = source.Id;
+                links[n].decorated = Decorated(connection.Links[n], allAdaptersInConnection).ToArray();
+            }
+
+            return links;
+        }
+
+        static List<oprConnectionLinkDecorated> Decorated(Link link, List<UIAdaptedOutputItem> allAdaptersInConnection)
+        {
+            List<oprConnectionLinkDecorated> oprs
+                = new List<oprConnectionLinkDecorated>();
+
+			List<UIOutputItem> outputs = new List<UIOutputItem>(1);
+			outputs.Add(link.Source);
+
+            while (outputs[outputs.Count - 1].Parent != null && outputs[outputs.Count - 1].Parent != outputs[outputs.Count - 1])
+            {
+                outputs.Add(outputs[outputs.Count - 1].Parent);
+            }
+
+			outputs.Reverse();
+
+			oprConnectionLinkDecorated decorator;
+
+			foreach (UIOutputItem source in outputs)
+			{
+				if (source.Output is ITimeSpaceAdaptedOutput)
+				{
+					decorator = new oprConnectionLinkDecorated();
+                    decorator.index = allAdaptersInConnection.IndexOf((UIAdaptedOutputItem)source);
+					decorator.indexSpecified = true;
+					oprs.Add(decorator);
+				}
+			}
+
+            return oprs;
+        }
+
         public static void Load(FileInfo oprFile, out List<UIModel> models, out List<UIConnection> connections)
         {
             if (!oprFile.Exists)
@@ -130,154 +276,6 @@ namespace Oatc.OpenMI.Gui.Core
             return opr;
         }
 
-        static oprModel[] Models(UIModel[] models)
-        {
-            oprModel[] oprModels
-                = new oprModel[models.Length];
-
-            for (int n = 0; n < models.Length; ++n)
-            {
-                oprModels[n] = new oprModel();
-                oprModels[n].omi = models[n].OmiFilename;
-                oprModels[n].rect_x = models[n].Rect.X.ToString();
-                oprModels[n].rect_y = models[n].Rect.Y.ToString();
-                oprModels[n].rect_width = models[n].Rect.Width.ToString();
-                oprModels[n].rect_height = models[n].Rect.Height.ToString();
-
-                if (models[n].IsTrigger)
-                    oprModels[n].is_trigger = true;
-            }
-
-            return oprModels;
-        }
-
-        static oprConnection[] Connections(List<UIModel> models, UIConnection[] connections, DirectoryInfo oprPath)
-        {
-            oprConnection[] oprConnections
-                = new oprConnection[connections.Length];
-
-            for (int n = 0; n < connections.Length; ++n)
-            {
-                oprConnections[n] = new oprConnection();
-                oprConnections[n].source_model_indexSpecified = true;
-                oprConnections[n].target_model_indexSpecified = true;
-                oprConnections[n].source_model_index
-                    = models.IndexOf(connections[n].SourceModel);
-                oprConnections[n].target_model_index
-                    = models.IndexOf(connections[n].TargetModel);
-
-                List<UIOutputItem> allAdaptersInConnection;
-
-                oprConnections[n].decorators = Decorators(connections[n], oprPath,
-                    out allAdaptersInConnection);
-                oprConnections[n].links = Links(connections[n], allAdaptersInConnection);
-            }
-
-            return oprConnections;
-        }
-
-        static oprConnectionDecorator[] Decorators(UIConnection connection, DirectoryInfo oprPath, out List<UIOutputItem> allAdaptersInConnection)
-        {
-            allAdaptersInConnection = new List<UIOutputItem>();
-
-            UIOutputItem adapter;
-
-            foreach (UIConnection.Link link in connection.Links)
-            {
-                adapter = link.Source;
-
-                while (adapter != null && adapter.IExchangeItem is ITimeSpaceAdaptedOutput)
-                {
-                    if (!allAdaptersInConnection.Contains(adapter))
-                        allAdaptersInConnection.Add(adapter);
-
-                    adapter = adapter.Parent;
-                }
-            }
-
-            oprConnectionDecorator[] oprDecorators
-                = new oprConnectionDecorator[allAdaptersInConnection.Count];
-
-            for (int n = 0; n < allAdaptersInConnection.Count; ++n)
-            {
-                oprDecorators[n] = new oprConnectionDecorator();
-                oprDecorators[n].item_id = allAdaptersInConnection[n].DecoratorId.Id;
-                oprDecorators[n].factory = allAdaptersInConnection[n].Factory.Persist(oprPath);
-
-                IList<IArgument> ars = ((ITimeSpaceAdaptedOutput)allAdaptersInConnection[n].Output).Arguments;
-                // Why no natural conversion
-                oprDecorators[n].arguments = DecoratorArgs(new List<IArgument>(ars).ToArray());
-            }
-
-            return oprDecorators;
-        }
-
-        static oprConnectionDecoratorArgument[] DecoratorArgs(IArgument[] arguments)
-        {
-            oprConnectionDecoratorArgument[] args = new oprConnectionDecoratorArgument[arguments.Length];
-
-            for (int n = 0; n < arguments.Length; ++n)
-            {
-                args[n] = new oprConnectionDecoratorArgument();
-                args[n].id = arguments[n].Id;
-                args[n].value = arguments[n].ValueAsString;
-            }
-
-            return args;
-        }
-
-        static oprConnectionLink[] Links(UIConnection connection, List<UIOutputItem> allAdaptersInConnection)
-        {
-            oprConnectionLink[] links = new oprConnectionLink[connection.Links.Count];
-
-			UIOutputItem source;
-
-            for (int n = 0; n < connection.Links.Count; ++n)
-            {
-				source = connection.Links[n].Source;
-
-				while (source.Parent != null && source.Parent != source)
-					source = source.Parent;
-
-                links[n] = new oprConnectionLink();
-                links[n].target_item_id = connection.Links[n].Target.Id;
-				links[n].source_item_id = source.Id;
-                links[n].decorated = Decorated(connection.Links[n], allAdaptersInConnection).ToArray();
-            }
-
-            return links;
-        }
-
-        static List<oprConnectionLinkDecorated> Decorated(UIConnection.Link link, List<UIOutputItem> allAdaptersInConnection)
-        {
-            List<oprConnectionLinkDecorated> oprs
-                = new List<oprConnectionLinkDecorated>();
-
-			List<UIOutputItem> outputs = new List<UIOutputItem>(1);
-			outputs.Add(link.Source);
-
-			while (outputs[outputs.Count - 1].Parent != null
-				&& outputs[outputs.Count - 1].Parent != outputs[outputs.Count - 1])
-				outputs.Add(outputs[outputs.Count - 1].Parent);
-
-			outputs.Reverse();
-
-			oprConnectionLinkDecorated decorator;
-
-			foreach (UIOutputItem source in outputs)
-			{
-				if (source.Output is ITimeSpaceAdaptedOutput)
-				{
-					decorator = new oprConnectionLinkDecorated();
-					decorator.index = allAdaptersInConnection.IndexOf(source);
-					decorator.indexSpecified = true;
-					oprs.Add(decorator);
-				}
-			}
-
-            return oprs;
-        }
-
         static void DeserializeV2(opr opr, DirectoryInfo oprPath, out List<UIModel> models, out List<UIConnection> connections)
         {
             CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
@@ -312,7 +310,6 @@ namespace Oatc.OpenMI.Gui.Core
             }
         }
 
-
         static List<UIModel> DeserializeModelsV2(opr opr, DirectoryInfo oprPath)
         {
             List<UIModel> models = new List<UIModel>();
@@ -342,11 +339,7 @@ namespace Oatc.OpenMI.Gui.Core
                 }
                 catch (Exception e)
                 {
-                    throw new Exception(
-                        "Cannot instatiate model " + omiFile == null
-                            ? model.omi
-                            : omiFile.FullName,
-                        e);
+                    throw new Exception("Cannot instatiate model " + omiFile == null ? model.omi : omiFile.FullName, e);
                 }
             }
 
@@ -433,12 +426,10 @@ namespace Oatc.OpenMI.Gui.Core
             UIModel uiSourceModel, uiTargetModel;
             UIConnection uiConnection;
 
-            Dictionary<string, UIOutputItem> sources
-                = new Dictionary<string, UIOutputItem>();
-            Dictionary<string, UIInputItem> targets
-                = new Dictionary<string, UIInputItem>();
-            List<UIConnection.Link> links
-                = new List<UIConnection.Link>();
+            Dictionary<string, UIOutputItem> sources = new Dictionary<string, UIOutputItem>();
+            Dictionary<string, UIInputItem> targets = new Dictionary<string, UIInputItem>();
+            List<Link> links = new List<Link>();
+
             string[] ids;
             UIAdaptedFactory factory;
             oprConnectionDecoratorFactory[] oprFactories;
@@ -450,9 +441,10 @@ namespace Oatc.OpenMI.Gui.Core
 
             foreach (oprConnection connection in opr.connections)
             {
-                if (!connection.source_model_indexSpecified
-                    || !connection.target_model_indexSpecified)
+                if (!connection.source_model_indexSpecified || !connection.target_model_indexSpecified)
+                {
                     throw new NotImplementedException("Incompletly specified connections");
+                }
 
                 uiSourceModel = models[connection.source_model_index];
                 uiTargetModel = models[connection.target_model_index];
@@ -469,7 +461,7 @@ namespace Oatc.OpenMI.Gui.Core
                 foreach (ITimeSpaceInput item in uiTargetModel.LinkableComponent.Inputs)
                     targets.Add(item.Id, new UIInputItem(item));
 
-                nDecorators = connection.decorators != null ? connection.decorators.Length : 0;
+                nDecorators =  connection.decorators != null ? connection.decorators.Length : 0;
 
                 ids = new string[nDecorators];
                 oprFactories = new oprConnectionDecoratorFactory[nDecorators];
@@ -488,6 +480,7 @@ namespace Oatc.OpenMI.Gui.Core
                 {
                     source = sources[oprLink.source_item_id];
                     target = targets[oprLink.target_item_id];
+
 					adapted = null;
 
                     if (oprLink.decorated != null)
@@ -520,7 +513,7 @@ namespace Oatc.OpenMI.Gui.Core
 					target.Provider = source;
 					source.AddConsumer(target);
 					
-					links.Add(new UIConnection.Link(source, target));
+					links.Add(new Link(source, target));
                 }
 
                 uiConnection.Links = links;

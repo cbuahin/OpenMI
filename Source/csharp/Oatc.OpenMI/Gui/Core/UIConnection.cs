@@ -37,43 +37,70 @@ using OpenMI.Standard2;
 
 namespace Oatc.OpenMI.Gui.Core
 {
+    public class Link
+    {
+        UIOutputItem _source;
+        UIInputItem _target;
+
+        public Link()
+        {
+           
+        }
+
+        public Link(UIOutputItem source, UIInputItem target)
+        {
+            _source = source;
+            _target = target;
+        }
+
+        public UIOutputItem Source
+        {
+            get { return _source; }
+            set { _source = value; }
+        }
+
+        public UIInputItem Target
+        {
+            get { return _target; }
+            set { _target = value; }
+        }
+
+        public override string ToString()
+        {
+            string toString = "";
+
+            if (_source != null && _target != null)
+            {
+                toString = _source.ToString();
+
+                UIOutputItem temp = _source;
+
+                while (temp.Parent != null)
+                {
+                    toString = temp.Parent + " => " + toString;
+                    temp = temp.Parent;
+                }
+
+
+                toString = toString + " => " + _target;
+            }
+            else
+            {
+                return "<Add New Link>";
+
+            }
+            return toString;
+        }
+
+
+    }
+
 	/// <summary>
 	/// This class describes connection between two OpenMI models in one direction,
 	/// which consists of many links in same direction.
 	/// </summary>
 	public class UIConnection
 	{
-        public class Link
-        {
-            UIOutputItem _source;
-            UIInputItem _target;
-
-            public Link()
-            {}
-
-			public Link(UIOutputItem source, UIInputItem target)
-            {
-                _source = source;
-                _target = target;
-            }
-
-			public UIOutputItem Source
-            {
-                get { return _source; }
-                set { _source = value; }
-            }
-
-            public UIInputItem Target
-            {
-                get { return _target; }
-                set { _target = value; }
-            }
-
-            public override string ToString()
-            {
-				return string.Format("{0} -> {1}", _source, _target);
-            }
-		}
 
 		UIModel _sourceModel = null;
 		UIModel _targetModel = null;

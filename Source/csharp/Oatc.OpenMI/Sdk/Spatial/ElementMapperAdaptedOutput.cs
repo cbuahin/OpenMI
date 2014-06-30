@@ -68,7 +68,8 @@ namespace Oatc.OpenMI.Sdk.Spatial
       _methodId = methodId;
       _target = target;
       _elementMapper = new ElementMapper();
-      _elementMapper.Initialise(_methodId, adaptee.ElementSet(), target);
+      IElementSet set = adaptee.ElementSet();
+      _elementMapper.Initialise(ref _methodId,ref set,ref target);
 
       // The query item must match the adaptee on every point but 
       // the timeset.
@@ -94,7 +95,11 @@ namespace Oatc.OpenMI.Sdk.Spatial
 
     public override ITimeSpaceValueSet Values
     {
-      get { return _elementMapper.MapValues(_adaptee.Values); }
+      get 
+      {
+          ITimeSpaceValueSet valueSet = _adaptee.Values;
+          return _elementMapper.MapValues(ref valueSet); 
+      }
     }
 
     public override ITimeSet TimeSet
@@ -134,10 +139,11 @@ namespace Oatc.OpenMI.Sdk.Spatial
       _query.TimeSet = timeSpaceQuery.TimeSet;
 
       ITimeSpaceValueSet incomingValues = _adaptee.GetValues(_query);
-      TimeSpaceValueSet<double> resultValues = ElementMapper.CreateResultValueSet(incomingValues.TimesCount(), SpatialDefinition.ElementCount);
+      ITimeSpaceValueSet<double> resultValues = ElementMapper.CreateResultValueSet(incomingValues.TimesCount(), SpatialDefinition.ElementCount);
 
       // Transform the values from the adaptee
-      _elementMapper.MapValues(resultValues, incomingValues);
+      _elementMapper.MapValues(ref resultValues,ref incomingValues);
+
       return resultValues;
     }
 
@@ -162,7 +168,7 @@ namespace Oatc.OpenMI.Sdk.Spatial
       ITimeSpaceValueSet incomingValues = _adaptee.GetValues(_query);
 
       // Transform the values from the adaptee
-      _elementMapper.MapValues(targetSet, incomingValues);
+      _elementMapper.MapValues(ref targetSet,ref incomingValues);
     }
 
 

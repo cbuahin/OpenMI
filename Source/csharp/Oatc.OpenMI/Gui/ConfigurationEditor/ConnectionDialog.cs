@@ -150,10 +150,8 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 
             _shouldBeSaved = false;
      
-            _treeSource.TreePopulate(
-                uilink, _treeOptionsSources);
-            _treeTarget.TreePopulate(
-                uilink, _treeOptionsTargets);
+            _treeSource.TreePopulate(uilink, _treeOptionsSources);
+            _treeTarget.TreePopulate(uilink, _treeOptionsTargets);
 
             ElementTypeFilterCheckBox.Checked = false;
             DimensionFilterCheckBox.Checked = false;
@@ -166,7 +164,7 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 
         private void UpdateListLinks()
         {
-            UIConnection.Link selected = (UIConnection.Link)listLinks.SelectedItem;
+            Link selected = (Link)listLinks.SelectedItem;
             
             listLinks.Items.Clear();
             listLinks.Items.AddRange(_uilink.Links.ToArray());
@@ -247,7 +245,7 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 
             btnAddSources.ForeColor = checkedSourceAndTarget
                 ? SystemColors.ActiveCaptionText : SystemColors.InactiveCaptionText;
-            btnArgEdit.ForeColor = source != null && source.IExchangeItem is ITimeSpaceAdaptedOutput
+            btnArgEdit.ForeColor = source != null && source.ExchangeItem is ITimeSpaceAdaptedOutput
                 ? SystemColors.ActiveCaptionText : SystemColors.InactiveCaptionText;
 		}
 
@@ -261,8 +259,8 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
                 return;
             
             PropertyGridSelectObject(_uilink.Links[listLinks.SelectedIndex]);
-            _treeSource.CheckLink(_uilink.Links[listLinks.SelectedIndex]);
-            _treeTarget.CheckLink(_uilink.Links[listLinks.SelectedIndex]);
+           // _treeSource.CheckLink(_uilink.Links[listLinks.SelectedIndex]);
+            //_treeTarget.CheckLink(_uilink.Links[listLinks.SelectedIndex]);
 
             UpdateButtonsEnabledStatus();
         }
@@ -312,7 +310,7 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
             // Are the connection dialogs check boxes screwed up?
             Debug.Assert(acceptors.Count == 1);
 
-            _uilink.Links.Add(new UIConnection.Link(
+            _uilink.Links.Add(new Link(
                 (UIOutputItem)providers[providers.Count - 1], (UIInputItem)acceptors[0]));
 
             UpdateListLinks();
@@ -326,7 +324,7 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
             if (listLinks.SelectedItem == null)
                 return;
 
-            _uilink.Links.Remove((UIConnection.Link)listLinks.SelectedItem);
+            _uilink.Links.Remove((Link)listLinks.SelectedItem);
 
             UpdateListLinks();
             UpdateButtonsEnabledStatus();
@@ -778,7 +776,7 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
             if (source == null)
                 return;
 
-            ITimeSpaceAdaptedOutput adapted = source.IExchangeItem as ITimeSpaceAdaptedOutput;
+            ITimeSpaceAdaptedOutput adapted = source.ExchangeItem as ITimeSpaceAdaptedOutput;
 
             if (adapted == null)
                 return;

@@ -202,7 +202,7 @@ namespace Oatc.OpenMI.Gui.Core
 				provider = modelcomponents[connection.SourceModel];
 				acceptor = modelcomponents[connection.TargetModel];
 
-				foreach (UIConnection.Link pair in connection.Links)
+				foreach (Link pair in connection.Links)
 				{
 					pair.Source.AddConsumer(pair.Target);
 					pair.Target.Provider = pair.Source;
@@ -228,8 +228,6 @@ namespace Oatc.OpenMI.Gui.Core
 			{
 				if (Canceled)
 					return;
-
-				//Thread.Sleep(1000); // TODO: Remove
 				triggered.Update();
 			}
 
@@ -355,12 +353,15 @@ namespace Oatc.OpenMI.Gui.Core
 
 		void LinkableComponent_ExchangeItemValueChanged(object sender, ExchangeItemChangeEventArgs e)
 		{
-			if (!_monitorExchangeEvents)
-				return;
+            if (!_monitorExchangeEvents)
+            {
+                return;
+            }
 
-			if (_worker != null && _worker.WorkerReportsProgress)
-				_worker.ReportProgress(0,
-					new State(_components.IndexOf(((ITimeSpaceExchangeItem)sender).Component), e));
+            if (_worker != null && _worker.WorkerReportsProgress)
+            {
+                _worker.ReportProgress(0, new State(_components.IndexOf(((ITimeSpaceExchangeItem)sender).Component), e));
+            }
 		}
 	}
 }

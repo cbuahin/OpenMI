@@ -56,7 +56,7 @@ namespace Oatc.OpenMI.Gui.Controls
 
         #region Form controls
 
-        private TreeView treeView1;
+        private TreeView treeView;
 
         #endregion
 
@@ -76,12 +76,12 @@ namespace Oatc.OpenMI.Gui.Controls
 
         #region Member variables
 
-        List<UIExchangeItem> _items 
+        List<UIExchangeItem> _items
             = new List<UIExchangeItem>();
         Dictionary<ITimeSpaceExchangeItem, TreeNode> _nodes
             = new Dictionary<ITimeSpaceExchangeItem, TreeNode>();
 
-        private ImageList imageList1;
+        private ImageList imageList;
 
         private IContainer components;
 
@@ -124,7 +124,7 @@ namespace Oatc.OpenMI.Gui.Controls
 
             TreeCreate(null);
         }
-        
+
         public void TreePopulate(ITimeSpaceComponent linkableComponent, TreeOptions options)
         {
             _linkableComponent = linkableComponent;
@@ -151,15 +151,15 @@ namespace Oatc.OpenMI.Gui.Controls
 
             UIOutputItem src;
 
-            foreach (UIConnection.Link pair in connection.Links)
+            foreach (Link pair in connection.Links)
             {
                 src = pair.Source;
 
-                while (src.Parent != null) // decorator
-                {
-                    extraSources.Add(src);
-                    src = src.Parent;
-                }
+                //while (src.Parent != null) // decorator
+                //{
+                //    extraSources.Add(src);
+                //    src = src.Parent;
+                //}
             }
 
             TreePopulate(source, target, extraSources, options);
@@ -185,7 +185,7 @@ namespace Oatc.OpenMI.Gui.Controls
             List<UIExchangeItem> targets = Targets(target);
 
             UIExchangeItem toCheck = null;
-            
+
             if (extraSources != null)
             {
                 sources.AddRange(extraSources.ToArray());
@@ -276,7 +276,7 @@ namespace Oatc.OpenMI.Gui.Controls
             {
                 _types = new List<ElementType>();
 
-				foreach (UIExchangeItem item in items)
+                foreach (UIExchangeItem item in items)
                 {
                     if (!_types.Contains(item.ElementSet.ElementType))
                         _types.Add(item.ElementSet.ElementType);
@@ -286,7 +286,7 @@ namespace Oatc.OpenMI.Gui.Controls
                 }
             }
 
-			public bool Predicate(UIExchangeItem item)
+            public bool Predicate(UIExchangeItem item)
             {
                 return _types.Contains(item.ElementSet.ElementType);
             }
@@ -296,7 +296,7 @@ namespace Oatc.OpenMI.Gui.Controls
         {
             List<IDimension> _dimensions = new List<IDimension>();
 
-			public FilterOnDimension(List<UIExchangeItem> items)
+            public FilterOnDimension(List<UIExchangeItem> items)
             {
                 if (items.Count > 0)
                 {
@@ -313,7 +313,7 @@ namespace Oatc.OpenMI.Gui.Controls
                 }
             }
 
-			static bool DimensionsAreEqual(UIExchangeItem x, UIExchangeItem y)
+            static bool DimensionsAreEqual(UIExchangeItem x, UIExchangeItem y)
             {
                 return x.ValueDefinition is IQuantity
                         && y.ValueDefinition is IQuantity
@@ -321,11 +321,11 @@ namespace Oatc.OpenMI.Gui.Controls
                             ((IQuantity)y.ValueDefinition).Unit.Dimension);
             }
 
-			class CompareDimensions : IComparer<UIExchangeItem>
-			{
-				#region IComparer<UIExchangeItem> Members
+            class CompareDimensions : IComparer<UIExchangeItem>
+            {
+                #region IComparer<UIExchangeItem> Members
 
-				public int Compare(UIExchangeItem x, UIExchangeItem y)
+                public int Compare(UIExchangeItem x, UIExchangeItem y)
                 {
                     if (DimensionsAreEqual(x, y))
                         return 0;
@@ -336,7 +336,7 @@ namespace Oatc.OpenMI.Gui.Controls
                 #endregion
             }
 
-			public bool Predicate(UIExchangeItem item)
+            public bool Predicate(UIExchangeItem item)
             {
                 if (!(item.ValueDefinition is IQuantity))
                     return false;
@@ -359,18 +359,18 @@ namespace Oatc.OpenMI.Gui.Controls
 
             if (_items == null)
             {
-                treeView1.BeginUpdate();
-                treeView1.Nodes.Clear();
-                treeView1.EndUpdate();
+                treeView.BeginUpdate();
+                treeView.Nodes.Clear();
+                treeView.EndUpdate();
                 return;
             }
 
             ExchangeItemsComparer comparer = new ExchangeItemsComparer();
             _items.Sort(comparer);
 
-            treeView1.BeginUpdate();
-            treeView1.Nodes.Clear();
-            treeView1.CheckBoxes = _treeOptions.ShowCheckboxs;
+            treeView.BeginUpdate();
+            treeView.Nodes.Clear();
+            treeView.CheckBoxes = _treeOptions.ShowCheckboxs;
 
             // Top Level
 
@@ -384,7 +384,7 @@ namespace Oatc.OpenMI.Gui.Controls
 
                 if (!quantities.ContainsKey(item.ValueDefinition.Caption))
                 {
-                    node = treeView1.Nodes.Add(item.ValueDefinition.Caption);
+                    node = treeView.Nodes.Add(item.ValueDefinition.Caption);
                     node.Tag = null;
                     quantities.Add(item.ValueDefinition.Caption, node);
                 }
@@ -397,74 +397,74 @@ namespace Oatc.OpenMI.Gui.Controls
             foreach (UIExchangeItem item in _items)
             {
                 node = new TreeNode(item.ToString());
-                
+
                 node.ImageIndex
                     = node.SelectedImageIndex
                     = ImageIndex(item.ElementSet.ElementType);
 
                 node.Tag = item;
 
-                if (item is UIOutputItem && ((UIOutputItem)item).Parent != null)
-                {
-                    kids.Push(node);
-                }
-                else
-                 {
-                    quantities[item.ValueDefinition.Caption].Nodes.Add(node);
+                //if (item is UIOutputItem && ((UIOutputItem)item).Parent != null)
+                //{
+                //    kids.Push(node);
+                //}
+                //else
+                //{
+                //    quantities[item.ValueDefinition.Caption].Nodes.Add(node);
 
-                    _nodes.Add(item.IExchangeItem, node);
-                }
+                //    _nodes.Add(item.IExchangeItem, node);
+                //}
             }
 
             // Lower levels
 
-            if (kids.Count > 0)
-            {
-                Stack<TreeNode> unassigned;
-                UIExchangeItem iParent, iNode;
-                int added;
+            //if (kids.Count > 0)
+            //{
+            //    Stack<TreeNode> unassigned;
+            //    UIExchangeItem iParent, iNode;
+            //    int added;
 
-                do
-                {                
-                    added = 0;
-                    unassigned = new Stack<TreeNode>(kids.Count);
+            //    do
+            //    {
+            //        added = 0;
+            //        unassigned = new Stack<TreeNode>(kids.Count);
 
-                    while (kids.Count > 0)
-                    {
-                        node = kids.Pop();
-                        iNode = (UIExchangeItem)node.Tag;
-                        iParent = ((UIOutputItem)iNode).Parent;
+            //        while (kids.Count > 0)
+            //        {
+            //            node = kids.Pop();
+            //            iNode = (UIExchangeItem)node.Tag;
+            //            iParent = ((UIOutputItem)iNode).Parent;
 
-                        if (_nodes.ContainsKey(iParent.IExchangeItem))
-                        {
-                            _nodes[iParent.IExchangeItem].Nodes.Add(node);
-                            _nodes.Add(iNode.IExchangeItem, node);
-                            ++added;
-                        }
-                        else
-                        {
-                            unassigned.Push(node);
-                        }
-                    }
+            //            if (_nodes.ContainsKey(iParent.IExchangeItem))
+            //            {
+            //                _nodes[iParent.IExchangeItem].Nodes.Add(node);
+            //                _nodes.Add(iNode.IExchangeItem, node);
+            //                ++added;
+            //            }
+            //            else
+            //            {
+            //                unassigned.Push(node);
+            //            }
+            //        }
 
-                    if (added == 0 && unassigned.Count > 0)
-                    {
-                        Debug.Assert(false); // cant assign kids
-                        break;
-                    }
+            //        if (added == 0 && unassigned.Count > 0)
+            //        {
+            //            Debug.Assert(false); // cant assign kids
+            //            break;
+            //        }
 
-                    kids = unassigned;
-                }
-                while (unassigned.Count > 0);
-            }
+            //        kids = unassigned;
+            //    }
+            //    while (unassigned.Count > 0);
+            //}
 
-            treeView1.ExpandAll();
-            treeView1.EndUpdate();
+            treeView.ExpandAll();
+            treeView.EndUpdate();
 
-            if (toCheck != null && _nodes.ContainsKey(toCheck.IExchangeItem))
-                CheckNode(_nodes[toCheck.IExchangeItem], true);
+            if (toCheck != null && _nodes.ContainsKey(toCheck.ExchangeItem))
+                CheckNode(_nodes[toCheck.ExchangeItem], true);
 
-            treeView1.Invalidate();
+            treeView.Invalidate();
         }
 
         int ImageIndex(ElementType type)
@@ -491,26 +491,28 @@ namespace Oatc.OpenMI.Gui.Controls
             return 11;
         }
 
-        public void CheckLink(UIConnection.Link link)
+        public void CheckLink(Link link)
         {
             if (_treeOptions.IsSource)
-                CheckNode(_nodes[link.Source.IExchangeItem], true);
+            {
+                CheckNode(_nodes[link.Source.ExchangeItem], true);
+            }
             else if (_treeOptions.IsTarget)
-                CheckNode(_nodes[link.Target.IExchangeItem], true);
+            {
+                CheckNode(_nodes[link.Target.ExchangeItem], true);
+            }
         }
 
         public UIExchangeItem GetSelectedObject()
         {
-            return treeView1.SelectedNode != null
-                ? (UIExchangeItem)treeView1.SelectedNode.Tag
-                : null;
+            return treeView.SelectedNode != null ? (UIExchangeItem)treeView.SelectedNode.Tag : null;
         }
 
         private class ExchangeItemsComparer : IComparer<UIExchangeItem>
-		{
-			#region IComparer<UIExchangeItem> Members
+        {
+            #region IComparer<UIExchangeItem> Members
 
-			public int Compare(UIExchangeItem x, UIExchangeItem y)
+            public int Compare(UIExchangeItem x, UIExchangeItem y)
             {
                 int result = string.Compare(x.ValueDefinition.Caption, y.ValueDefinition.Caption, false);
 
@@ -530,8 +532,12 @@ namespace Oatc.OpenMI.Gui.Controls
             node.Checked = state;
 
             if (node.Nodes != null)
+            {
                 foreach (TreeNode n in node.Nodes)
+                {
                     SetNodeAndChildrenCheck(n, state); // RECURSION
+                }
+            }
         }
 
         void SetNodeAndParentsCheck(TreeNode node, bool state)
@@ -539,13 +545,17 @@ namespace Oatc.OpenMI.Gui.Controls
             node.Checked = state;
 
             if (node.Parent != null)
+            {
                 SetNodeAndParentsCheck(node.Parent, state); // RECURSION
+            }
         }
 
         void SetAllNodesCheck(TreeNode node, bool state)
         {
             while (node.Parent != null)
+            {
                 node = node.Parent;
+            }
 
             SetNodeAndChildrenCheck(node, state);
         }
@@ -557,10 +567,12 @@ namespace Oatc.OpenMI.Gui.Controls
         /// <param name="output"></param>
         public List<UIExchangeItem> GetCheckedExchangeItems()
         {
-			List<UIExchangeItem> items = new List<UIExchangeItem>();
+            List<UIExchangeItem> items = new List<UIExchangeItem>();
 
-            foreach (TreeNode node in treeView1.Nodes)
+            foreach (TreeNode node in treeView.Nodes)
+            {
                 AddCheckedExchangeChildren(node, items);
+            }
 
             return items;
         }
@@ -570,15 +582,19 @@ namespace Oatc.OpenMI.Gui.Controls
             UIExchangeItem item = (UIExchangeItem)node.Tag;
 
             if (node.Checked && item != null)
+            {
                 items.Add(item);
+            }
 
             foreach (TreeNode n in node.Nodes)
+            {
                 AddCheckedExchangeChildren(n, items); // RECURSION
+            }
         }
 
         #region Event handlers
 
-        private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
+        private void treeView_AfterCheck(object sender, TreeViewEventArgs e)
         {
             CheckNode(e.Node, e.Node.Checked);
         }
@@ -608,7 +624,7 @@ namespace Oatc.OpenMI.Gui.Controls
 
                 ExchangeItemChanged(this, new EventArgs());
 
-                treeView1.EndUpdate();
+                treeView.EndUpdate();
             }
             finally
             {
@@ -657,54 +673,54 @@ namespace Oatc.OpenMI.Gui.Controls
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources =
-                new System.ComponentModel.ComponentResourceManager(typeof (ExchangeItemSelector));
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+                new System.ComponentModel.ComponentResourceManager(typeof(ExchangeItemSelector));
+            this.treeView = new System.Windows.Forms.TreeView();
+            this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
             // 
             // treeView1
             // 
-            this.treeView1.Anchor =
+            this.treeView.Anchor =
                 ((System.Windows.Forms.AnchorStyles)
                  ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                     | System.Windows.Forms.AnchorStyles.Left)
                    | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.treeView1.CheckBoxes = true;
-            this.treeView1.ImageIndex = 0;
-            this.treeView1.ImageList = this.imageList1;
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(256, 328);
-            this.treeView1.TabIndex = 0;
-            this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
-            this.treeView1.Enter += new System.EventHandler(this.treeView1_Enter);
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            this.treeView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.treeView.CheckBoxes = true;
+            this.treeView.ImageIndex = 0;
+            this.treeView.ImageList = this.imageList;
+            this.treeView.Location = new System.Drawing.Point(0, 0);
+            this.treeView.Name = "treeView1";
+            this.treeView.SelectedImageIndex = 0;
+            this.treeView.Size = new System.Drawing.Size(256, 328);
+            this.treeView.TabIndex = 0;
+            this.treeView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterCheck);
+            this.treeView.Enter += new System.EventHandler(this.treeView1_Enter);
+            this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // imageList1
             // 
-            this.imageList1.ImageStream =
-                ((System.Windows.Forms.ImageListStreamer) (resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "");
-            this.imageList1.Images.SetKeyName(1, "");
-            this.imageList1.Images.SetKeyName(2, "");
-            this.imageList1.Images.SetKeyName(3, "");
-            this.imageList1.Images.SetKeyName(4, "");
-            this.imageList1.Images.SetKeyName(5, "");
-            this.imageList1.Images.SetKeyName(6, "");
-            this.imageList1.Images.SetKeyName(7, "");
-            this.imageList1.Images.SetKeyName(8, "");
-            this.imageList1.Images.SetKeyName(9, "");
-            this.imageList1.Images.SetKeyName(10, "");
-            this.imageList1.Images.SetKeyName(11, "");
-            this.imageList1.Images.SetKeyName(12, "");
-            this.imageList1.Images.SetKeyName(13, "RESOURCE.BMP");
+            this.imageList.ImageStream =
+                ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList.Images.SetKeyName(0, "");
+            this.imageList.Images.SetKeyName(1, "");
+            this.imageList.Images.SetKeyName(2, "");
+            this.imageList.Images.SetKeyName(3, "");
+            this.imageList.Images.SetKeyName(4, "");
+            this.imageList.Images.SetKeyName(5, "");
+            this.imageList.Images.SetKeyName(6, "");
+            this.imageList.Images.SetKeyName(7, "");
+            this.imageList.Images.SetKeyName(8, "");
+            this.imageList.Images.SetKeyName(9, "");
+            this.imageList.Images.SetKeyName(10, "");
+            this.imageList.Images.SetKeyName(11, "");
+            this.imageList.Images.SetKeyName(12, "");
+            this.imageList.Images.SetKeyName(13, "RESOURCE.BMP");
             // 
             // ExchangeItemSelector
             // 
-            this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.treeView);
             this.Name = "ExchangeItemSelector";
             this.Size = new System.Drawing.Size(256, 328);
             this.ResumeLayout(false);

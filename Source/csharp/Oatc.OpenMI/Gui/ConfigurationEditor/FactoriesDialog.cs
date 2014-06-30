@@ -84,7 +84,9 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
                             firstSourceFactory = factory.ToString();
                     }
                     else
+                    {
                         factory.InitialiseAs3rdParty(iFactory.GetType(), model.LinkableComponent);
+                    }
 
                     AddFactory(factory);
                 }

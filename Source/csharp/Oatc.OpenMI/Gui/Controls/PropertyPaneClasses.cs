@@ -68,10 +68,10 @@ namespace Oatc.OpenMI.Gui.Controls
                 return new ElementSet((IElementSet)obj);
 
             if (obj is UIExchangeItem) // RECURSION
-                return Selection(((UIExchangeItem)obj).IExchangeItem);
+                return Selection(((UIExchangeItem)obj).ExchangeItem);
 
-            if (obj is UIConnection.Link)
-                return new Link((UIConnection.Link)obj);
+            if (obj is Oatc.OpenMI.Gui.Core.Link)
+                return new Link((Oatc.OpenMI.Gui.Core.Link)obj);
 
             return null;
         }
@@ -878,11 +878,11 @@ namespace Oatc.OpenMI.Gui.Controls
         [TypeConverter(typeof(ExpandableObjectConverter))]
         public class Link
         {
-            UIConnection.Link _link;
+            Oatc.OpenMI.Gui.Core.Link _link;
             Input _target;
             Output _source;
 
-            public Link(UIConnection.Link link)
+            public Link(Oatc.OpenMI.Gui.Core.Link link)
             {
                 _link = link;
             }
@@ -898,7 +898,7 @@ namespace Oatc.OpenMI.Gui.Controls
                 get
                 {
                     if (_target == null)
-                        _target = new Input((ITimeSpaceInput)_link.Target.IExchangeItem);
+                        _target = new Input((ITimeSpaceInput)_link.Target.ExchangeItem);
 
                     return _target;
                 }
@@ -911,10 +911,10 @@ namespace Oatc.OpenMI.Gui.Controls
                 {
                     if (_source == null)
                     {
-                        if (_link.Source.IExchangeItem is ITimeSpaceAdaptedOutput)
-                            _source = new AdaptedOutput((ITimeSpaceAdaptedOutput)_link.Source.IExchangeItem);
+                        if (_link.Source.ExchangeItem is ITimeSpaceAdaptedOutput)
+                            _source = new AdaptedOutput((ITimeSpaceAdaptedOutput)_link.Source.ExchangeItem);
                         else
-                            _source = new Output((ITimeSpaceOutput)_link.Source.IExchangeItem);
+                            _source = new Output((ITimeSpaceOutput)_link.Source.ExchangeItem);
                     }
 
                     return _source;

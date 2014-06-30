@@ -477,11 +477,16 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 
 		private void ShowLinkDialog( UIConnection link )
 		{
-            ConnectionDialog dlg = new ConnectionDialog(_composition.Models);
-            dlg.PopulateDialog(link);
+            ConnectionDlg dlg = new ConnectionDlg(link);
+          
             if (dlg.ShowDialog(this) == DialogResult.OK)
 				_composition.ShouldBeSaved = true;
-			
+
+            //ConnectionDialog dlg = new ConnectionDialog(_composition.Models);
+            //dlg.PopulateDialog(link);
+            //if (dlg.ShowDialog(this) == DialogResult.OK)
+            //    _composition.ShouldBeSaved = true;
+
 			UpdateTitle();
 		}
 

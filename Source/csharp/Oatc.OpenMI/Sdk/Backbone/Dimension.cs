@@ -35,6 +35,7 @@ namespace Oatc.OpenMI.Sdk.Backbone
     public enum PredefinedDimensions
     {
         Length,
+        Area,
         Volume,
         LengthPerTime,
         VolumePerTime,
@@ -70,6 +71,9 @@ namespace Oatc.OpenMI.Sdk.Backbone
             {
                 case PredefinedDimensions.Length:
                     SetPower(DimensionBase.Length, 1);
+                    break;
+                case PredefinedDimensions.Area:
+                    SetPower(DimensionBase.Length, 2);
                     break;
                 case PredefinedDimensions.Volume:
                     SetPower(DimensionBase.Length, 3);

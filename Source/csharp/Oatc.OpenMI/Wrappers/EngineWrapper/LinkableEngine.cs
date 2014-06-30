@@ -501,14 +501,17 @@ namespace Oatc.OpenMI.Wrappers.EngineWrapper
       ICollection<EngineOutputItem> requiredOutputItems = ActiveOutputItems;
       foreach (EngineOutputItem outputItem in requiredOutputItems)
       {
+          
         if (outputItem.Update())
         {
           // if updated, also update all adapted outputs
           foreach (ITimeSpaceAdaptedOutput adaptedOutput in outputItem.AdaptedOutputs)
           {
             // Only update adaptedOutputs that are actually active
-            if (adaptedOutput.Consumers.Count > 0 || adaptedOutput.AdaptedOutputs.Count > 0)
-              adaptedOutput.Refresh();
+              if (adaptedOutput.Consumers.Count > 0 || adaptedOutput.AdaptedOutputs.Count > 0)
+              {
+                  adaptedOutput.Refresh();
+              }
           }
         }
       }

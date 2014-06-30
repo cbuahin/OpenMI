@@ -48,6 +48,9 @@ namespace Oatc.OpenMI.Gui.Core
         IAdaptedOutputFactory _factory = null;
         bool _is3rdParty = true;
 
+
+        public UIAdaptedFactory() { }
+
         public void InitialiseAs3rdParty(Type type, ITimeSpaceComponent source)
         {
             FileInfo assembly = new FileInfo(System.Reflection.Assembly.GetAssembly(type).Location);
@@ -104,8 +107,10 @@ namespace Oatc.OpenMI.Gui.Core
 
         public void Initialise(oprConnectionDecoratorFactory opr, IBaseLinkableComponent source, DirectoryInfo oprPath)
         {
-            if (opr.id != string.Empty)
+            if (opr.id != string.Empty || opr.assembly == "SourceComponent")
+            {
                 InitialiseAsNative(opr.id, source);
+            }
             else // 3rd party
             {
                 FileInfo assembly;
@@ -134,9 +139,7 @@ namespace Oatc.OpenMI.Gui.Core
             if (_is3rdParty)
             {
                 factory.id = string.Empty;
-                factory.assembly = oprPath == null
-                    ? _assembly.FullName
-                    : Utils.RelativePath(oprPath, _assembly.FullName);
+                factory.assembly = oprPath == null  ? _assembly.FullName: Utils.RelativePath(oprPath, _assembly.FullName);
             }
             else
             {
@@ -149,9 +152,7 @@ namespace Oatc.OpenMI.Gui.Core
 
         public override string ToString()
         {
-            return _modelCaption == string.Empty
-                ? string.Format("{0} ({1})", _factory.Caption, _factory.GetType().ToString())
-                : string.Format("\"{0}\", {1}", _modelCaption, _factory.Caption);
+            return _modelCaption == string.Empty ? string.Format("{0} ({1})", _factory.Caption, _factory.GetType().ToString()) : string.Format("\"{0}\", {1}", _modelCaption, _factory.Caption);
         }
 
         public FileInfo Assembly
@@ -174,13 +175,13 @@ namespace Oatc.OpenMI.Gui.Core
             get { return _factory; }
         }
 
-        public UIOutputItem NewAdaptedUIOutputItem(string decoratorId, UIOutputItem parent, ITimeSpaceInput target)
+        public UIAdaptedOutputItem NewAdaptedUIOutputItem(string decoratorId, UIOutputItem parent, ITimeSpaceInput target)
         {
             Identifier identifier = new Identifier(decoratorId);
-            IBaseAdaptedOutput iAdapted = Factory.CreateAdaptedOutput(
-                identifier, parent, target);
 
-            UIOutputItem item = new UIOutputItem(this, identifier, (ITimeSpaceOutput)iAdapted, parent);
+            IBaseAdaptedOutput iAdapted = Factory.CreateAdaptedOutput(identifier, parent, target);
+
+            UIAdaptedOutputItem item = new UIAdaptedOutputItem(this, identifier, (ITimeSpaceAdaptedOutput)iAdapted, parent);
 
             parent.AddAdaptedOutput((IBaseAdaptedOutput)item.Output);
 

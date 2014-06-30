@@ -46,7 +46,6 @@ namespace Oatc.OpenMI.Sdk.Backbone.Generic
             Values = new TimeSpaceValueSet<T>();
         }
 
-        public event EventHandler<ExchangeItemChangeEventArgs> ItemChanged;
 
 
         public new TimeSpaceValueSet<T> Values

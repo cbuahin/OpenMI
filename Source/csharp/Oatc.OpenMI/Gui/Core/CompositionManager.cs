@@ -232,8 +232,8 @@ namespace Oatc.OpenMI.Gui.Core
 			{
 				if (model.Rect.X == uiModel.Rect.X && model.Rect.Y == uiModel.Rect.Y)
 				{
-					model.Rect.X = model.Rect.X + model.Rect.Width / 2;
-					model.Rect.Y = model.Rect.Y + model.Rect.Height / 2;
+					model.Rect.X = model.Rect.X + model.Rect.Width + 50;
+					model.Rect.Y = model.Rect.Y + model.Rect.Height+ 50;
 				}
 			}
 

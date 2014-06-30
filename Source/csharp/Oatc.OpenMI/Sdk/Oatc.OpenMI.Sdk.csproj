@@ -75,10 +75,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OpenMI.Standard2, Version=2.0.0.0, Culture=neutral, PublicKeyToken=82bbb00ca5ab39e4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\OpenMI.Standard2.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -167,6 +163,12 @@
   <ItemGroup>
     <None Include="UML\SpatialDefinitions.cd" />
     <None Include="UML\SpatialDefinitionsDetails.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\OpenMI.Standard2\OpenMI.Standard2.csproj">
+      <Project>{e768c562-3a5a-40c5-adf1-1957ae4bcd27}</Project>
+      <Name>OpenMI.Standard2</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

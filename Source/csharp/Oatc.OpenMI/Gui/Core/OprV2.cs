@@ -50,7 +50,8 @@ using System.Xml.Serialization;
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
 [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-public partial class opr {
+public partial class opr 
+{
     
     private oprModel[] modelsField;
     
@@ -61,11 +62,14 @@ public partial class opr {
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
     [System.Xml.Serialization.XmlArrayItemAttribute("model", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-    public oprModel[] models {
-        get {
+    public oprModel[] models
+    {
+        get 
+        {
             return this.modelsField;
         }
-        set {
+        set 
+        {
             this.modelsField = value;
         }
     }
@@ -73,22 +77,28 @@ public partial class opr {
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
     [System.Xml.Serialization.XmlArrayItemAttribute("connection", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-    public oprConnection[] connections {
-        get {
+    public oprConnection[] connections
+    {
+        get 
+        {
             return this.connectionsField;
         }
-        set {
+        set
+        {
             this.connectionsField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string version {
-        get {
+    public string version
+    {
+        get
+        {
             return this.versionField;
         }
-        set {
+        set 
+        {
             this.versionField = value;
         }
     }
@@ -100,7 +110,8 @@ public partial class opr {
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public partial class oprModel {
+public partial class oprModel 
+{
     
     private string omiField;
     
@@ -114,61 +125,77 @@ public partial class oprModel {
     
     private bool is_triggerField;
     
-    public oprModel() {
+    public oprModel() 
+    {
         this.is_triggerField = false;
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string omi {
-        get {
+    public string omi
+    {
+        get 
+        {
             return this.omiField;
         }
-        set {
+        set 
+        {
             this.omiField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string rect_x {
-        get {
+    public string rect_x 
+    {
+        get 
+        {
             return this.rect_xField;
         }
-        set {
+        set
+        {
             this.rect_xField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string rect_y {
-        get {
+    public string rect_y 
+    {
+        get
+        {
             return this.rect_yField;
         }
-        set {
+        set 
+        {
             this.rect_yField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string rect_width {
-        get {
+    public string rect_width
+    {
+        get 
+        {
             return this.rect_widthField;
         }
-        set {
+        set 
+        {
             this.rect_widthField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string rect_height {
-        get {
+    public string rect_height 
+    {
+        get
+        {
             return this.rect_heightField;
         }
-        set {
+        set 
+        {
             this.rect_heightField = value;
         }
     }
@@ -176,11 +203,14 @@ public partial class oprModel {
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
     [System.ComponentModel.DefaultValueAttribute(false)]
-    public bool is_trigger {
-        get {
+    public bool is_trigger 
+    {
+        get 
+        {
             return this.is_triggerField;
         }
-        set {
+        set 
+        {
             this.is_triggerField = value;
         }
     }
@@ -192,7 +222,8 @@ public partial class oprModel {
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public partial class oprConnection {
+public partial class oprConnection 
+{
     
     private oprConnectionLink[] linksField;
     
@@ -209,11 +240,14 @@ public partial class oprConnection {
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
     [System.Xml.Serialization.XmlArrayItemAttribute("link", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-    public oprConnectionLink[] links {
-        get {
+    public oprConnectionLink[] links 
+    {
+        get 
+        {
             return this.linksField;
         }
-        set {
+        set 
+        {
             this.linksField = value;
         }
     }
@@ -221,55 +255,70 @@ public partial class oprConnection {
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
     [System.Xml.Serialization.XmlArrayItemAttribute("decorator", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-    public oprConnectionDecorator[] decorators {
-        get {
+    public oprConnectionDecorator[] decorators 
+    {
+        get 
+        {
             return this.decoratorsField;
         }
-        set {
+        set 
+        {
             this.decoratorsField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public int source_model_index {
-        get {
+    public int source_model_index
+    {
+        get 
+        {
             return this.source_model_indexField;
         }
-        set {
+        set
+        {
             this.source_model_indexField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool source_model_indexSpecified {
-        get {
+    public bool source_model_indexSpecified 
+    {
+        get 
+        {
             return this.source_model_indexFieldSpecified;
         }
-        set {
+        set 
+        {
             this.source_model_indexFieldSpecified = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public int target_model_index {
-        get {
+    public int target_model_index 
+    {
+        get 
+        {
             return this.target_model_indexField;
         }
-        set {
+        set 
+        {
             this.target_model_indexField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool target_model_indexSpecified {
-        get {
+    public bool target_model_indexSpecified 
+    {
+        get 
+        {
             return this.target_model_indexFieldSpecified;
         }
-        set {
+        set 
+        {
             this.target_model_indexFieldSpecified = value;
         }
     }
@@ -281,7 +330,8 @@ public partial class oprConnection {
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public partial class oprConnectionLink {
+public partial class oprConnectionLink
+{
     
     private oprConnectionLinkDecorated[] decoratedField;
     
@@ -291,33 +341,44 @@ public partial class oprConnectionLink {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute("decorated", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-    public oprConnectionLinkDecorated[] decorated {
-        get {
+    public oprConnectionLinkDecorated[] decorated 
+    {
+        get
+        {
             return this.decoratedField;
         }
-        set {
+        set 
+        {
             this.decoratedField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string source_item_id {
-        get {
+    public string source_item_id 
+    {
+        get 
+        {
             return this.source_item_idField;
         }
-        set {
+
+        set 
+        {
             this.source_item_idField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string target_item_id {
-        get {
+    public string target_item_id 
+    {
+        get 
+        {
             return this.target_item_idField;
         }
-        set {
+
+        set 
+        {
             this.target_item_idField = value;
         }
     }
@@ -329,7 +390,8 @@ public partial class oprConnectionLink {
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public partial class oprConnectionLinkDecorated {
+public partial class oprConnectionLinkDecorated 
+{
     
     private int indexField;
     
@@ -337,22 +399,30 @@ public partial class oprConnectionLinkDecorated {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public int index {
-        get {
+    public int index 
+    {
+        get 
+        {
             return this.indexField;
         }
-        set {
+
+        set 
+        {
             this.indexField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
-    public bool indexSpecified {
-        get {
+    public bool indexSpecified 
+    {
+        get 
+        {
             return this.indexFieldSpecified;
         }
-        set {
+        
+        set 
+        {
             this.indexFieldSpecified = value;
         }
     }
@@ -364,8 +434,8 @@ public partial class oprConnectionLinkDecorated {
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public partial class oprConnectionDecorator {
-    
+public partial class oprConnectionDecorator 
+{
     private oprConnectionDecoratorFactory factoryField;
     
     private oprConnectionDecoratorArgument[] argumentsField;
@@ -374,11 +444,15 @@ public partial class oprConnectionDecorator {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-    public oprConnectionDecoratorFactory factory {
-        get {
+    public oprConnectionDecoratorFactory factory 
+    {
+        get 
+        {
             return this.factoryField;
         }
-        set {
+        set 
+        {
+
             this.factoryField = value;
         }
     }
@@ -386,22 +460,28 @@ public partial class oprConnectionDecorator {
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
     [System.Xml.Serialization.XmlArrayItemAttribute("argument", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-    public oprConnectionDecoratorArgument[] arguments {
-        get {
+    public oprConnectionDecoratorArgument[] arguments 
+    {
+        get 
+        {
             return this.argumentsField;
         }
-        set {
+        set 
+        {
             this.argumentsField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string item_id {
-        get {
+    public string item_id 
+    {
+        get 
+        {
             return this.item_idField;
         }
-        set {
+        set 
+        {
             this.item_idField = value;
         }
     }
@@ -413,7 +493,8 @@ public partial class oprConnectionDecorator {
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public partial class oprConnectionDecoratorFactory {
+public partial class oprConnectionDecoratorFactory
+{
     
     private string idField;
     
@@ -421,17 +502,22 @@ public partial class oprConnectionDecoratorFactory {
     
     private string typeField;
     
-    public oprConnectionDecoratorFactory() {
+    public oprConnectionDecoratorFactory() 
+    {
         this.assemblyField = "SourceComponent";
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string id {
-        get {
+    public string id 
+    {
+        get 
+        {
             return this.idField;
         }
-        set {
+        
+        set 
+        {
             this.idField = value;
         }
     }
@@ -439,22 +525,30 @@ public partial class oprConnectionDecoratorFactory {
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
     [System.ComponentModel.DefaultValueAttribute("SourceComponent")]
-    public string assembly {
-        get {
+    public string assembly 
+    {
+        get 
+        {
             return this.assemblyField;
         }
-        set {
+        
+        set 
+        {
             this.assemblyField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string type {
-        get {
+    public string type 
+    {
+        get 
+        {
             return this.typeField;
         }
-        set {
+        
+        set 
+        {
             this.typeField = value;
         }
     }
@@ -466,7 +560,8 @@ public partial class oprConnectionDecoratorFactory {
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public partial class oprConnectionDecoratorArgument {
+public partial class oprConnectionDecoratorArgument 
+{
     
     private string idField;
     
@@ -474,22 +569,30 @@ public partial class oprConnectionDecoratorArgument {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string id {
-        get {
+    public string id 
+    {
+        get 
+        {
             return this.idField;
         }
-        set {
+
+        set 
+        {
             this.idField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string value {
-        get {
+    public string value 
+    {
+        get 
+        {
             return this.valueField;
         }
-        set {
+
+        set 
+        {
             this.valueField = value;
         }
     }
@@ -502,17 +605,21 @@ public partial class oprConnectionDecoratorArgument {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
 [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-public partial class NewDataSet {
+public partial class NewDataSet 
+{
     
     private opr itemField;
     
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute("opr")]
-    public opr Item {
-        get {
+    public opr Item 
+    {
+        get 
+        {
             return this.itemField;
         }
-        set {
+        set 
+        {
             this.itemField = value;
         }
     }
