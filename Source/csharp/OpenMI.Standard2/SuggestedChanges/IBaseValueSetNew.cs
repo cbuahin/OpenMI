@@ -1,55 +1,28 @@
-#region Copyright
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-/*
-    Copyright (c) 2005-2010, OpenMI Association
-    "http://www.openmi.org/"
-
-    This file is part of OpenMI.Standard2.dll
-
-    OpenMI.Standard2.dll is free software; you can redistribute it and/or modify
-    it under the terms of the Lesser GNU General Public License as published by
-    the Free Software Foundation; either version 3 of the License, or
-    (at your option) any later version.
-
-    OpenMI.Standard2.dll is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    Lesser GNU General Public License for more details.
-
-    You should have received a copy of the Lesser GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-#endregion
-
-using System;
-
-namespace OpenMI.Standard2
+namespace OpenMI.Standard2.SuggestedChanges
 {
-    /// <summary>
-    /// The <see cref="IBaseValueSet"/> represents a general multi-dimensional set of
-    /// values. Each value is of type <see cref="ValueType"/>
-    /// <para>
-    /// The size of each dimension can vary, depending on the indices provided, e.g.
-    /// in a 2D matrix each row can have different lengths. Example, assuming the data
-    /// is stored as a double[][] matrix, then matrix[1].Length need not equal 
-    /// matrix[2].Length.
-    /// </para>
-    /// </summary>
-    public interface IBaseValueSet
+    public interface IBaseValueSetNew
     {
         /// <summary>
-        /// The object type of the values that will be available in the value set that is
-        /// returned by the Values property and the GetValues function.
+        /// Definition of the values in the exchange item.
         /// </summary>
-        Type ValueType { get; }
+        /// <remarks>
+        /// The <see cref="IValueDefinition"/> should never be returned directly; all implementing
+        /// classes should return either an <see cref="IQuality"/>, an <see cref="IQuantity"/>, or a
+        /// custom derived vale definition interface.
+        /// </remarks>
+        IValueDefinition ValueDefinition { get; }
 
         /// <summary>
         /// Returns the number of possible indices (dimensions) for the value set.
         /// </summary>
         /// <returns>number of indices, zero based</returns>
         int NumberOfIndices { get; }
-
 
         /// <summary>
         /// Returns the length (max index count) of the dimension specified by the

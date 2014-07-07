@@ -148,6 +148,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Additional\DatagridViewProgressItems.cs" />
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -189,10 +190,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Examples\AsciiFileReader\Oatc.OpenMI.Examples.AsciiFileReader.csproj">
-      <Project>{8b5cb36d-2450-4801-8892-58e233fb790b}</Project>
-      <Name>Oatc.OpenMI.Examples.AsciiFileReader</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Sdk\Oatc.OpenMI.Sdk.csproj">
       <Project>{95FE2AA2-60C6-4459-8DCA-3132B7D74D5F}</Project>
       <Name>Oatc.OpenMI.Sdk</Name>

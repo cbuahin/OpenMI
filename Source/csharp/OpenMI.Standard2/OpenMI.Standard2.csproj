@@ -130,6 +130,31 @@
     <Compile Include="IBaseValueSet.cs" />
     <Compile Include="LinkableComponentStatusChangeEventArgs.cs" />
     <Compile Include="LinkableComponentStatus.cs" />
+    <Compile Include="SuggestedChanges\IBaseAdaptedOutputNew.cs" />
+    <Compile Include="SuggestedChanges\IBaseExchangeItemNew.cs" />
+    <Compile Include="SuggestedChanges\IBaseInputNew.cs" />
+    <Compile Include="SuggestedChanges\IBaseOutputNew.cs" />
+    <Compile Include="SuggestedChanges\IBaseValueSetNew.cs" />
+    <Compile Include="SuggestedChanges\SpaceTime\ITimeSpaceAdaptedOutputNew.cs" />
+    <Compile Include="SuggestedChanges\SpaceTime\ITimeSpaceOutputNew.cs" />
+    <Compile Include="SuggestedChanges\SpaceTime\ITimeSpaceComponentNew.cs" />
+    <Compile Include="SuggestedChanges\SpaceTime\ITimeSpaceExchangeItemNew.cs" />
+    <Compile Include="SuggestedChanges\SpaceTime\ITimeSpaceInputNew.cs" />
+    <Compile Include="SuggestedChanges\SpaceTime\ITimeSpaceValueSetNew.cs" />
+    <Compile Include="SuggestedChanges\Space\ISpaceAdaptedOutput.cs" />
+    <Compile Include="SuggestedChanges\Space\ISpaceComponent.cs" />
+    <Compile Include="SuggestedChanges\Space\ISpaceExtension.cs" />
+    <Compile Include="SuggestedChanges\SpaceTime\ITimeSpaceExtension.cs" />
+    <Compile Include="SuggestedChanges\Space\ISpaceExchangeItemNew.cs" />
+    <Compile Include="SuggestedChanges\Space\ISpaceInput.cs" />
+    <Compile Include="SuggestedChanges\Space\ISpaceOutput.cs" />
+    <Compile Include="SuggestedChanges\Space\ISpaceValueSet.cs" />
+    <Compile Include="SuggestedChanges\Time\ITimeAdaptedOutput.cs" />
+    <Compile Include="SuggestedChanges\Time\ITimeComponent.cs" />
+    <Compile Include="SuggestedChanges\Time\ITimeExchangeItemNew.cs" />
+    <Compile Include="SuggestedChanges\Time\ITimeInput.cs" />
+    <Compile Include="SuggestedChanges\Time\ITimeOutput.cs" />
+    <Compile Include="SuggestedChanges\Time\ITimeValueSet.cs" />
     <Compile Include="TimeSpace\ElementType.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -142,7 +167,7 @@
     <Compile Include="TimeSpace\ITime.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TimeSpace\ITimeExtension.cs">
+    <Compile Include="SuggestedChanges\Time\ITimeExtension.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TimeSpace\ITimeSet.cs">
@@ -166,6 +191,8 @@
     <Compile Include="TimeSpace\ITimeSpaceValueSet.cs">
       <SubType>Code</SubType>
     </Compile>
+    <None Include="SuggestedChanges\Comparison\NewSuggested.cd" />
+    <None Include="SuggestedChanges\Comparison\ExistingUML.cd" />
     <None Include="Uml\AllInterfaces.cd" />
     <None Include="Uml\ExchangeItems.cd" />
     <None Include="Uml\OpenMIStandard.cd" />
@@ -175,6 +202,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>

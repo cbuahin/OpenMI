@@ -2,8 +2,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{0F451836-6672-4462-87DF-38B3596E6B3B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wrappers", "Wrappers", "{A6A876B5-7D42-4FCE-A51D-679ED6091946}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gui", "Gui", "{83869031-B07D-4666-8BFE-F7D2442B0EAB}"
@@ -18,19 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oatc.OpenMI.Gui.Controls", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oatc.OpenMI.Gui.CommandLine", "Oatc.OpenMI\Gui\CommandLine\Oatc.OpenMI.Gui.CommandLine.csproj", "{46FB499C-4EE5-4D44-8DCA-E55A83437934}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oatc.OpenMI.Examples.GroundWaterModel", "Oatc.OpenMI\Examples\SimpleGroundWaterModel\Oatc.OpenMI.Examples.GroundWaterModel.csproj", "{0111F4C9-01CD-49DC-86A5-C631A3DDC0F1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oatc.OpenMI.Wrappers.UpdwardsCompatibleWrappers", "Oatc.OpenMI\Wrappers\UpdwardsCompatibleWrappers\Oatc.OpenMI.Wrappers.UpdwardsCompatibleWrappers.csproj", "{C9BCCDB0-5A7B-4266-8996-BFB18B8515D8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oatc.OpenMI.Examples.SimpleCSharpRiver2", "Oatc.OpenMI\Examples\SimpleCSharpRiver2\Oatc.OpenMI.Examples.SimpleCSharpRiver2.csproj", "{B1E90537-B1CF-44AE-90A8-2340F3C994C9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oatc.OpenMI.Examples.GroundWaterModel2", "Oatc.OpenMI\Examples\SimpleGroundWaterModel2\Oatc.OpenMI.Examples.GroundWaterModel2.csproj", "{2BE0FBE1-B957-4F96-968A-6A360250E54D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oatc.OpenMI.Examples.SimpleCSharpRiver", "Oatc.OpenMI\Examples\SimpleCSharpRiver\Oatc.OpenMI.Examples.SimpleCSharpRiver.csproj", "{6A0307F0-8E2E-4E44-B919-AF88657BC538}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oatc.OpenMI.Examples.SimpleFortranRiver.Wrapper", "Oatc.OpenMI\Examples\SimpleFortranRiver\Wrapper\Oatc.OpenMI.Examples.SimpleFortranRiver.Wrapper.csproj", "{DC93453C-A682-4531-ACA9-7FC8416A9B79}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oatc.OpenMI.Examples.AsciiFileReader", "Oatc.OpenMI\Examples\AsciiFileReader\Oatc.OpenMI.Examples.AsciiFileReader.csproj", "{8B5CB36D-2450-4801-8892-58E233FB790B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oatc.OpenMI.Wrappers.EngineWrapper2", "Oatc.OpenMI\Wrappers\EngineWrapper2\Oatc.OpenMI.Wrappers.EngineWrapper2.csproj", "{873EFFF3-A50E-4193-AF66-27D37D32C477}"
 EndProject
@@ -66,34 +52,10 @@ Global
 		{46FB499C-4EE5-4D44-8DCA-E55A83437934}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46FB499C-4EE5-4D44-8DCA-E55A83437934}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46FB499C-4EE5-4D44-8DCA-E55A83437934}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0111F4C9-01CD-49DC-86A5-C631A3DDC0F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0111F4C9-01CD-49DC-86A5-C631A3DDC0F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0111F4C9-01CD-49DC-86A5-C631A3DDC0F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0111F4C9-01CD-49DC-86A5-C631A3DDC0F1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C9BCCDB0-5A7B-4266-8996-BFB18B8515D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C9BCCDB0-5A7B-4266-8996-BFB18B8515D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9BCCDB0-5A7B-4266-8996-BFB18B8515D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9BCCDB0-5A7B-4266-8996-BFB18B8515D8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B1E90537-B1CF-44AE-90A8-2340F3C994C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1E90537-B1CF-44AE-90A8-2340F3C994C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B1E90537-B1CF-44AE-90A8-2340F3C994C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1E90537-B1CF-44AE-90A8-2340F3C994C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2BE0FBE1-B957-4F96-968A-6A360250E54D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2BE0FBE1-B957-4F96-968A-6A360250E54D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2BE0FBE1-B957-4F96-968A-6A360250E54D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2BE0FBE1-B957-4F96-968A-6A360250E54D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6A0307F0-8E2E-4E44-B919-AF88657BC538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6A0307F0-8E2E-4E44-B919-AF88657BC538}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6A0307F0-8E2E-4E44-B919-AF88657BC538}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6A0307F0-8E2E-4E44-B919-AF88657BC538}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DC93453C-A682-4531-ACA9-7FC8416A9B79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DC93453C-A682-4531-ACA9-7FC8416A9B79}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DC93453C-A682-4531-ACA9-7FC8416A9B79}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DC93453C-A682-4531-ACA9-7FC8416A9B79}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8B5CB36D-2450-4801-8892-58E233FB790B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8B5CB36D-2450-4801-8892-58E233FB790B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8B5CB36D-2450-4801-8892-58E233FB790B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8B5CB36D-2450-4801-8892-58E233FB790B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{873EFFF3-A50E-4193-AF66-27D37D32C477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{873EFFF3-A50E-4193-AF66-27D37D32C477}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{873EFFF3-A50E-4193-AF66-27D37D32C477}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -115,12 +77,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{0111F4C9-01CD-49DC-86A5-C631A3DDC0F1} = {0F451836-6672-4462-87DF-38B3596E6B3B}
-		{B1E90537-B1CF-44AE-90A8-2340F3C994C9} = {0F451836-6672-4462-87DF-38B3596E6B3B}
-		{2BE0FBE1-B957-4F96-968A-6A360250E54D} = {0F451836-6672-4462-87DF-38B3596E6B3B}
-		{6A0307F0-8E2E-4E44-B919-AF88657BC538} = {0F451836-6672-4462-87DF-38B3596E6B3B}
-		{DC93453C-A682-4531-ACA9-7FC8416A9B79} = {0F451836-6672-4462-87DF-38B3596E6B3B}
-		{8B5CB36D-2450-4801-8892-58E233FB790B} = {0F451836-6672-4462-87DF-38B3596E6B3B}
 		{C9BCCDB0-5A7B-4266-8996-BFB18B8515D8} = {A6A876B5-7D42-4FCE-A51D-679ED6091946}
 		{873EFFF3-A50E-4193-AF66-27D37D32C477} = {A6A876B5-7D42-4FCE-A51D-679ED6091946}
 		{20823D6B-2464-46C8-8C43-19BD5B80C732} = {A6A876B5-7D42-4FCE-A51D-679ED6091946}

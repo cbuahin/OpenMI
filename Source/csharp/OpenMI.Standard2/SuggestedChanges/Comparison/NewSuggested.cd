@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.IBaseValueSetNew">
+    <Position X="4.75" Y="17" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAIAAAAgAQAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>SuggestedChanges\IBaseValueSetNew.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.IBaseAdaptedOutputNew">
+    <Position X="5.75" Y="10.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAQAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\IBaseAdaptedOutputNew.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.IBaseExchangeItemNew">
+    <Position X="10.25" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\IBaseExchangeItemNew.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.IBaseInputNew">
+    <Position X="3.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\IBaseInputNew.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.IBaseOutputNew">
+    <Position X="5.75" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAAQAAAQAAAAAAAAgAAAqAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\IBaseOutputNew.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.ITimeValueSet">
+    <Position X="3" Y="20.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\Time\ITimeValueSet.cs</FileName>
+      <NewMemberFileName>SuggestedChanges\Space\ISpaceValueSet.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.ITimeAdaptedOutput">
+    <Position X="7.25" Y="13.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\Time\ITimeAdaptedOutput.cs</FileName>
+      <NewMemberFileName>SuggestedChanges\Space\ISpaceAdaptedOutput.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.ITimeExchangeItemNew">
+    <Position X="8.5" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\Time\ITimeExchangeItemNew.cs</FileName>
+      <NewMemberFileName>SuggestedChanges\Space\ISpaceExchangeItemNew.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.ITimeInput">
+    <Position X="3.25" Y="8.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\Time\ITimeInput.cs</FileName>
+      <NewMemberFileName>SuggestedChanges\Space\ISpaceInput.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.Space.ITimeOutput">
+    <Position X="8.75" Y="8.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\Time\ITimeOutput.cs</FileName>
+      <NewMemberFileName>SuggestedChanges\Space\ISpaceOutput.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.SpaceTime.ITimeSpaceComponentNew">
+    <Position X="12.5" Y="22.75" Width="3.25" />
+    <InheritanceLine Type="OpenMI.Standard2.TimeSpace.ITimeSpaceExtension" FixedToPoint="true">
+      <Path>
+        <Point X="13.875" Y="21.377" />
+        <Point X="13.875" Y="22.375" />
+        <Point X="14.312" Y="22.375" />
+        <Point X="14.312" Y="22.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\SpaceTime\ITimeSpaceComponentNew.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.SpaceTime.ITimeSpaceExchangeItemNew">
+    <Position X="12.5" Y="6.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\SpaceTime\ITimeSpaceExchangeItemNew.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.SpaceTime.ITimeSpaceInputNew">
+    <Position X="11.25" Y="8.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\SpaceTime\ITimeSpaceInputNew.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.ITimeSpaceOutputNew">
+    <Position X="14" Y="8.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\SpaceTime\ITimeSpaceOutputNew.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.ITimeSpaceValueSetNew">
+    <Position X="5" Y="20.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAIABAQgAAAAAACAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\SpaceTime\ITimeSpaceValueSetNew.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.ISpaceAdaptedOutput">
+    <Position X="11.5" Y="13.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\Space\ISpaceAdaptedOutput.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.ISpaceComponent">
+    <Position X="10" Y="22.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\Space\ISpaceComponent.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.ISpaceExchangeItemNew">
+    <Position X="16.75" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\Space\ISpaceExchangeItemNew.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.ISpaceExtension">
+    <Position X="10" Y="21" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\Space\ISpaceExtension.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.ISpaceInput">
+    <Position X="10.25" Y="10.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\Space\ISpaceInput.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.ISpaceValueSet">
+    <Position X="8" Y="22.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\Space\ISpaceValueSet.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.SuggestedChanges.Space.ISpaceOutput">
+    <Position X="17" Y="8.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\Space\ISpaceOutput.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.TimeSpace.ITimeSpaceExtension">
+    <Position X="13" Y="20.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\SpaceTime\ITimeSpaceExtension.cs</FileName>
+      <NewMemberFileName>SuggestedChanges\Time\ITimeExtension.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OpenMI.Standard2.TimeSpace.ITimeExtension">
+    <Position X="11" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SuggestedChanges\Time\ITimeExtension.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -24,7 +24,7 @@
   <Interface Name="OpenMI.Standard2.IDimension">
     <Position X="4.75" Y="14" Width="3.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAACAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
       <FileName>IDimension.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -55,7 +55,7 @@
   <Interface Name="OpenMI.Standard2.IBaseLinkableComponent" HideInheritanceLine="true">
     <Position X="20.25" Y="9.5" Width="4.75" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAEAACAQQAAAAAAAAAAAEAAAAAAoAEAAAEAAAg=</HashCode>
+      <HashCode>BAQAAAAEAACAQQAAAAAAAAAAEEAAAAAAoAAAAAAAAAg=</HashCode>
       <FileName>IBaseLinkableComponent.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -63,7 +63,6 @@
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="Arguments" />
-      <Property Name="InputItems" />
     </ShowAsCollectionAssociation>
   </Interface>
   <Interface Name="OpenMI.Standard2.IManageState">
@@ -107,17 +106,10 @@
       <Property Name="Times" />
     </ShowAsCollectionAssociation>
   </Interface>
-  <Interface Name="OpenMI.Standard2.ITime">
-    <Position X="5.5" Y="5" Width="3" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
-      <FileName>ITime.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Interface Name="OpenMI.Standard2.IUnit" HideInheritanceLine="true">
     <Position X="6.5" Y="11.75" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAABAAAAAAAQAIAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAQAIAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
       <FileName>IUnit.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -127,7 +119,7 @@
   <Interface Name="OpenMI.Standard2.IValueDefinition" HideInheritanceLine="true">
     <Position X="4" Y="7.25" Width="4.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAEAA=</HashCode>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
       <FileName>IValueDefinition.cs</FileName>
     </TypeIdentifier>
   </Interface>

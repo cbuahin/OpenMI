@@ -34,29 +34,59 @@ using System.Windows.Forms;
 using System.Text;
 
 using OpenMI.Standard2;
+using OpenMI.Standard2.TimeSpace;
 
 namespace Oatc.OpenMI.Gui.Core
 {
     public class Link
     {
-        UIOutputItem _source;
         UIInputItem _target;
+        List<UIOutputItem> _sources;
 
         public Link()
         {
-           
+            _sources = new List<UIOutputItem>();
         }
 
         public Link(UIOutputItem source, UIInputItem target)
         {
-            _source = source;
+            _sources = new List<UIOutputItem>();
             _target = target;
+            _sources.Add(source);
+        }
+
+        public Link(List<UIOutputItem >sources , UIInputItem target)
+        {
+            _sources = new List<UIOutputItem>(sources);
+            _target = target;
+           
         }
 
         public UIOutputItem Source
         {
-            get { return _source; }
-            set { _source = value; }
+            get 
+            {
+                if(_sources.Count > 0)
+                {
+                    return _sources[0];
+                }
+                else
+                return null; 
+            }
+            set 
+            {
+                _sources.Remove(value);
+                _sources.Add(value); 
+            }
+        }
+
+        public List<UIOutputItem> Sources
+        {
+            get { return _sources; }
+            set
+            {
+                _sources = value;
+            }
         }
 
         public UIInputItem Target
@@ -69,30 +99,164 @@ namespace Oatc.OpenMI.Gui.Core
         {
             string toString = "";
 
-            if (_source != null && _target != null)
+            if (_sources.Count > 0 ||  _target != null)
             {
-                toString = _source.ToString();
-
-                UIOutputItem temp = _source;
-
-                while (temp.Parent != null)
+                if(IsMultiInputLink)
                 {
-                    toString = temp.Parent + " => " + toString;
-                    temp = temp.Parent;
+                    for(int i = 0 ; i <_sources.Count ; i++)
+                    {
+                        if(i == 0)
+                        {
+                            toString = "[ " +GetOutputItemString(_sources[i]) + " ]";
+                        }
+                        else
+                        {
+                            toString = toString + " , [ " + GetOutputItemString(_sources[i]) + " ]";
+                        }
+                    }
                 }
-
-
-                toString = toString + " => " + _target;
+                else
+                {
+                    toString = GetOutputItemString(Source);
+                }
+               
+                toString = "{ " +toString + " } => { " + _target + " }";
             }
             else
             {
-                return "<Add New Link>";
+                return "<Source not set> => <Target not set>";
 
             }
             return toString;
         }
 
+        string GetOutputItemString(UIOutputItem item)
+        {
+            string toString = item.ToString();
+            UIOutputItem parent = item.Parent;
 
+            while (parent != null)
+            {
+                toString = parent + " => " + toString;
+                parent = parent.Parent;
+            }
+
+            return toString;
+        }
+
+        public bool IsMultiInputLink
+        {
+            get
+            {
+            return _sources.Count > 1;
+            }
+        }
+
+        bool CheckOutputItemEqual(UIOutputItem item1 , UIOutputItem item2)
+        {
+            if(item1 != null && item2 != null && item1 == item2 || item1.ExchangeItem == item2.ExchangeItem)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is Link)
+            {
+                Link link = (Link)obj;
+
+                if ( link.Sources.Count == _sources.Count)
+                {
+                    int max = _sources.Count;
+
+                    for (int i = 0; i < max; i++)
+                    {
+                        if(!CheckOutputItemEqual(_sources[i], link.Sources[i]))
+                        {
+                            return false;
+                        }
+                    }
+                     
+                    return true;
+                }
+
+            }
+
+            return false;
+        }
+
+        public List<UIOutputItem> FindNextChildrenInChain(UIOutputItem output)
+        {
+            List<UIOutputItem> items = new List<UIOutputItem>();
+
+            foreach(UIOutputItem source in Sources)
+            {
+                UIOutputItem parent = source.Parent;
+                
+                bool found = false;
+
+                while(parent != null)
+                {
+                    if (parent == output || parent.ExchangeItem == output.ExchangeItem)
+                    {
+                        found = true;
+                       break;
+                    }
+
+                    parent = parent.Parent;
+                }
+                
+                if(found)
+                {
+                   
+                    items.Add(parent);
+                }
+            }
+
+            return items;
+        }
+
+        public UIOutputItem FindInChain(ITimeSpaceOutput output)
+        {
+            foreach (UIOutputItem source in Sources)
+            {
+
+                UIOutputItem parent = source;
+
+                while (parent != null)
+                {
+                    if (parent.ExchangeItem == output)
+                    {
+                        return parent;
+                    }
+
+                    parent = parent.Parent;
+                }
+         
+            }
+
+            return null;
+        }
+
+        public static List<UIOutputItem> ParentChain(UIOutputItem item)
+        {
+            List<UIOutputItem> parentChain = new List<UIOutputItem>();
+
+            UIOutputItem parent = item;
+
+            while(parent != null)
+            {
+                parentChain.Add(parent);
+                parent = parent.Parent;
+            }
+
+            parentChain.Reverse();
+
+            return parentChain;
+        }
     }
 
 	/// <summary>

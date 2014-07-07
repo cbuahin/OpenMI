@@ -56,8 +56,7 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 
 		private MainMenu mainMenu1;
 		private MenuItem menuItem15;
-		private MenuItem menuItem17;
-		private MenuItem menuItem18;
+        private MenuItem menuItem17;
 		private ContextMenu contextMenu;		
 		private MenuItem menuFileNew;
 		private MenuItem menuFileOpen;
@@ -271,8 +270,7 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 
 		private static void StartApplication( object data )
 		{
-			try
-			{
+		
 				string oprFilename = ( (string[]) data )[0];
 				string omiFilename = ( (string[]) data )[1];
 
@@ -286,23 +284,25 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 
 					Application.Run( mainForm );
 				}
-				else if( omiFilename!=null )
-				{
-					// Create new project with one OMI model
-					MainForm mainForm = new MainForm();
-					FileInfo fileInfo = new FileInfo( omiFilename );
+                else if (omiFilename != null)
+                {
+                    // Create new project with one OMI model
+                    MainForm mainForm = new MainForm();
+                    FileInfo fileInfo = new FileInfo(omiFilename);
 
-					mainForm.AddModel( fileInfo );
+                    mainForm.AddModel(fileInfo);
 
-					Application.Run( mainForm );
-				}
-				else
-					Application.Run( new MainForm() );
-            }
-            catch (Exception ex)
-            {
-                Trace.TraceError("Start Application: " + ex.Message);
-            }
+                    Application.Run(mainForm);
+                }
+                else
+                {
+                    Application.Run(new MainForm());
+                }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Trace.TraceError("Start Application: " + ex.Message);
+            //}
         }
 
 		/// <summary>
@@ -1279,8 +1279,9 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 		/// </summary>		
 		static void Main( string[] args ) 
 		{
-			try 
-			{								
+			try
+            {
+      	
 				ProcessCommandLineArgs( args );
 			}
 			catch( Exception e )
@@ -1303,12 +1304,11 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
             this.menuFile = new System.Windows.Forms.MenuItem();
             this.menuFileNew = new System.Windows.Forms.MenuItem();
-            this.menuItem17 = new System.Windows.Forms.MenuItem();
-            this.menuFileReload = new System.Windows.Forms.MenuItem();
-            this.menuItem18 = new System.Windows.Forms.MenuItem();
             this.menuFileOpen = new System.Windows.Forms.MenuItem();
+            this.menuItem17 = new System.Windows.Forms.MenuItem();
             this.menuFileSave = new System.Windows.Forms.MenuItem();
             this.menuFileSaveAs = new System.Windows.Forms.MenuItem();
+            this.menuFileReload = new System.Windows.Forms.MenuItem();
             this.menuItem15 = new System.Windows.Forms.MenuItem();
             this.menuFileExit = new System.Windows.Forms.MenuItem();
             this.menuComposition = new System.Windows.Forms.MenuItem();
@@ -1363,12 +1363,11 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
             this.menuFile.Index = 0;
             this.menuFile.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuFileNew,
-            this.menuItem17,
-            this.menuFileReload,
-            this.menuItem18,
             this.menuFileOpen,
+            this.menuItem17,
             this.menuFileSave,
             this.menuFileSaveAs,
+            this.menuFileReload,
             this.menuItem15,
             this.menuFileExit});
             this.menuFile.Text = "&File";
@@ -1380,51 +1379,46 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
             this.menuFileNew.Text = "&New";
             this.menuFileNew.Click += new System.EventHandler(this.OnNew);
             // 
-            // menuItem17
-            // 
-            this.menuItem17.Index = 1;
-            this.menuItem17.Text = "-";
-            // 
-            // menuFileReload
-            // 
-            this.menuFileReload.Index = 2;
-            this.menuFileReload.Shortcut = System.Windows.Forms.Shortcut.CtrlR;
-            this.menuFileReload.Text = "&Reload";
-            this.menuFileReload.Click += new System.EventHandler(this.OnReOpen);
-            // 
-            // menuItem18
-            // 
-            this.menuItem18.Index = 3;
-            this.menuItem18.Text = "-";
-            // 
             // menuFileOpen
             // 
-            this.menuFileOpen.Index = 4;
+            this.menuFileOpen.Index = 1;
             this.menuFileOpen.Shortcut = System.Windows.Forms.Shortcut.CtrlO;
             this.menuFileOpen.Text = "&Open...";
             this.menuFileOpen.Click += new System.EventHandler(this.OnOpen);
             // 
+            // menuItem17
+            // 
+            this.menuItem17.Index = 2;
+            this.menuItem17.Text = "-";
+            // 
             // menuFileSave
             // 
-            this.menuFileSave.Index = 5;
+            this.menuFileSave.Index = 3;
             this.menuFileSave.Shortcut = System.Windows.Forms.Shortcut.CtrlS;
             this.menuFileSave.Text = "&Save";
             this.menuFileSave.Click += new System.EventHandler(this.OnSave);
             // 
             // menuFileSaveAs
             // 
-            this.menuFileSaveAs.Index = 6;
+            this.menuFileSaveAs.Index = 4;
             this.menuFileSaveAs.Text = "Save &As...";
             this.menuFileSaveAs.Click += new System.EventHandler(this.OnSaveAs);
             // 
+            // menuFileReload
+            // 
+            this.menuFileReload.Index = 5;
+            this.menuFileReload.Shortcut = System.Windows.Forms.Shortcut.CtrlR;
+            this.menuFileReload.Text = "&Reload";
+            this.menuFileReload.Click += new System.EventHandler(this.OnReOpen);
+            // 
             // menuItem15
             // 
-            this.menuItem15.Index = 7;
+            this.menuItem15.Index = 6;
             this.menuItem15.Text = "-";
             // 
             // menuFileExit
             // 
-            this.menuFileExit.Index = 8;
+            this.menuFileExit.Index = 7;
             this.menuFileExit.Text = "E&xit";
             this.menuFileExit.Click += new System.EventHandler(this.menuFileExit_Click);
             // 

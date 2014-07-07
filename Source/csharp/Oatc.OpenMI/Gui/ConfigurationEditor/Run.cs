@@ -39,6 +39,8 @@ using System.IO;
 using OpenMI.Standard2;
 using Oatc.OpenMI.Gui.Core;
 using OpenMI.Standard2.TimeSpace;
+using System.Runtime.CompilerServices;
+using System.ComponentModel;
 
 namespace Oatc.OpenMI.Gui.ConfigurationEditor
 {
@@ -48,7 +50,8 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 
 		RunStatus _runStatus = RunStatus.Runable;
 		FileInfo _oprFile;
-		Table _table;
+        BindingList<ProgressStatus> status;
+
 		CompositionRun _runManager;
 		List<CompositionRun.State> _logCache;
         int _nOprIndexTrigger = -1;
@@ -60,53 +63,7 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 			InitializeComponent();
 		}
 
-		public class Table : DataTable
-		{
-			public enum EColumns { Component = 0, Status, Progress, Changed, Events, }
-
-			Type[] _columnTypes = new Type[] { 
-				typeof(String),
-				typeof(String),
-				typeof(Int32),
-				typeof(String),
-				typeof(Int32),
-				};
-
-			String[] _columnNames = new String[] { 
-				EColumns.Component.ToString(),
-				EColumns.Status.ToString(),
-				EColumns.Progress.ToString(),
-				"Last event updated",
-				EColumns.Events.ToString(),
-				};
-
-			public void Initialise(List<string> captions)
-			{
-				for (int n = 0; n < Enum.GetNames(typeof(EColumns)).Length; ++n)
-					base.Columns.Add(new DataColumn(_columnNames[n], _columnTypes[n]));
-
-				DataRow row;
-
-				foreach (string caption in captions)
-				{
-					row = NewRow();
-					row[(int)EColumns.Component] = caption;
-					row[(int)EColumns.Status] = "";
-                    row[(int)EColumns.Progress] = 0;
-                    row[(int)EColumns.Changed] = "";
-					row[(int)EColumns.Events] = 0;
-
-					Rows.Add(row);
-				}
-			}
-
-			public DataGridViewCell Cell(EColumns column, int oprIndex, DataGridView grid)
-			{
-				return grid.Rows[oprIndex].Cells[(int)column];
-			}
-		}
-
-		public class Log : DataTable
+	    public class Log : DataTable
 		{
 			public enum EColumns { DateTime = 0, Component, Details}
 
@@ -204,13 +161,15 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 			if (oprFile == "")
 				Open();
 
+            status = new BindingList<ProgressStatus>();
+
 			Status = RunStatus.Runable;
 			_oprFile = new FileInfo(oprFile);
-			_table = new Table();
+		    
 			_runManager = new CompositionRun();
 			_logCache = new List<CompositionRun.State>();
 
-			List<string> captions = new List<string>();
+			
 
             List<UIModel> models;
             List<UIConnection> connections;
@@ -228,15 +187,16 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 			{
                 ++nOprIndex;
 
-                captions.Add(model.LinkableComponent.Caption);
+                status.Add(new ProgressStatus(model.LinkableComponent));
+             
 
                 if (model.IsTrigger)
                     _nOprIndexTrigger = nOprIndex;
 			}
 
-			_table.Initialise(captions);
+			
 
-			dataGridView1.DataSource = _table;
+			dataGridViewStatus.DataSource = status;
 
 			btnOk.Text = "Run";
 
@@ -357,77 +317,56 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 			else
 				Status = RunStatus.Done;
 		}
-
+    
+        delegate void RunProgressDelegate(object sender, ProgressChangedEventArgs e);
 		void RunProgress(object sender, ProgressChangedEventArgs e)
 		{
-			lock (this)
-			{
+
+
 				if (e.UserState != null
 					&& (e.UserState is CompositionRun.State))
 				{
-					CompositionRun.State state
-						= (CompositionRun.State)e.UserState;
-
-					DataGridViewCell cellComponent = _table.Cell(Table.EColumns.Component, state.OprIndex, dataGridView1);
-
-					// Status
-
-					DataGridViewCell cellStatus = _table.Cell(Table.EColumns.Status, state.OprIndex, dataGridView1);
-
-					IBaseLinkableComponent iLC = state.StatusArgs != null
-						? state.StatusArgs.LinkableComponent
-						: state.ExchangeArgs.ExchangeItem.Component;
-
-					cellStatus.Value = iLC != null ? iLC.Status.ToString() : "";
-					dataGridView1.InvalidateCell(cellStatus);
-
-					// Changes Count
-
-					DataGridViewCell cellChanges = _table.Cell(Table.EColumns.Events, state.OprIndex, dataGridView1);
-
-					cellChanges.Value = (int)cellChanges.Value + 1;
-					dataGridView1.InvalidateCell(cellChanges);
-
-					// Changed Time
-
-					DataGridViewCell cellChanged = _table.Cell(Table.EColumns.Changed, state.OprIndex, dataGridView1);
-					cellChanged.Value = state.LastEventUpdate;
-					dataGridView1.InvalidateCell(cellChanged);
-
-                    // Changed Progress
-
+					CompositionRun.State state = (CompositionRun.State)e.UserState;
+                    ProgressStatus currStatus = status[state.OprIndex];
                     int? progress = state.Progress;
 
-                    if (progress != null)
+                    if (progress != null && progress.Value > currStatus.Progress)
                     {
-                        DataGridViewCell cellProgress = _table.Cell(Table.EColumns.Progress, state.OprIndex, dataGridView1);
-                        cellProgress.Value = progress.Value;
-                        dataGridView1.InvalidateCell(cellProgress);
+                        IBaseLinkableComponent iLC = state.StatusArgs != null
+                            ? state.StatusArgs.LinkableComponent
+                            : state.ExchangeArgs.ExchangeItem.Component;
 
-                        if (state.OprIndex == _nOprIndexTrigger
-                            && progressBarRun.Value != progress.Value)
+
+
+                        currStatus.ComponentStatus = iLC != null ? iLC.Status.ToString() : "";
+                        currStatus.LastUpdated = state.LastEventUpdate;
+
+
+                        currStatus.Progress = progress.Value;
+
+                        if (state.OprIndex == _nOprIndexTrigger && progressBarRun.Value != progress.Value)
                         {
+
                             progressBarRun.Value = progress.Value;
-                            progressBarRun.Invalidate();
+
 
                             UpdateTitleText(progress);
 
                             _timeSpan = DateTime.Now - _startTime;
 
                             string elapsed = string.Format("{0},{1},{2}.{3}",
-                                _timeSpan.Hours, _timeSpan.Minutes, 
+                                _timeSpan.Hours, _timeSpan.Minutes,
                                 _timeSpan.Seconds, _timeSpan.Milliseconds);
 
-                            labelMessage.Text = string.Format("Running [{0}%]\r\nElapsed {1}", 
+                            labelMessage.Text = string.Format("Running [{0}%]\r\nElapsed {1}",
                                 progress.Value, elapsed);
                         }
+
+                        dataGridViewStatus.Refresh();
                     }
-
-					dataGridView1.Refresh();
-
+                 
 					_logCache.Add(state);
 				}
-			}
 		}
 
 		public static void RunComposition(string oprFile)
@@ -474,5 +413,77 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 			RunLog logView = new RunLog(_logCache);
 			logView.ShowDialog(this);
 		}
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            _runManager.Cancel();
+
+        }
+
+        public class ProgressStatus : INotifyPropertyChanged
+        {
+
+            public event PropertyChangedEventHandler PropertyChanged;
+            IBaseLinkableComponent component;
+            string  componentStatus;
+            DateTime lastUpdated;
+            int progress;
+
+            public ProgressStatus(IBaseLinkableComponent component)
+            {
+                this.component = component;
+            }
+
+            public IBaseLinkableComponent Component
+            {
+
+                set { component = value; NotifyPropertyChanged(); }
+            }
+
+
+            public string ComponentStatus
+            {
+                get { return componentStatus;  }
+                set
+                { 
+                    componentStatus = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+            public string ComponentName
+            {
+                get { return component.Id; }
+                
+            }
+
+            public int Progress
+            {
+                get 
+                {
+                    return progress; 
+                }
+                set 
+                {
+                    progress = value;
+                    NotifyPropertyChanged();
+                }
+            }
+
+
+            public DateTime LastUpdated
+            {
+                get { return lastUpdated; }
+                set { lastUpdated = value; NotifyPropertyChanged(); }
+            }
+
+            private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+            {
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                }
+            }
+        }
 	}
 }

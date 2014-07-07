@@ -1,4 +1,5 @@
 ﻿using Oatc.OpenMI.Gui.Core;
+using Oatc.OpenMI.Sdk.Backbone;
 using OpenMI.Standard2;
 using OpenMI.Standard2.TimeSpace;
 using System;
@@ -16,30 +17,33 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 {
     public partial class ConnectionDlg : Form
     {
-        private ElementSetViewer _elementSetViewer;
+        ElementSetViewer elementSetViewer;
         UIConnection connection;
-        Dictionary<UIInputItem, List<Link>> links;
         static List<UIAdaptedFactory> externalFactories;
         Link currentLink;
-        List<Link> workingLinks;
+        Dictionary<UIOutputItem, TreeNode> fastLookUpOutputs;
+        Dictionary<UIInputItem, TreeNode> fastLookUpInputs;
+
         static ConnectionDlg()
         {
             externalFactories = new List<UIAdaptedFactory>();
-
         }
 
         public ConnectionDlg(UIConnection connection)
         {
             InitializeComponent();
-            this.connection = connection;
-            workingLinks = new List<Link>();
+
             currentLink = new Link();
-            workingLinks.Add(currentLink);
-            workingLinks.AddRange(connection.Links);
-            listBoxConnections.DataSource = links;
-            _elementSetViewer = new ElementSetViewer();
-            updateSourcesTreeView();
+
+            this.connection = connection;
+
+            elementSetViewer = new ElementSetViewer();
+
             updateTargetsTreeView();
+            updateSourcesTreeView();
+
+            listBoxConnections.DataSource = connection.Links;
+
         }
 
         void buttonClose_Click(object sender, EventArgs e)
@@ -52,6 +56,8 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 
             treeViewSources.SuspendLayout();
             treeViewSources.Nodes.Clear();
+
+            fastLookUpOutputs = new Dictionary<UIOutputItem, TreeNode>();
 
             UIModel sourceModel = connection.SourceModel;
             Dictionary<string, TreeNode> quantities = new Dictionary<string, TreeNode>();
@@ -83,24 +89,27 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 
                     ITimeSpaceOutput tspaceOutput = (ITimeSpaceOutput)output;
 
-                    UIOutputItem uitem = (from n in workingLinks
-                                                 where n.Source != null && upperMostParent(n.Source).ExchangeItem == tspaceOutput
-                                                 select upperMostParent(n.Source)).FirstOrDefault();
+                    UIOutputItem uitem = (from n in connection.Links
+                                          where n.FindInChain(tspaceOutput) != null
+                                          select n.FindInChain(tspaceOutput)).FirstOrDefault();
 
 
 
                     if (uitem != null)
-                    {
-
+                    { 
                         item.Tag = uitem;
-
-                        updateUIOutputItem(item, uitem);
-
+                        fastLookUpOutputs.Add(uitem, item);
+                        expandOutputItem(item, uitem);
                     }
                     else
                     {
-                        item.Tag = new UIOutputItem(tspaceOutput);
+                        uitem = new UIOutputItem(tspaceOutput);
+                        item.Tag = uitem;
+                        fastLookUpOutputs.Add(uitem, item);
                     }
+
+                   
+
 
                     if (tspaceOutput.SpatialDefinition is IElementSet)
                     {
@@ -166,11 +175,14 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
         void updateTargetsTreeView()
         {
             treeViewTargets.SuspendLayout();
+            treeViewTargets.Nodes.Clear();
 
-            UIModel sourceModel = connection.SourceModel;
+            fastLookUpInputs = new Dictionary<UIInputItem, TreeNode>();
+
+            UIModel targetModel = connection.TargetModel;
             Dictionary<string, TreeNode> quantities = new Dictionary<string, TreeNode>();
 
-            foreach (IBaseInput input in sourceModel.LinkableComponent.Inputs)
+            foreach (IBaseInput input in targetModel.LinkableComponent.Inputs)
             {
                 IValueDefinition value = input.ValueDefinition;
                 TreeNode node = null;
@@ -197,20 +209,21 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 
                     ITimeSpaceInput tspaceInput = (ITimeSpaceInput)input;
 
-                    UIInputItem uitem = (from n in workingLinks
+                    UIInputItem uitem = (from n in connection.Links
                                          where n.Target != null && n.Target.ExchangeItem == tspaceInput
                                          select n.Target).FirstOrDefault();
                     if (uitem != null)
                     {
-                        item.Tag = uitem;
+                        
                     }
                     else
                     {
-                        item.Tag = new UIInputItem(tspaceInput);
+                        uitem = new UIInputItem(tspaceInput);
+                       
                     }
 
-
-                    item.Tag = new UIInputItem(tspaceInput);
+                    item.Tag = uitem;
+                    fastLookUpInputs.Add(uitem, item);
 
                     if (tspaceInput.SpatialDefinition is IElementSet)
                     {
@@ -274,30 +287,157 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
             treeViewTargets.ResumeLayout();
         }
 
-
-        UIOutputItem upperMostParent(UIOutputItem item)
+        void expandOutputItem(TreeNode node, UIOutputItem item)
         {
-            UIOutputItem parent = item;
+            List<UIOutputItem> children = currentLink.FindNextChildrenInChain(item);
 
-            while (parent.Parent != null)
+            for (int i = 0; i < children.Count; i++)
             {
-                parent = parent.Parent;
+                UIOutputItem child = children[0];
+                TreeNode n1 = null;
+
+                if(!TreeNodeContains(child, node,out n1))
+                {
+                    n1 = new TreeNode(child.Caption);
+                    n1.Tag = child;
+                    n1.ImageKey = "RESOURCE.BMP";
+                    n1.SelectedImageKey = "RESOURCE.BMP";
+                    node.Nodes.Add(n1);
+                    if (!fastLookUpOutputs.ContainsKey(child))
+                        fastLookUpOutputs.Add(child, n1);
+                }
+
+                if(n1 != null)
+                {
+                    expandOutputItem(n1, child);
+                }
             }
 
-            return parent;
+            foreach(Link link in connection.Links)
+            {
+                children = link.FindNextChildrenInChain(item);
+
+                for (int i = 0; i < children.Count; i++)
+                {
+                    UIOutputItem child = children[0];
+                    TreeNode n1 = null;
+
+                    if (!TreeNodeContains(child, node, out n1))
+                    {
+                        n1 = new TreeNode(child.Caption);
+                        n1.Tag = child;
+                        n1.ImageKey = "RESOURCE.BMP";
+                        n1.SelectedImageKey = "RESOURCE.BMP";
+                        node.Nodes.Add(n1);
+
+                        if(!fastLookUpOutputs.ContainsKey(child))
+                        fastLookUpOutputs.Add(child, n1);
+                    }
+
+                    if (n1 != null)
+                    {
+                        expandOutputItem(n1, child);
+                    }
+                }
+            }
         }
+
+        bool TreeNodeContains( IBaseExchangeItem item , TreeNode node , out TreeNode outnode) 
+        {
+            outnode = null;
+
+            foreach(TreeNode n  in node.Nodes)
+            {
+                if (n.Tag != null && n.Tag is IBaseExchangeItem && ((item == (IBaseExchangeItem)n.Tag) || item.Id == ((IBaseExchangeItem)node.Tag).Id))
+                {
+                    outnode = n;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        
+
+        void uncheckAllNodes(bool Target = true , bool withBlocking = true)
+        {
+            if (!Target)
+            {
+                treeViewSources.SuspendLayout();
+
+                if (withBlocking)
+                {
+                    treeViewSources.AfterCheck-=treeViewSources_AfterCheck;
+                }
+
+                foreach(TreeNode node in treeViewSources.Nodes)
+                {
+                    if(node.Checked)
+                    {
+                        node.Checked = false;
+                    }
+
+                    CheckDescendants(node, false);
+
+                }
+
+                if (withBlocking)
+                {
+                    treeViewSources.AfterCheck += treeViewSources_AfterCheck;
+                }
+
+                treeViewSources.ResumeLayout();
+            }
+            else
+            {
+                treeViewTargets.SuspendLayout();
+
+                if (withBlocking)
+                {
+                    treeViewTargets.AfterCheck-=treeViewTargets_AfterCheck;
+                }
+
+                foreach (TreeNode node in treeViewTargets.Nodes)
+                {
+                    if (node.Checked)
+                    {
+                        node.Checked = false;
+                    }
+
+                    CheckDescendants(node, false);
+
+                }
+                
+                if (withBlocking)
+                {
+                    treeViewTargets.AfterCheck += treeViewTargets_AfterCheck;
+                }
+
+                treeViewTargets.ResumeLayout();
+            }
+        }
+
         void treeViewSources_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (e.Node != null)
+            if (e.Node != null && e.Node.Tag != null)
+            {
                 propertyGridConnection.SelectedObject = e.Node.Tag;
+
+                if (e.Node.Checked)
+                    SetValidAdatedOutputs(e.Node);
+                else
+                    listBoxAdaptedOutputs.DataSource = null;
+            }
             else
                 propertyGridConnection.SelectedObject = null;
         }
 
         void treeViewTargets_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (e.Node != null)
+            if (e.Node != null && e.Node.Tag != null)
+            {
                 propertyGridConnection.SelectedObject = e.Node.Tag;
+            }
             else
                 propertyGridConnection.SelectedObject = null;
         }
@@ -305,8 +445,8 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
         void buttonPlotElementSet_Click(object sender, EventArgs e)
         {
             ArrayList elementSets = new ArrayList();
-            List<UIOutputItem> outputs = getSelectedSources(treeViewSources.Nodes);
-            List<UIInputItem> inputs = getSelectedTargets(treeViewTargets.Nodes);
+            List<UIOutputItem> outputs = GetCheckedItems<UIOutputItem>(treeViewSources.Nodes);
+            List<UIInputItem> inputs = GetCheckedItems<UIInputItem>(treeViewTargets.Nodes);
 
             List<IElementSet> elements = (from n in outputs
                                           where n is ITimeSpaceOutput && ((ITimeSpaceOutput)n).SpatialDefinition is IElementSet
@@ -322,154 +462,221 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 
             if (elementSets.Count > 0)
             {
-                _elementSetViewer.PopulateDialog(elementSets);
-                _elementSetViewer.ShowDialog();
+                elementSetViewer.PopulateDialog(elementSets);
+                elementSetViewer.ShowDialog();
             }
-        }
-
-        List<UIOutputItem> getSelectedSources(TreeNodeCollection nodes)
-        {
-            List<UIOutputItem> outputs = new List<UIOutputItem>();
-
-            foreach (TreeNode node in nodes)
-            {
-                if (node.Checked && node.Tag != null)
-                {
-                    outputs.Add((UIOutputItem)node.Tag);
-                }
-
-                outputs.AddRange(getSelectedSources(node.Nodes));
-            }
-
-
-            return outputs;
-        }
-
-        List<TreeNode> getSelectedNodes(TreeNodeCollection nodes)
-        {
-            List<TreeNode> outputs = new List<TreeNode>();
-
-            foreach (TreeNode node in nodes)
-            {
-                if (node.Checked && node.Tag != null)
-                {
-                    outputs.Add(node);
-                }
-
-                outputs.AddRange(getSelectedNodes(node.Nodes));
-            }
-
-
-            return outputs;
-        }
-
-        void getSelectedNodesWithLevels(TreeNodeCollection nodes, ref Dictionary<int, List<TreeNode>> outputs)
-        {
-            foreach (TreeNode node in nodes)
-            {
-                if (node.Level > 0 && node.Checked)
-                {
-                    if (!outputs.ContainsKey(node.Level))
-                    {
-                        List<TreeNode> tempNodes = new List<TreeNode>();
-                        tempNodes.Add(node);
-                        outputs.Add(node.Level, tempNodes);
-                    }
-                    else
-                    {
-                        outputs[node.Level].Add(node);
-                    }
-                }
-
-                if (node.Nodes.Count > 0)
-                {
-                    getSelectedNodesWithLevels(node.Nodes, ref outputs);
-                }
-
-            }
-        }
-
-        List<UIInputItem> getSelectedTargets(TreeNodeCollection nodes)
-        {
-            List<UIInputItem> outputs = new List<UIInputItem>();
-
-            foreach (TreeNode node in nodes)
-            {
-                if (node.Checked && node.Tag != null)
-                {
-                    outputs.Add((UIInputItem)node.Tag);
-                }
-
-                outputs.AddRange(getSelectedTargets(node.Nodes));
-            }
-
-            return outputs;
         }
 
         void treeViewSources_AfterCheck(object sender, TreeViewEventArgs e)
         {
             treeViewSources.SuspendLayout();
+                      
             treeViewSources.AfterCheck -= treeViewSources_AfterCheck;
 
-            if (e.Node.Tag == null)
+            if (e.Node.Tag != null)
             {
-                checkDescendants(e.Node, false);
+                if (e.Node.Checked)
+                {
+                    CheckDescendants(e.Node, true);
+                    SetValidAdatedOutputs(e.Node);
+                }
+                else
+                {
+                    if(e.Node.Level >= 2)
+                    {
+                        CheckDescendants(e.Node, false);
+                    }
+
+                   
+                }
             }
-            else
-            {
-                checkDescendants(e.Node, true);
-            }
-            
            
             treeViewSources.AfterCheck += treeViewSources_AfterCheck;
             treeViewSources.ResumeLayout();
-
-            getAdaptedOutputs();
+            UpdateCurrentLink();
         }
 
         void treeViewTargets_AfterCheck(object sender, TreeViewEventArgs e)
         {
             treeViewTargets.SuspendLayout();
+            bool checkedd = e.Node.Checked;
+ 
+            uncheckAllNodes(true, true);
+
             treeViewTargets.AfterCheck -= treeViewTargets_AfterCheck;
 
-            if (e.Node.Tag == null)
+            e.Node.Checked = checkedd;
+
+            if (e.Node.Tag != null && e.Node.Checked)
             {
-                checkDescendants(e.Node, false);
+                CheckDescendants(e.Node, true);
             }
-            else
-            {
-                checkDescendants(e.Node, true);
-            }
+       
 
             treeViewTargets.AfterCheck += treeViewTargets_AfterCheck;
             treeViewTargets.ResumeLayout();
 
-            getAdaptedOutputs();
+          
+            UpdateCurrentLink();
         }
 
-
-        void getAdaptedOutputs()
+        List<T> GetDownStreamCheckedItems<T>(TreeNodeCollection nodes)
         {
-            UIOutputItem output;
-            UIInputItem input;
+            List<T> outputs = new List<T>();
 
-            getCurrentLinkOutputs(out output, out input);
+            List<TreeNode> outNodes = new List<TreeNode>();
+
+            foreach (TreeNode node in nodes)
+            {
+                outNodes.AddRange(GetDownStreamCheckedNodes(node));
+            }
+
+            foreach (TreeNode node in outNodes)
+            {
+                if (node.Tag is T)
+                {
+                    outputs.Add((T)node.Tag);
+                }
+            }
+
+            return outputs;
+        }
+
+        List<TreeNode> GetDownStreamCheckedNodes(TreeNode node)
+        {
+            List<TreeNode> outputs = new List<TreeNode>();
+
+            if (node.Checked)
+            {
+                List<TreeNode> checkedNodes = GetCheckedChildNodes(node);
+
+                if (checkedNodes.Count == 0)
+                {
+                    outputs.Add(node);
+                }
+                else
+                {
+                    foreach (TreeNode node1 in checkedNodes)
+                    {
+                        outputs.AddRange(GetDownStreamCheckedNodes(node1));
+                    }
+                }
+            }
+
+
+            return outputs;
+        }
+
+        List<TreeNode> GetCheckedChildNodes(TreeNode node)
+        {
+            List<TreeNode> nodes = new List<TreeNode>();
+
+            foreach (TreeNode n in node.Nodes)
+            {
+                if (n.Checked)
+                {
+                    nodes.Add(n);
+                }
+            }
+
+            return nodes;
+        }
+
+        List<T> GetCheckedItems<T>(TreeNodeCollection nodes)
+        {
+            List<TreeNode> checkedNodes = new List<TreeNode>();
+            List<T> outputs = new List<T>();
+
+            foreach (TreeNode node in nodes)
+            {
+                checkedNodes.AddRange(GetCheckedNodes(node));
+            }
+
+            foreach (TreeNode node in checkedNodes)
+            {
+                if (node.Tag is T)
+                {
+                    outputs.Add((T)node.Tag);
+                }
+            }
+
+            return outputs;
+        }
+
+        List<TreeNode> GetCheckedNodes(TreeNode node)
+        {
+            List<TreeNode> nodes = new List<TreeNode>();
+
+            foreach (TreeNode n in node.Nodes)
+            {
+                if (n.Checked)
+                {
+                    nodes.Add(n);
+                    nodes.AddRange(GetCheckedNodes(n));
+                }
+            }
+
+            return nodes;
+        }
+
+        void CheckDescendants(TreeNode node, bool upward)
+        {
+            if (upward)
+            {
+                if (node.Parent != null)
+                {
+                    node.Parent.Checked = node.Checked;
+                    CheckDescendants(node.Parent, upward);
+                }
+            }
+            else
+            {
+                foreach (TreeNode child in node.Nodes)
+                {
+                    child.Checked = node.Checked;
+                    CheckDescendants(child, upward);
+                }
+            }
+        }
+
+        void SetValidAdatedOutputs(TreeNode sender = null)
+        {
+            UIInputItem input = null;
+            UIOutputItem output  = null;
+
+            if(sender != null && sender.Tag is UIOutputItem)
+            {
+                output = sender.Tag as UIOutputItem;
+            }
+            else
+            {
+                SetErrorText("No output item has been selected");
+            }
+
+            List<UIInputItem> checkedInputs = GetDownStreamCheckedItems<UIInputItem>(treeViewTargets.Nodes);
+
+            if(checkedInputs.Count != 1)
+            {
+                SetErrorText("More than one input item has been selected");
+            }
+            else
+            {
+                input = checkedInputs[0];
+            }
 
             if(input == null)
             {
-                //MessageBox.Show("Either no input item has been selected or more than on input item selected");
                 listBoxAdaptedOutputs.DataSource = null;
                 return;
             }
 
             if(output == null)
             {
-                //MessageBox.Show("Either no output item has been selected or more than on output item selected");
                 listBoxAdaptedOutputs.DataSource = null;
                 return;
             }
 
-            List<IBaseAdaptedOutput> ids = new List<IBaseAdaptedOutput>();
+            List<UIAdaptedOutputItem> ids = new List<UIAdaptedOutputItem>();
 
 
             foreach(UIAdaptedFactory factory in externalFactories)
@@ -486,15 +693,36 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 
             foreach(IAdaptedOutputFactory factory in connection.SourceModel.LinkableComponent.AdaptedOutputFactories)
             {
-          UIAdaptedFactory fac = new UIAdaptedFactory();
+                UIAdaptedFactory fac = new UIAdaptedFactory();
                 fac.InitialiseAsNative(factory.Id,connection.SourceModel.LinkableComponent);
 
                 IIdentifiable[] idf = factory.GetAvailableAdaptedOutputIds(output, input);
 
                 foreach (IIdentifiable f in idf)
                 {
-                UIAdaptedOutputItem dt = new UIAdaptedOutputItem(fac,)
-                    ids.Add(factory.CreateAdaptedOutput(f, output, input));
+                    UIAdaptedFactory tempFac = new UIAdaptedFactory();
+                    tempFac.InitialiseAsNative(factory.Id , connection.SourceModel.LinkableComponent);
+
+                   ITimeSpaceAdaptedOutput adpout =   (ITimeSpaceAdaptedOutput)factory.CreateAdaptedOutput(f, output, input);
+                   UIAdaptedOutputItem uiadpout = new UIAdaptedOutputItem(tempFac, f,  adpout , output);
+                   ids.Add(uiadpout);
+                }
+            }
+
+            foreach(TreeNode node in sender.Nodes)
+            {
+                if(node.Tag != null && node.Tag is UIAdaptedOutputItem)
+                {
+                    UIAdaptedOutputItem item = (UIAdaptedOutputItem)node.Tag;
+
+                    for(int i = 0 ; i < ids.Count ; i++)
+                    {
+                        if(item.Id == ids[i].Id)
+                        {
+                            ids.RemoveAt(i);
+                            break;
+                        }
+                    }
                 }
             }
 
@@ -502,195 +730,178 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
             listBoxAdaptedOutputs.DisplayMember = "Caption";
         }
 
-        void checkDescendants(TreeNode node, bool upward)
+        void UpdateCurrentLink()
         {
-            if (upward)
+            List<UIOutputItem> outputs = GetDownStreamCheckedItems<UIOutputItem>(treeViewSources.Nodes);
+            List<UIInputItem> inputs = GetDownStreamCheckedItems<UIInputItem>(treeViewTargets.Nodes);
+
+            if(inputs.Count == 1)
             {
-                if (node.Parent != null)
+                if(outputs.Count != 1 && !(inputs[0] is IBaseMultiInput))
                 {
-                    node.Parent.Checked = node.Checked;
-                    checkDescendants(node.Parent, upward);
+                    SetErrorText("Selected input item requires one output item");
+                }
+                else
+                {
+                    currentLink.Target = inputs[0];
+                    currentLink.Sources = outputs;
                 }
             }
             else
             {
-                //foreach (TreeNode child in node.Nodes)
-                //{
-                //    child.Checked = node.Checked;
-                //    checkDescendants(child, upward);
-                //}
+                SetErrorText("Unable to update link because current input item does not support the number of output items selected");
             }
         }
 
-        void updateUIOutputItem(TreeNode node, UIOutputItem output)
-        {
-
-            List<UIOutputItem> uitems = (from n in workingLinks
-                                         where upperMostParent(n.Source).ExchangeItem == output.ExchangeItem
-                                         select n.Source).ToList();
-
-            for (int i = 0; i < uitems.Count; i++)
-            {
-                List<UIOutputItem> steps = stepsToParent(uitems[0], output);
-
-                if(steps.Count > 0 )
-                {
-                    UIOutputItem last = steps[steps.Count - 1];
-                    TreeNode n1 = getChildNode(node, last);
-
-                    if (n1 != null)
-                    {
-
-                    }
-                    else
-                    {
-                        n1 = new TreeNode(last.Id);
-                        n1.Tag = last;
-
-                        if(last is ITimeSpaceAdaptedOutput)
-                        {
-                            n1.ImageKey = "RESOURCE.BMP";
-                        }
-
-                        node.Nodes.Add(n1);
-                    }
-
-                    updateUIOutputItem(n1, last);
-                }
-            }
-        }
-
-        void getCurrentLinkOutputs(out UIOutputItem output, out UIInputItem input)
-        {
-            output = null;
-            input = null;
-
-            List<UIInputItem> inputs = getSelectedTargets(treeViewTargets.Nodes);
-           
-            if(inputs.Count == 1)
-            {
-                input = inputs[0];
-
-           }
-
-            Dictionary<int, List<TreeNode>> nodes = new Dictionary<int, List<TreeNode>>();
-            getSelectedNodesWithLevels(treeViewSources.Nodes, ref nodes);
-
-            if (nodes.Count > 0)
-            {
-                List<int> levels = nodes.Keys.ToList<int>();
-                levels.Sort();
-
-
-                bool valid = true;
-                int current = levels.Count - 1;
-
-                for (int i = current; i >= 0; i--)
-                {
-                    List<TreeNode> nodesAtLevel = nodes[levels[current]];
-
-                    if (nodesAtLevel.Count != 1 && valid)
-                    {
-                        valid = false;
-                        break;
-                    }
-                }
-
-                if (valid && nodes[levels[current]][0].Tag != null)
-                {
-                    output = (UIOutputItem)nodes[levels[current]][0].Tag;
-                }
-            }
-        }
 
         private void buttonAddConnection_Click(object sender, EventArgs e)
         {
+            UpdateCurrentLink();
 
-        }
-
-        List<UIOutputItem> stepsToParent(UIOutputItem item, UIOutputItem parent)
-        {
-            UIOutputItem check = item;
-
-            List<UIOutputItem> items = new List<UIOutputItem>();
-            
-            while (check != null && check != parent)
+            if(ValidateLink(currentLink))
             {
-                check = check.Parent;
-                items.Add(check);
+                connection.Links.Add(currentLink);
+                currentLink = new Link(currentLink.Sources, currentLink.Target);
+                listBoxConnections.DataSource = null;
+                listBoxConnections.DataSource = connection.Links;
             }
-
-
-            return items;
         }
 
-        TreeNode getChildNode(TreeNode node , UIOutputItem outputItem)
+        bool ValidateLink(Link link)
         {
-            TreeNode nod = null;
-
-            foreach(TreeNode no in node.Nodes)
+            if(link.Target != null && link.Sources.Count> 0
+                )
             {
-                if(no.Tag == outputItem)
+                for (int i = 0; i < connection.Links.Count; i++)
                 {
-                    return no;
+                    if (currentLink.Equals(connection.Links[i]))
+                    {
+                        MessageBox.Show("Link already exists");
+                        return false;
+                    }
                 }
-
-                return getChildNode(no, outputItem);
+                return true;
             }
-           
-            return nod;
+            else
+            {
+                MessageBox.Show("Please select valid target and sources");
+                return false;
+            }
+
         }
 
         private void buttonAddAdaptedOutput_Click(object sender, EventArgs e)
         {
-            UIOutputItem output;
-            UIInputItem input;
+            UIOutputItem output = null;
 
-            getCurrentLinkOutputs(out output, out input);
-
-            if (input == null)
+            if (treeViewSources.SelectedNode != null && treeViewSources.SelectedNode.Checked && treeViewSources.SelectedNode.Tag is UIOutputItem)
             {
-                //MessageBox.Show("Either no input item has been selected or more than on input item selected");
-                listBoxAdaptedOutputs.DataSource = null;
-                return;
-            }
+                output = (UIOutputItem)treeViewSources.SelectedNode.Tag;
 
-            if (output == null)
-            {
-                //MessageBox.Show("Either no output item has been selected or more than on output item selected");
-                listBoxAdaptedOutputs.DataSource = null;
-                return;
-            }
-
-            if(listBoxAdaptedOutputs.SelectedItem != null)
-            {
-                if(currentLink.Source != null && currentLink.Target != null )
+                if(listBoxAdaptedOutputs.SelectedItem is UIAdaptedOutputItem)
                 {
-                    currentLink.Source = output;
-                    currentLink.Target = input;
+                    UIAdaptedOutputItem adaptedOutput = (UIAdaptedOutputItem)listBoxAdaptedOutputs.SelectedItem;
+
+                    if(adaptedOutput.Adaptee == output)
+                    {
+                        if (fastLookUpOutputs.ContainsKey(output))
+                        {
+                            TreeNode parent = fastLookUpOutputs[output];
+                            TreeNode child = new TreeNode(adaptedOutput.Caption);
+                            child.Tag = adaptedOutput;
+                            child.ImageKey = "RESOURCE.BMP";
+                            child.SelectedImageKey = "RESOURCE.BMP";
+                            child.Checked = true;
+                            parent.Nodes.Add(child);
+
+                            fastLookUpOutputs.Add(adaptedOutput, child);
+
+                            parent.ExpandAll();
+                            UpdateCurrentLink();
+
+                        }
+                    }
+                    else
+                    {
+                        SetErrorText("Selected adaptor is not valid for selected output");
+                    }
                 }
-
-                IBaseAdaptedOutput selected = (IBaseAdaptedOutput)listBoxAdaptedOutputs.SelectedItem;
-
-                UIAdaptedOutputItem output = new UIAdaptedOutputItem()
             }
+        }
 
+        private void listBoxAdaptedOutputs_SelectedValueChanged(object sender, EventArgs e)
+        {
+            propertyGridConnection.SelectedObject = listBoxAdaptedOutputs.SelectedItem;
+        }
+
+        private void SetErrorText(string error)
+        {
+            labelError.Text = error;
+            timerError.Start();
+        }
+        
+        private void timerError_Tick(object sender, EventArgs e)
+        {
+            labelError.Text = "";
+            timerError.Stop();
+        }
+
+        private void listBoxConnections_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if(listBoxConnections.SelectedItem != null)
+            {
+                Link selected = listBoxConnections.SelectedItem as Link;
+
+                if (selected != null)
+                {
+
+                    uncheckAllNodes(true, true);
+                    uncheckAllNodes(false, true);
+
+                    UIInputItem item = selected.Target;
+
+                    if (fastLookUpInputs.ContainsKey(item))
+                    {
+                        TreeNode node = fastLookUpInputs[item];
+                        node.Checked = true;
+                    }
+
+                    foreach (UIOutputItem output in selected.Sources)
+                    {
+                        if (fastLookUpOutputs.ContainsKey(output))
+                        {
+                            TreeNode node = fastLookUpOutputs[output];
+                            node.Checked = true;
+                        }
+                    }
+                    
+                    currentLink = new Link(selected.Sources, selected.Target);
+
+                }
+            }
+        }
+
+        private void buttonRemoveLink_Click(object sender, EventArgs e)
+        {
+            if (listBoxConnections.SelectedItem != null)
+            {
+                Link selected = listBoxConnections.SelectedItem as Link;
+
+                if (selected != null)
+                {
+                    connection.Links.Remove(selected);
+                    uncheckAllNodes(true, true);
+                    uncheckAllNodes(false, true);
+
+                    currentLink = new Link();
+
+                    updateSourcesTreeView();
+
+                    listBoxConnections.DataSource = null;
+                    listBoxConnections.DataSource = connection.Links;
+                }
+            }
         }
     }
 
-    public class LinkChain
-    {
-
-        public List<Link> Links
-        {
-            get;
-            set;
-        }
-
-        public override string ToString()
-        {
-            return base.ToString();
-        }
-
-    }
 }

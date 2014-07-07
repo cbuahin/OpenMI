@@ -37,6 +37,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using Oatc.OpenMI.Sdk.Backbone;
 using OpenMI.Standard2.TimeSpace;
+using System.Windows.Forms;
 
 namespace Oatc.OpenMI.Gui.Core
 {
@@ -85,6 +86,7 @@ namespace Oatc.OpenMI.Gui.Core
 				Utils.ResetFPU(); 
 				_font = new Font("Arial", 11);
 			} 
+            
 
 			Rect = new Rectangle(30,30,100,3*_font.Height);	
         }
@@ -134,14 +136,36 @@ namespace Oatc.OpenMI.Gui.Core
 		/// <param name="g"><see cref="Graphics">Graphics</see> where rectangle should be drawn.</param>
 		public void Draw(bool selected, Point displacement, Graphics g)
 		{
+
+            SizeF size  = g.MeasureString(InstanceCaption, _font);
+
+          
+                Rect.Width = (int)(size.Width + size.Width * .60);
+            //    Rect.Height = (int)(size.Height + size.Height * .60);
+           
+
 			Rectangle rectToDraw = Rect;
+
+
+            int buffx = (int) (rectToDraw.Width * .10);
+            int buffy = (int) (rectToDraw.Height * .10);
+
 			rectToDraw.X -= displacement.X;
 			rectToDraw.Y -= displacement.Y;
 
 			Region fillRegion = new Region(rectToDraw);	
 		
 			g.FillRegion( GetFillBrush(), fillRegion );
+
+      
+
 			g.DrawRectangle(selected ? _sPenRed : _sPenBlue, rectToDraw);
+
+            rectToDraw.X += buffx;
+            rectToDraw.Y += buffy;
+            rectToDraw.Width -= 2 * buffx;
+            rectToDraw.Height -= 2 * buffy;
+           
             g.DrawString(InstanceCaption, _font, Brushes.Black, rectToDraw);
 		}
 
@@ -214,6 +238,10 @@ namespace Oatc.OpenMI.Gui.Core
 			set
 			{
 				_linkableComponent = value;
+
+                
+
+   
 			}
 		}
 

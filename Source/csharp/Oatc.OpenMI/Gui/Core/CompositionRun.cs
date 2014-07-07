@@ -26,7 +26,7 @@
 * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 #endregion
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
@@ -38,176 +38,192 @@ using OpenMI.Standard2.TimeSpace;
 
 namespace Oatc.OpenMI.Gui.Core
 {
-	public class CompositionRun
-	{
-		BackgroundWorker _worker;
-		FileInfo _oprfile;
-		bool _allowCancel = false;
-		bool _reportProgress = false;
-		bool _canceled = false;
-		bool _monitorComponentEvents = true;
-		bool _monitorExchangeEvents = true;
+    public class CompositionRun
+    {
+        BackgroundWorker worker;
+        FileInfo _oprfile;
+        bool _allowCancel = false;
+        bool _reportProgress = false;
+        bool _canceled = false;
+        bool _monitorComponentEvents = true;
+        bool _monitorExchangeEvents = true;
 
-		RunStatus _status = RunStatus.available;
-		List<IBaseLinkableComponent> _components;
+        RunStatus _status = RunStatus.available;
+        List<IBaseLinkableComponent> _components;
 
-		public enum RunStatus { available = 0, running, completed_ok, cancelled, exception_thrown, }
+        public enum RunStatus { available = 0, running, completed_ok, cancelled, exception_thrown, }
 
-		public RunStatus Status
-		{
-			get { return _status; }
-			set { _status = value; }
-		}
+        public RunStatus Status
+        {
+            get { return _status; }
+            set { _status = value; }
+        }
 
-		public bool ReportProgress
-		{
-			get { return _reportProgress; }
-			set { _reportProgress = value; }
-		}
-        
-		public bool AllowCancel
-		{
-			get { return _allowCancel; }
-			set { _allowCancel = value; }
-		}
+        public bool ReportProgress
+        {
+            get { return _reportProgress; }
+            set { _reportProgress = value; }
+        }
 
-		public bool MonitorComponentEvents
-		{
-			get { return _monitorComponentEvents; }
-			set { _monitorComponentEvents = value; }
-		}
+        public bool AllowCancel
+        {
+            get { return _allowCancel; }
+            set { _allowCancel = value; }
+        }
 
-		public bool MonitorExchangeEvents
-		{
-			get { return _monitorExchangeEvents; }
-			set { _monitorExchangeEvents = value; }
-		}
+        public bool MonitorComponentEvents
+        {
+            get { return _monitorComponentEvents; }
+            set { _monitorComponentEvents = value; }
+        }
 
-		public delegate void RunCompleted(object sender, RunWorkerCompletedEventArgs e);
-		public delegate void RunProgress(object sender, ProgressChangedEventArgs e);
+        public bool MonitorExchangeEvents
+        {
+            get { return _monitorExchangeEvents; }
+            set { _monitorExchangeEvents = value; }
+        }
 
-		public void RunAsync(FileInfo oprfile, RunProgress progress, RunCompleted completed)
-		{
-			if (_status == RunStatus.running)
-				throw new Exception("Already running, cannot start additional run");
+        public delegate void RunCompleted(object sender, RunWorkerCompletedEventArgs e);
+        public delegate void RunProgress(object sender, ProgressChangedEventArgs e);
 
-			_oprfile = oprfile;
+        RunProgress progress = null;
+        RunCompleted completed = null;
+        public void RunAsync(FileInfo oprfile, RunProgress progress, RunCompleted completed)
+        {
+            if (_status == RunStatus.running)
+                throw new Exception("Already running, cannot start additional run");
 
-			BackgroundWorker worker = new BackgroundWorker();
-			worker.DoWork += new DoWorkEventHandler(DoRun);
+            _oprfile = oprfile;
 
-			_reportProgress = progress != null;
+            worker = new BackgroundWorker();
 
-			worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(completed);
-			worker.ProgressChanged += new ProgressChangedEventHandler(progress);
-			worker.WorkerReportsProgress = _reportProgress;
-			worker.WorkerSupportsCancellation = _allowCancel;
-			worker.RunWorkerAsync();
+            worker.DoWork += new DoWorkEventHandler(DoRun);
 
-			_status = RunStatus.running;
-		}
+            _reportProgress = progress != null;
 
-		public void Run(FileInfo oprfile)
-		{
-			try
-			{
-				if (_status == RunStatus.running)
-					throw new Exception("Already running, cannot start additional run");
+            this.progress = progress;
+            this.completed = completed;
 
-				_oprfile = oprfile;
+            worker.WorkerReportsProgress = _reportProgress;
+            worker.WorkerSupportsCancellation = _allowCancel;
 
-				_status = RunStatus.running;
+            worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+            worker.ProgressChanged += worker_ProgressChanged;
 
-				DoRun(null, null);
+            worker.RunWorkerAsync();
 
-				_status = RunStatus.completed_ok;
-			}
-			catch
-			{
-				_status = RunStatus.exception_thrown;
-				throw;
-			}
-		}
+            _status = RunStatus.running;
+        }
 
-		public void Cancel()
-		{
-			if (_worker != null && _status == RunStatus.running)
-				_worker.CancelAsync();
-		}
+        void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            if (progress != null)
+            {
+                progress(sender, e);
+            }
+        }
 
-		public bool Canceled
-		{
-			set { _canceled = value; }
-			get 
-			{
-				if (_worker != null && _worker.CancellationPending)
-				{
-					_canceled = true;
+        void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (completed != null)
+                completed(sender, e);
+        }
 
-					foreach (ITimeSpaceComponent iLC in _components)
-						iLC.Finish();
-				}
-					
-				return _canceled; 
-			}
-		}
+        public void Run(FileInfo oprfile)
+        {
+            try
+            {
+                if (_status == RunStatus.running)
+                    throw new Exception("Already running, cannot start additional run");
 
-		void DoRun(object sender, DoWorkEventArgs e)
-		{
-			Canceled = false;
+                _oprfile = oprfile;
 
-			// Get the BackgroundWorker that raised this event.
-			_worker = sender != null ? sender as BackgroundWorker : null;
+                _status = RunStatus.running;
 
-			if (_worker != null && _worker.WorkerReportsProgress)
-				_worker.ReportProgress(0);
-			//_worker.ReportProgress(0, new State(State.Status.Preparation));
+                DoRun(null, null);
 
-			if (!_oprfile.Exists)
-				throw new FileNotFoundException(_oprfile.FullName);
+                _status = RunStatus.completed_ok;
+            }
+            catch
+            {
+                _status = RunStatus.exception_thrown;
+                throw;
+            }
+        }
 
-			_components = new List<IBaseLinkableComponent>();
-			ITimeSpaceComponent triggered = null;
+        public void Cancel()
+        {
+            if (worker != null && _status == RunStatus.running)
+                worker.CancelAsync();
+        }
 
-			List<UIModel> models;
+        public bool Canceled
+        {
+            set { _canceled = value; }
+            get
+            {
+                if (worker != null && worker.CancellationPending)
+                {
+                    _canceled = true;
+
+                    foreach (ITimeSpaceComponent iLC in _components)
+                        iLC.Finish();
+                }
+
+                return _canceled;
+            }
+        }
+
+
+        void DoRun(object sender, DoWorkEventArgs e)
+        {
+            Canceled = false;
+
+            if (!_oprfile.Exists)
+                throw new FileNotFoundException(_oprfile.FullName);
+
+            _components = new List<IBaseLinkableComponent>();
+            ITimeSpaceComponent triggered = null;
+
+            List<UIModel> models;
             List<UIConnection> connections;
 
             Opr.Load(_oprfile, out models, out connections);
 
             if (models == null || models.Count == 0)
-				throw new InvalidDataException("No models found in " + _oprfile.FullName);
+                throw new InvalidDataException("No models found in " + _oprfile.FullName);
 
-			if (Canceled)
-				return;
+            if (Canceled)
+                return;
 
-			Dictionary<UIModel, ITimeSpaceComponent> modelcomponents
-				= new Dictionary<UIModel, ITimeSpaceComponent>();
+            Dictionary<UIModel, ITimeSpaceComponent> modelcomponents
+                = new Dictionary<UIModel, ITimeSpaceComponent>();
 
-			foreach (UIModel model in models)
-			{
-				model.LinkableComponent.StatusChanged += new EventHandler<LinkableComponentStatusChangeEventArgs>(LinkableComponent_StatusChanged);
+            foreach (UIModel model in models)
+            {
+                model.LinkableComponent.StatusChanged += new EventHandler<LinkableComponentStatusChangeEventArgs>(LinkableComponent_StatusChanged);
 
-				_components.Add(model.LinkableComponent);
+                _components.Add(model.LinkableComponent);
 
-				modelcomponents.Add(model, model.LinkableComponent);
+                modelcomponents.Add(model, model.LinkableComponent);
 
-				if (model.IsTrigger)
-					triggered = model.LinkableComponent;
-			}
+                if (model.IsTrigger)
+                    triggered = model.LinkableComponent;
+            }
 
-			ITimeSpaceComponent provider, acceptor;
+            ITimeSpaceComponent provider, acceptor;
 
-			foreach (UIConnection connection in connections)
-			{
-				provider = modelcomponents[connection.SourceModel];
-				acceptor = modelcomponents[connection.TargetModel];
+            foreach (UIConnection connection in connections)
+            {
+                provider = modelcomponents[connection.SourceModel];
+                acceptor = modelcomponents[connection.TargetModel];
 
-				foreach (Link pair in connection.Links)
-				{
-					pair.Source.AddConsumer(pair.Target);
-					pair.Target.Provider = pair.Source;
-				}
-			}
+                foreach (Link pair in connection.Links)
+                {
+                    pair.Source.AddConsumer(pair.Target);
+                    pair.Target.Provider = pair.Source;
+                }
+            }
 
             //prepare
 
@@ -216,70 +232,71 @@ namespace Oatc.OpenMI.Gui.Core
                 iComponent.Prepare();
             }
 
-			if (triggered == null)
-				throw new InvalidOperationException("No trigger specified");
+            if (triggered == null)
+                throw new InvalidOperationException("No trigger specified");
 
-			if (Canceled)
-				return;
+            if (Canceled)
+                return;
 
-			// See comment on WaitingForFinish additional state
-			while (triggered.Status != LinkableComponentStatus.Finishing
-					&& triggered.Status != LinkableComponentStatus.Failed)
-			{
-				if (Canceled)
-					return;
-				triggered.Update();
-			}
+            // See comment on WaitingForFinish additional state
+            while (triggered.Status != LinkableComponentStatus.Finishing
+                    && triggered.Status != LinkableComponentStatus.Failed)
+            {
+                if (Canceled)
+                    return;
+                triggered.Update();
+            }
 
-			foreach (ITimeSpaceComponent iComponent in _components)
-			{
-				iComponent.Finish();
+            foreach (ITimeSpaceComponent iComponent in _components)
+            {
+                iComponent.Finish();
 
-				if (iComponent is IDisposable)
-					((IDisposable)iComponent).Dispose();
-			}
-		}
+                if (iComponent is IDisposable)
+                    ((IDisposable)iComponent).Dispose();
+            }
 
-		public class State
-		{
-			int _oprIndex = -1;
-			LinkableComponentStatusChangeEventArgs _statusArgs = null;
-			ExchangeItemChangeEventArgs _exchangeArgs = null;
-			DateTime _lastEventUpdate;
+        }
 
-			public State(int oprIndex, LinkableComponentStatusChangeEventArgs args)
-			{
-				_oprIndex = oprIndex;
-				_statusArgs = args;
-				_lastEventUpdate = DateTime.Now;
-			}
+        public class State
+        {
+            int _oprIndex = -1;
+            LinkableComponentStatusChangeEventArgs _statusArgs = null;
+            ExchangeItemChangeEventArgs _exchangeArgs = null;
+            DateTime _lastEventUpdate;
 
-			public State(int oprIndex, ExchangeItemChangeEventArgs args)
-			{
-				_oprIndex = oprIndex;
-				_exchangeArgs = args;
-				_lastEventUpdate = DateTime.Now;
-            }	
+            public State(int oprIndex, LinkableComponentStatusChangeEventArgs args)
+            {
+                _oprIndex = oprIndex;
+                _statusArgs = args;
+                _lastEventUpdate = DateTime.Now;
+            }
 
-			public LinkableComponentStatusChangeEventArgs StatusArgs
-			{
-				get { return _statusArgs; }
-			}
+            public State(int oprIndex, ExchangeItemChangeEventArgs args)
+            {
+                _oprIndex = oprIndex;
+                _exchangeArgs = args;
+                _lastEventUpdate = DateTime.Now;
+            }
 
-			public ExchangeItemChangeEventArgs ExchangeArgs
-			{
-				get { return _exchangeArgs; }
-			}
+            public LinkableComponentStatusChangeEventArgs StatusArgs
+            {
+                get { return _statusArgs; }
+            }
 
-			public int OprIndex
-			{
-				get { return _oprIndex; }
-			}
+            public ExchangeItemChangeEventArgs ExchangeArgs
+            {
+                get { return _exchangeArgs; }
+            }
 
-			public DateTime LastEventUpdate
-			{
-				get { return _lastEventUpdate; }
-			}
+            public int OprIndex
+            {
+                get { return _oprIndex; }
+            }
+
+            public DateTime LastEventUpdate
+            {
+                get { return _lastEventUpdate; }
+            }
 
             public int? Progress
             {
@@ -303,7 +320,7 @@ namespace Oatc.OpenMI.Gui.Core
 
                     // Try the TimeExtent (if implemented), this will provide values for Stand alone runs
                     // ie that have no output exchange items 
-                    IList<ITime> times = iLC.TimeExtent().Times ;
+                    IList<ITime> times = iLC.TimeExtent().Times;
 
                     lock (times)
                     {
@@ -333,35 +350,40 @@ namespace Oatc.OpenMI.Gui.Core
                             }
                         }
                     }
-        
+
                     double p = 100.0 * (last - start) / (end - start);
 
                     return (int)p;
                 }
             }
-		}
+        }
 
-		void LinkableComponent_StatusChanged(object sender, LinkableComponentStatusChangeEventArgs e)
-		{
-			if (!_monitorComponentEvents)
-				return;
+        void LinkableComponent_StatusChanged(object sender, LinkableComponentStatusChangeEventArgs e)
+        {
 
-			if (_worker != null && _worker.WorkerReportsProgress)
-				_worker.ReportProgress(0,
-					new State(_components.IndexOf((ITimeSpaceComponent)sender), e));
-		}
+            if (!_monitorComponentEvents)
+                return;
 
-		void LinkableComponent_ExchangeItemValueChanged(object sender, ExchangeItemChangeEventArgs e)
-		{
+            if (worker != null && worker.WorkerReportsProgress)
+            {
+                State state = new State(_components.IndexOf((ITimeSpaceComponent)sender), e);
+                worker.ReportProgress(state.Progress.Value, state);
+            }
+
+        }
+
+        void LinkableComponent_ExchangeItemValueChanged(object sender, ExchangeItemChangeEventArgs e)
+        {
             if (!_monitorExchangeEvents)
             {
                 return;
             }
 
-            if (_worker != null && _worker.WorkerReportsProgress)
+            if (worker != null && worker.WorkerReportsProgress)
             {
-                _worker.ReportProgress(0, new State(_components.IndexOf(((ITimeSpaceExchangeItem)sender).Component), e));
+                State state = new State(_components.IndexOf((ITimeSpaceComponent)sender), e);
+                worker.ReportProgress(state.Progress.Value, state);
             }
-		}
-	}
+        }
+    }
 }

@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConnectionDlg));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.groupBoxSources = new System.Windows.Forms.GroupBox();
+            this.groupBoxTargets = new System.Windows.Forms.GroupBox();
             this.treeViewSources = new System.Windows.Forms.TreeView();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
@@ -42,15 +42,17 @@
             this.button1 = new System.Windows.Forms.Button();
             this.buttonAddAdaptedOutput = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonRemoveLink = new System.Windows.Forms.Button();
+            this.listBoxConnections = new System.Windows.Forms.ListBox();
             this.buttonAddConnection = new System.Windows.Forms.Button();
-            this.groupBoxTargets = new System.Windows.Forms.GroupBox();
+            this.groupBoxSources = new System.Windows.Forms.GroupBox();
             this.treeViewTargets = new System.Windows.Forms.TreeView();
             this.groupBoxSelectedObjectsProperties = new System.Windows.Forms.GroupBox();
             this.propertyGridConnection = new System.Windows.Forms.PropertyGrid();
             this.buttonPlotElementSet = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.listBoxConnections = new System.Windows.Forms.ListBox();
+            this.labelError = new System.Windows.Forms.Label();
+            this.timerError = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -59,7 +61,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            this.groupBoxSources.SuspendLayout();
+            this.groupBoxTargets.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
@@ -70,7 +72,7 @@
             this.splitContainer4.SuspendLayout();
             this.groupBoxAvailable.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBoxTargets.SuspendLayout();
+            this.groupBoxSources.SuspendLayout();
             this.groupBoxSelectedObjectsProperties.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -110,22 +112,22 @@
             this.splitContainer2.SplitterDistance = 234;
             this.splitContainer2.TabIndex = 0;
             // 
-            // groupBoxSources
+            // groupBoxTargets
             // 
-            this.groupBoxSources.Controls.Add(this.treeViewSources);
-            this.groupBoxSources.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxSources.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxSources.Name = "groupBoxSources";
-            this.groupBoxSources.Size = new System.Drawing.Size(234, 549);
-            this.groupBoxSources.TabIndex = 1;
-            this.groupBoxSources.TabStop = false;
-            this.groupBoxSources.Text = "Sources";
+            this.groupBoxTargets.Controls.Add(this.treeViewTargets);
+            this.groupBoxTargets.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxTargets.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxTargets.Name = "groupBoxTargets";
+            this.groupBoxTargets.Size = new System.Drawing.Size(240, 549);
+            this.groupBoxTargets.TabIndex = 2;
+            this.groupBoxTargets.TabStop = false;
+            this.groupBoxTargets.Text = "Targets";
             // 
             // treeViewSources
             // 
             this.treeViewSources.CheckBoxes = true;
             this.treeViewSources.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewSources.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeViewSources.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
             this.treeViewSources.ImageIndex = 0;
             this.treeViewSources.ImageList = this.imageList;
             this.treeViewSources.Location = new System.Drawing.Point(3, 16);
@@ -209,10 +211,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxAdaptedOutputs.FormattingEnabled = true;
+            this.listBoxAdaptedOutputs.HorizontalScrollbar = true;
             this.listBoxAdaptedOutputs.Location = new System.Drawing.Point(6, 48);
             this.listBoxAdaptedOutputs.Name = "listBoxAdaptedOutputs";
             this.listBoxAdaptedOutputs.Size = new System.Drawing.Size(381, 290);
             this.listBoxAdaptedOutputs.TabIndex = 4;
+            this.listBoxAdaptedOutputs.SelectedValueChanged += new System.EventHandler(this.listBoxAdaptedOutputs_SelectedValueChanged);
             // 
             // button1
             // 
@@ -236,7 +240,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button2);
+            this.groupBox2.Controls.Add(this.buttonRemoveLink);
             this.groupBox2.Controls.Add(this.listBoxConnections);
             this.groupBox2.Controls.Add(this.buttonAddConnection);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -246,6 +250,30 @@
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Connections";
+            // 
+            // buttonRemoveLink
+            // 
+            this.buttonRemoveLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonRemoveLink.Location = new System.Drawing.Point(272, 18);
+            this.buttonRemoveLink.Name = "buttonRemoveLink";
+            this.buttonRemoveLink.Size = new System.Drawing.Size(115, 23);
+            this.buttonRemoveLink.TabIndex = 6;
+            this.buttonRemoveLink.Text = "Remove Connection";
+            this.buttonRemoveLink.UseVisualStyleBackColor = true;
+            this.buttonRemoveLink.Click += new System.EventHandler(this.buttonRemoveLink_Click);
+            // 
+            // listBoxConnections
+            // 
+            this.listBoxConnections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBoxConnections.FormattingEnabled = true;
+            this.listBoxConnections.HorizontalScrollbar = true;
+            this.listBoxConnections.Location = new System.Drawing.Point(6, 47);
+            this.listBoxConnections.Name = "listBoxConnections";
+            this.listBoxConnections.Size = new System.Drawing.Size(381, 134);
+            this.listBoxConnections.TabIndex = 5;
+            this.listBoxConnections.SelectedValueChanged += new System.EventHandler(this.listBoxConnections_SelectedValueChanged);
             // 
             // buttonAddConnection
             // 
@@ -258,22 +286,22 @@
             this.buttonAddConnection.UseVisualStyleBackColor = true;
             this.buttonAddConnection.Click += new System.EventHandler(this.buttonAddConnection_Click);
             // 
-            // groupBoxTargets
+            // groupBoxSources
             // 
-            this.groupBoxTargets.Controls.Add(this.treeViewTargets);
-            this.groupBoxTargets.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxTargets.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxTargets.Name = "groupBoxTargets";
-            this.groupBoxTargets.Size = new System.Drawing.Size(240, 549);
-            this.groupBoxTargets.TabIndex = 2;
-            this.groupBoxTargets.TabStop = false;
-            this.groupBoxTargets.Text = "Targets";
+            this.groupBoxSources.Controls.Add(this.treeViewSources);
+            this.groupBoxSources.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxSources.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxSources.Name = "groupBoxSources";
+            this.groupBoxSources.Size = new System.Drawing.Size(234, 549);
+            this.groupBoxSources.TabIndex = 1;
+            this.groupBoxSources.TabStop = false;
+            this.groupBoxSources.Text = "Sources";
             // 
             // treeViewTargets
             // 
             this.treeViewTargets.CheckBoxes = true;
             this.treeViewTargets.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewTargets.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeViewTargets.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
             this.treeViewTargets.ImageIndex = 0;
             this.treeViewTargets.ImageList = this.imageList;
             this.treeViewTargets.Location = new System.Drawing.Point(3, 16);
@@ -326,35 +354,33 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // button2
+            // labelError
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(272, 18);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(115, 23);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Remove Connection";
-            this.button2.UseVisualStyleBackColor = true;
+            this.labelError.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelError.AutoSize = true;
+            this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelError.ForeColor = System.Drawing.Color.Red;
+            this.labelError.Location = new System.Drawing.Point(152, 572);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(43, 13);
+            this.labelError.TabIndex = 2;
+            this.labelError.Text = "Ready";
             // 
-            // listBoxConnections
+            // timerError
             // 
-            this.listBoxConnections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBoxConnections.FormattingEnabled = true;
-            this.listBoxConnections.Location = new System.Drawing.Point(6, 47);
-            this.listBoxConnections.Name = "listBoxConnections";
-            this.listBoxConnections.Size = new System.Drawing.Size(381, 134);
-            this.listBoxConnections.TabIndex = 5;
+            this.timerError.Interval = 1000;
+            this.timerError.Tick += new System.EventHandler(this.timerError_Tick);
             // 
             // ConnectionDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1121, 602);
+            this.Controls.Add(this.labelError);
             this.Controls.Add(this.buttonPlotElementSet);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.splitContainer1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ConnectionDlg";
             this.Text = "ConnectionDlg";
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -365,7 +391,7 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            this.groupBoxSources.ResumeLayout(false);
+            this.groupBoxTargets.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
@@ -376,9 +402,10 @@
             this.splitContainer4.ResumeLayout(false);
             this.groupBoxAvailable.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.groupBoxTargets.ResumeLayout(false);
+            this.groupBoxSources.ResumeLayout(false);
             this.groupBoxSelectedObjectsProperties.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -403,7 +430,9 @@
         private System.Windows.Forms.Button buttonAddAdaptedOutput;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox listBoxAdaptedOutputs;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonRemoveLink;
         private System.Windows.Forms.ListBox listBoxConnections;
+        private System.Windows.Forms.Label labelError;
+        private System.Windows.Forms.Timer timerError;
     }
 }

@@ -404,59 +404,59 @@ namespace Oatc.OpenMI.Gui.Controls
 
                 node.Tag = item;
 
-                //if (item is UIOutputItem && ((UIOutputItem)item).Parent != null)
-                //{
-                //    kids.Push(node);
-                //}
-                //else
-                //{
-                //    quantities[item.ValueDefinition.Caption].Nodes.Add(node);
+                if (item is UIOutputItem && ((UIOutputItem)item).Parent != null)
+                {
+                    kids.Push(node);
+                }
+                else
+                {
+                    quantities[item.ValueDefinition.Caption].Nodes.Add(node);
 
-                //    _nodes.Add(item.IExchangeItem, node);
-                //}
+                    _nodes.Add(item.ExchangeItem, node);
+                }
             }
 
             // Lower levels
 
-            //if (kids.Count > 0)
-            //{
-            //    Stack<TreeNode> unassigned;
-            //    UIExchangeItem iParent, iNode;
-            //    int added;
+            if (kids.Count > 0)
+            {
+                Stack<TreeNode> unassigned;
+                UIExchangeItem iParent, iNode;
+                int added;
 
-            //    do
-            //    {
-            //        added = 0;
-            //        unassigned = new Stack<TreeNode>(kids.Count);
+                do
+                {
+                    added = 0;
+                    unassigned = new Stack<TreeNode>(kids.Count);
 
-            //        while (kids.Count > 0)
-            //        {
-            //            node = kids.Pop();
-            //            iNode = (UIExchangeItem)node.Tag;
-            //            iParent = ((UIOutputItem)iNode).Parent;
+                    while (kids.Count > 0)
+                    {
+                        node = kids.Pop();
+                        iNode = (UIExchangeItem)node.Tag;
+                        iParent = ((UIOutputItem)iNode).Parent;
 
-            //            if (_nodes.ContainsKey(iParent.IExchangeItem))
-            //            {
-            //                _nodes[iParent.IExchangeItem].Nodes.Add(node);
-            //                _nodes.Add(iNode.IExchangeItem, node);
-            //                ++added;
-            //            }
-            //            else
-            //            {
-            //                unassigned.Push(node);
-            //            }
-            //        }
+                        if (_nodes.ContainsKey(iParent.ExchangeItem))
+                        {
+                            _nodes[iParent.ExchangeItem].Nodes.Add(node);
+                            _nodes.Add(iNode.ExchangeItem, node);
+                            ++added;
+                        }
+                        else
+                        {
+                            unassigned.Push(node);
+                        }
+                    }
 
-            //        if (added == 0 && unassigned.Count > 0)
-            //        {
-            //            Debug.Assert(false); // cant assign kids
-            //            break;
-            //        }
+                    if (added == 0 && unassigned.Count > 0)
+                    {
+                        Debug.Assert(false); // cant assign kids
+                        break;
+                    }
 
-            //        kids = unassigned;
-            //    }
-            //    while (unassigned.Count > 0);
-            //}
+                    kids = unassigned;
+                }
+                while (unassigned.Count > 0);
+            }
 
             treeView.ExpandAll();
             treeView.EndUpdate();

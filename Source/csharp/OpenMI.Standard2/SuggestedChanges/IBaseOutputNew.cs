@@ -1,39 +1,12 @@
-#region Copyright
-/*
-    Copyright (c) 2005-2010, OpenMI Association
-    "http://www.openmi.org/"
-
-    This file is part of OpenMI.Standard2.dll
-
-    OpenMI.Standard2.dll is free software; you can redistribute it and/or modify
-    it under the terms of the Lesser GNU General Public License as published by
-    the Free Software Foundation; either version 3 of the License, or
-    (at your option) any later version.
-
-    OpenMI.Standard2.dll is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    Lesser GNU General Public License for more details.
-
-    You should have received a copy of the Lesser GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-#endregion
-
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace OpenMI.Standard2
+namespace OpenMI.Standard2.SuggestedChanges
 {
-    /// <summary>
-    /// An output exchange item that can deliver values from an <see cref="IBaseLinkableComponent"/>.
-    /// <para>
-    /// If an output does not provide the data in the way a consumer would
-    /// like to have it the output can be adapted by an <see cref="IBaseAdaptedOutput"/>, which can
-    /// transform the data according to the consumer's wishes. E.g. by performing
-    /// interpolation in time, spatial aggregation, etc.).
-    /// </para>
-    /// </summary>
-    public interface IBaseOutput : IBaseExchangeItem
+    public interface IBaseOutputNew : IBaseExchangeItemNew
     {
         /// <summary>
         /// Input items that will consume the values, by calling the GetValues() method. Every input item
@@ -48,7 +21,7 @@ namespace OpenMI.Standard2
         /// Please be aware that the "unadulterated" values in the output item, provided by the read only Values property,
         /// may be called anyway, even if there are no values available.
         /// </remarks>
-        IList<IBaseInput> Consumers { get; }
+        IList<IBaseInputNew> Consumers { get; }
 
         ///<summary>
         /// Add a consumer to this output item. Every input item that wants to call the GetValues() method,
@@ -59,14 +32,14 @@ namespace OpenMI.Standard2
         /// Provider (see <see cref="IBaseInput.Provider"/>)</para>
         /// <param name="consumer">consumer that has to be added</param>
         ///</summary>
-        void AddConsumer(IBaseInput consumer);
+        void AddConsumer(IBaseInputNew consumer);
 
         ///<summary>
         /// Remove a consumer. If an input item is not interested any longer in calling the GetValues method,
         /// it should remove itself by calling RemoveConsumer.
         /// <param name="consumer">consumer that has to be removed</param>
         ///</summary>
-        void RemoveConsumer(IBaseInput consumer);
+        void RemoveConsumer(IBaseInputNew consumer);
 
         ///<summary>
         /// The adaptedOutputs that have this current output item as <code>Adaptee</code>.
@@ -77,7 +50,7 @@ namespace OpenMI.Standard2
         /// and <see cref="RemoveAdaptedOutput"/>.
         /// </para>
         ///</summary>
-        IList<IBaseAdaptedOutput> AdaptedOutputs { get; }
+        IList<IBaseAdaptedOutputNew> AdaptedOutputs { get; }
 
         ///<summary>
         /// Add a <see cref="IBaseAdaptedOutput"/> to this output item. 
@@ -87,7 +60,7 @@ namespace OpenMI.Standard2
         /// incompatible with the already added adaptedOutputs, an exception will be thrown.</para>
         /// <param name="adaptedOutput">consumer that has to be added</param>
         ///</summary>
-        void AddAdaptedOutput(IBaseAdaptedOutput adaptedOutput);
+        void AddAdaptedOutput(IBaseAdaptedOutputNew adaptedOutput);
 
         ///<summary>
         /// Remove a <see cref="IBaseAdaptedOutput"/>. If a adaptedOutput is not interested 
@@ -95,12 +68,12 @@ namespace OpenMI.Standard2
         /// it should remove itself by calling RemoveConsumer.
         /// <param name="adaptedOutput">consumer that has to be removed</param>
         ///</summary>
-        void RemoveAdaptedOutput(IBaseAdaptedOutput adaptedOutput);
+        void RemoveAdaptedOutput(IBaseAdaptedOutputNew adaptedOutput);
 
         ///<summary>
         /// The exchange item's values
         ///</summary>
-        IBaseValueSet Values { get; }
+        IBaseValueSetNew Values { get; }
 
         ///<summary>
         /// Provides the values matching the value definition specified by the
@@ -114,7 +87,7 @@ namespace OpenMI.Standard2
         /// to have the flexibility to loosen the "always register as consumer" approach, it is chosen to provide
         /// an <see cref="IBaseExchangeItem"/> as argument.</para>
         /// </remarks>
-        IBaseValueSet GetValues(IBaseExchangeItem querySpecifier);
+        IBaseValueSetNew GetValues(IBaseExchangeItemNew querySpecifier);
 
     }
 }
