@@ -292,24 +292,24 @@ namespace Oatc.OpenMI.Gui.Core
 
 
            // serializer.Serialize(new StreamWriter("C:\\Users\\Caleb\\Desktop\\Projects\\OpenMI\\1.4.0\\Oatc\\src\\csharp\\Examples\\ModelComponents\\SpatialModels\\UnitTest\\test.xml"), comp);
-			try
-			{
+            //try
+            //{
 				using (XmlReader reader = XmlReader.Create(new StringReader(xml), settings))
 				{
 					LinkableComponentComplexType omi = 
 						(LinkableComponentComplexType)serializer.Deserialize(reader);
 					return OmiDeserializeAndInitialize(omi, omiPath);
 				}
-			}
-			catch (Exception e)
-			{
-				// TODO: Do we want to allow unspecified xmlns?
-				if (e.InnerException != null
-					&& e.InnerException.Message.Contains("<LinkableComponent xmlns="))
-					throw new XmlException("xmlns=\"http://www.openmi.org\" missing in <LinkableComponent />", e);
+            //}
+            //catch (Exception e)
+            //{
+            //    // TODO: Do we want to allow unspecified xmlns?
+            //    if (e.InnerException != null
+            //        && e.InnerException.Message.Contains("<LinkableComponent xmlns="))
+            //        throw new XmlException("xmlns=\"http://www.openmi.org\" missing in <LinkableComponent />", e);
 
-				throw;
-			}
+            //    throw;
+            //}
 		}
 
 		public static ITimeSpaceComponent OmiDeserializeAndInitialize(LinkableComponentComplexType omi, DirectoryInfo relativePath)

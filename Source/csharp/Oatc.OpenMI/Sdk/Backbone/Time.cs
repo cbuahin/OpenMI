@@ -58,7 +58,7 @@ namespace Oatc.OpenMI.Sdk.Backbone
         public const long ModifiedJulianDateZeroTicks = 586288800000000000L;
 
 
-        private double durationInDays;
+        private double durationInDays = 0;
         private double stampAsModifiedJulianDay;
 
         static double epsilonForTimeCompare = 1e-8;

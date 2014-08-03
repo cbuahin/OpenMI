@@ -308,8 +308,7 @@ namespace Oatc.OpenMI.Gui.Core
 
                     IBaseLinkableComponent iLC = _statusArgs.LinkableComponent;
 
-                    if (iLC.TimeExtent() == null
-                        || iLC.TimeExtent().TimeHorizon == null)
+                    if (iLC.TimeExtent() == null || iLC.TimeExtent().TimeHorizon == null)
                         return null;
 
                     double start = iLC.TimeExtent().TimeHorizon.StampAsModifiedJulianDay;
@@ -322,18 +321,17 @@ namespace Oatc.OpenMI.Gui.Core
                     // ie that have no output exchange items 
                     IList<ITime> times = iLC.TimeExtent().Times;
 
-                    lock (times)
-                    {
-                        if (times != null && times.Count > 0)
-                        {
-                            iTime = iLC.TimeExtent().Times[iLC.TimeExtent().Times.Count - 1];
 
-                            if (iTime.StampAsModifiedJulianDay > last)
-                            {
-                                last = iTime.StampAsModifiedJulianDay;
-                            }
+                    if (times != null && times.Count > 0)
+                    {
+                        iTime = iLC.TimeExtent().Times[iLC.TimeExtent().Times.Count - 1];
+
+                        if (iTime.StampAsModifiedJulianDay > last)
+                        {
+                            last = iTime.StampAsModifiedJulianDay;
                         }
                     }
+
 
                     if (iTime == null)
                     {

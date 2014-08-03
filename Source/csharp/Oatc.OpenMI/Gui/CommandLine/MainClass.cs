@@ -115,15 +115,17 @@ namespace Oatc.OpenMI.Gui.CommandLine
 			// In VS2005 the main thread uses MTA by default, so we have to create new thread,
 			// which will run the application, and set it's appartment state before it's started
 
-			Thread thread = new Thread( new ParameterizedThreadStart( RunApplication ) );			
+            //Thread thread = new Thread( new ParameterizedThreadStart( RunApplication ) );			
 
-			if( mta )
-				thread.SetApartmentState( ApartmentState.MTA );
-			else
-				thread.SetApartmentState( ApartmentState.STA );
+            //if( mta )
+            //    thread.SetApartmentState( ApartmentState.MTA );
+            //else
+            //    thread.SetApartmentState( ApartmentState.STA );
 
-			thread.Start( new object[] { verboseOff, oprFilename } );
-			thread.Join();
+            //thread.Start( new object[] { verboseOff, oprFilename } );
+            //thread.Join();
+
+            RunApplication(new object[] { verboseOff, oprFilename });
 		}
 
 		private static void RunApplication( object data )
@@ -151,28 +153,29 @@ namespace Oatc.OpenMI.Gui.CommandLine
 
 
 				// open OPR
-				CompositionManager composition = new CompositionManager();
+                CompositionRun composition = new CompositionRun();
 
 				if( !verboseOff )
 					Console.WriteLine( "Loading project file "+fileInfo.FullName+"..." );
-				composition.Open(fileInfo);
+                composition.Run(fileInfo);
 
 
-				// prepare listeners
-                if (!verboseOff)
-                {
-                    Console.WriteLine("Preparing listener(s)...");
-                }
 
-				// run simulation
-				if( !verboseOff )
-					Console.WriteLine( "Starting composition run..." );
-				composition.Run(true);
+                //// prepare listeners
+                //if (!verboseOff)
+                //{
+                //    Console.WriteLine("Preparing listener(s)...");
+                //}
 
-				if( !verboseOff )
-					Console.WriteLine( "Closing composition..." );
+                //// run simulation
+                //if( !verboseOff )
+                //    Console.WriteLine( "Starting composition run..." );
+                //composition.Run(true);
 
-				composition.Initialize();
+                //if( !verboseOff )
+                //    Console.WriteLine( "Closing composition..." );
+
+                //composition.Initialize();
 
 				_exitCode = 0;
 			}

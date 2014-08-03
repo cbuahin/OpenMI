@@ -61,10 +61,6 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.dataGridViewStatus = new System.Windows.Forms.DataGridView();
-            this.ComponentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ComponentStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Progress = new Oatc.OpenMI.Gui.Core.Additional.DataGridViewProgressColumn();
-            this.LastUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelMessage = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,6 +69,10 @@
             this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.progressBarRun = new System.Windows.Forms.ProgressBar();
             this.dataGridViewProgressColumn1 = new Oatc.OpenMI.Gui.Core.Additional.DataGridViewProgressColumn();
+            this.ComponentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ComponentStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Progress = new Oatc.OpenMI.Gui.Core.Additional.DataGridViewProgressColumn();
+            this.LastUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStatus)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -81,7 +81,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(548, 225);
+            this.btnCancel.Location = new System.Drawing.Point(647, 227);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 0;
@@ -92,7 +92,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(467, 225);
+            this.btnOk.Location = new System.Drawing.Point(566, 227);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 1;
@@ -119,49 +119,14 @@
             this.dataGridViewStatus.Name = "dataGridViewStatus";
             this.dataGridViewStatus.ReadOnly = true;
             this.dataGridViewStatus.RowHeadersWidth = 4;
-            this.dataGridViewStatus.Size = new System.Drawing.Size(608, 192);
+            this.dataGridViewStatus.Size = new System.Drawing.Size(707, 194);
             this.dataGridViewStatus.TabIndex = 10;
-            // 
-            // ComponentName
-            // 
-            this.ComponentName.DataPropertyName = "ComponentName";
-            this.ComponentName.FillWeight = 74.23858F;
-            this.ComponentName.HeaderText = "Component";
-            this.ComponentName.Name = "ComponentName";
-            this.ComponentName.ReadOnly = true;
-            // 
-            // ComponentStatus
-            // 
-            this.ComponentStatus.DataPropertyName = "ComponentStatus";
-            this.ComponentStatus.FillWeight = 74.23858F;
-            this.ComponentStatus.HeaderText = "Status";
-            this.ComponentStatus.Name = "ComponentStatus";
-            this.ComponentStatus.ReadOnly = true;
-            // 
-            // Progress
-            // 
-            this.Progress.DataPropertyName = "Progress";
-            this.Progress.FillWeight = 203.0457F;
-            this.Progress.HeaderText = "Progress";
-            this.Progress.Name = "Progress";
-            this.Progress.ReadOnly = true;
-            // 
-            // LastUpdated
-            // 
-            this.LastUpdated.DataPropertyName = "LastUpdated";
-            dataGridViewCellStyle1.Format = "G";
-            dataGridViewCellStyle1.NullValue = null;
-            this.LastUpdated.DefaultCellStyle = dataGridViewCellStyle1;
-            this.LastUpdated.FillWeight = 74.23858F;
-            this.LastUpdated.HeaderText = "Last Updated";
-            this.LastUpdated.Name = "LastUpdated";
-            this.LastUpdated.ReadOnly = true;
             // 
             // labelMessage
             // 
             this.labelMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelMessage.AutoSize = true;
-            this.labelMessage.Location = new System.Drawing.Point(12, 226);
+            this.labelMessage.Location = new System.Drawing.Point(12, 228);
             this.labelMessage.Name = "labelMessage";
             this.labelMessage.Size = new System.Drawing.Size(55, 13);
             this.labelMessage.TabIndex = 11;
@@ -174,7 +139,7 @@
             this.viewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(635, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(734, 24);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -214,9 +179,9 @@
             // 
             this.progressBarRun.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBarRun.Location = new System.Drawing.Point(113, 225);
+            this.progressBarRun.Location = new System.Drawing.Point(113, 227);
             this.progressBarRun.Name = "progressBarRun";
-            this.progressBarRun.Size = new System.Drawing.Size(348, 23);
+            this.progressBarRun.Size = new System.Drawing.Size(447, 23);
             this.progressBarRun.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBarRun.TabIndex = 13;
             // 
@@ -228,11 +193,46 @@
             this.dataGridViewProgressColumn1.Name = "dataGridViewProgressColumn1";
             this.dataGridViewProgressColumn1.Width = 287;
             // 
+            // ComponentName
+            // 
+            this.ComponentName.DataPropertyName = "ComponentName";
+            this.ComponentName.FillWeight = 108.0613F;
+            this.ComponentName.HeaderText = "Component";
+            this.ComponentName.Name = "ComponentName";
+            this.ComponentName.ReadOnly = true;
+            // 
+            // ComponentStatus
+            // 
+            this.ComponentStatus.DataPropertyName = "ComponentStatus";
+            this.ComponentStatus.FillWeight = 59.43208F;
+            this.ComponentStatus.HeaderText = "Status";
+            this.ComponentStatus.Name = "ComponentStatus";
+            this.ComponentStatus.ReadOnly = true;
+            // 
+            // Progress
+            // 
+            this.Progress.DataPropertyName = "Progress";
+            this.Progress.FillWeight = 162.5493F;
+            this.Progress.HeaderText = "Progress";
+            this.Progress.Name = "Progress";
+            this.Progress.ReadOnly = true;
+            // 
+            // LastUpdated
+            // 
+            this.LastUpdated.DataPropertyName = "LastUpdated";
+            dataGridViewCellStyle1.Format = "G";
+            dataGridViewCellStyle1.NullValue = null;
+            this.LastUpdated.DefaultCellStyle = dataGridViewCellStyle1;
+            this.LastUpdated.FillWeight = 95.71885F;
+            this.LastUpdated.HeaderText = "Last Updated";
+            this.LastUpdated.Name = "LastUpdated";
+            this.LastUpdated.ReadOnly = true;
+            // 
             // Run
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(635, 260);
+            this.ClientSize = new System.Drawing.Size(734, 262);
             this.Controls.Add(this.progressBarRun);
             this.Controls.Add(this.labelMessage);
             this.Controls.Add(this.dataGridViewStatus);
@@ -264,10 +264,10 @@
 		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem logToolStripMenuItem;
         private System.Windows.Forms.ProgressBar progressBarRun;
+        private Core.Additional.DataGridViewProgressColumn dataGridViewProgressColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ComponentName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ComponentStatus;
         private Core.Additional.DataGridViewProgressColumn Progress;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdated;
-        private Core.Additional.DataGridViewProgressColumn dataGridViewProgressColumn1;
 	}
 }

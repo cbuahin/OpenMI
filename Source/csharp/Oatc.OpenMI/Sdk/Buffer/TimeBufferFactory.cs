@@ -30,20 +30,24 @@ using System;
 using Oatc.OpenMI.Sdk.Spatial;
 using OpenMI.Standard2;
 using OpenMI.Standard2.TimeSpace;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Oatc.OpenMI.Sdk.Buffer
 {
   public class TimeBufferFactory : IAdaptedOutputFactory
   {
     private readonly string id;
+    List<IBaseAdaptedOutput> outputsCreatedSoFar;
 
     public TimeBufferFactory()
     {
-       
+        outputsCreatedSoFar = new List<IBaseAdaptedOutput>();
     }
     public TimeBufferFactory(string id)
     {
       this.id = id;
+      outputsCreatedSoFar = new List<IBaseAdaptedOutput>();
     }
 
     #region Implementation of IDescribable
@@ -74,12 +78,41 @@ namespace Oatc.OpenMI.Sdk.Buffer
       ITimeSpaceOutput tsAdaptee = adaptee as ITimeSpaceOutput;
       if (tsAdaptee == null)
         return (new IIdentifiable[0]);
-      return new IIdentifiable[] { new TimeInterpolator(tsAdaptee), new TimeExtrapolator(tsAdaptee), new LinearOperationAdaptedOutput(tsAdaptee) };
+
+      IIdentifiable[] ids = new IBaseAdaptedOutput[] 
+      {
+          new TimeInterpolator(tsAdaptee), 
+          new TimeExtrapolator(tsAdaptee), 
+          new LinearOperationAdaptedOutput(tsAdaptee) 
+      };
+
+      for (int i = 0; i < ids.Length; i++ )
+      {
+          IBaseAdaptedOutput searchItem = ids[i] as IBaseAdaptedOutput;
+
+          IBaseAdaptedOutput temp = (from n in outputsCreatedSoFar
+                                     where searchItem.Id == n.Id && n.Adaptee == searchItem.Adaptee
+                                     select n).FirstOrDefault();
+
+          if(temp == null)
+          {
+              outputsCreatedSoFar.Add(searchItem);
+          }
+          else
+          {
+              ids[i] = temp;
+          }
+      }
+
+      return ids;
     }
 
     public IBaseAdaptedOutput CreateAdaptedOutput(IIdentifiable adaptedOutputIdentifier, IBaseOutput adaptee, IBaseInput target)
     {
-      IBaseAdaptedOutput adaptor = adaptedOutputIdentifier as IBaseAdaptedOutput;
+      IBaseAdaptedOutput adaptor = (from n in outputsCreatedSoFar
+                                   where n.Id == adaptedOutputIdentifier.Id && n.Adaptee == adaptee
+                                   select n).FirstOrDefault();
+
       if (adaptor == null)
       {
         throw new ArgumentException("Unknown adaptedOutput type - it does not originate from this factory");

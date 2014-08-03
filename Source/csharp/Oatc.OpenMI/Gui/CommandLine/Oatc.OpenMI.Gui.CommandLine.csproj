@@ -140,13 +140,13 @@
     <Content Include="OmiEd_cmd.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Core\Oatc.OpenMI.Gui.Core.csproj">
       <Project>{5ed7c71d-e89a-41f7-8b34-54c0c099412c}</Project>
       <Name>Oatc.OpenMI.Gui.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

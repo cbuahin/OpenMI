@@ -47,8 +47,7 @@ namespace Oatc.OpenMI.Gui.Core
     {
         public static void Save(FileInfo file, bool saveRelativePaths, List<UIModel> models, UIConnection[] connections)
         {
-            opr opr = Serialize(models, connections,
-                saveRelativePaths ? file.Directory : null);
+            opr opr = Serialize(models, connections, saveRelativePaths ? file.Directory : null);
 
             if (saveRelativePaths && opr.models != null)
                 foreach (oprModel model in opr.models)
@@ -106,16 +105,19 @@ namespace Oatc.OpenMI.Gui.Core
 
             for (int n = 0; n < connections.Length; ++n)
             {
-                oprConnections[n] = new oprConnection();
-                oprConnections[n].source_model_indexSpecified = true;
-                oprConnections[n].target_model_indexSpecified = true;
-                oprConnections[n].source_model_index = models.IndexOf(connections[n].SourceModel);
-                oprConnections[n].target_model_index = models.IndexOf(connections[n].TargetModel);
+               UIConnection uiconn = connections[n];
+               oprConnection conn  = new oprConnection();
+               conn.source_model_indexSpecified = true;
+               conn.target_model_indexSpecified = true;
+               conn.source_model_index = models.IndexOf(uiconn.SourceModel);
+               conn.target_model_index = models.IndexOf(uiconn.TargetModel);
+               
+               List<UIAdaptedOutputItem> allAdaptersInConnection;
 
-                List<UIAdaptedOutputItem> allAdaptersInConnection;
+               conn.decorators = Decorators(uiconn, oprPath, out allAdaptersInConnection);
+               conn.links = Links(uiconn, allAdaptersInConnection);
+               oprConnections[n] = conn;
 
-                oprConnections[n].decorators = Decorators(connections[n], oprPath, out allAdaptersInConnection);
-                oprConnections[n].links = Links(connections[n], allAdaptersInConnection);
             }
 
             return oprConnections;
@@ -129,14 +131,17 @@ namespace Oatc.OpenMI.Gui.Core
 
             foreach (Link link in connection.Links)
             {
-                adapter = link.Source;
-
-                while (adapter != null && adapter.ExchangeItem is UIAdaptedOutputItem)
+                foreach (UIOutputItem source in link.Sources)
                 {
-                    if (!allAdaptersInConnection.Contains((UIAdaptedOutputItem)adapter))
-                        allAdaptersInConnection.Add((UIAdaptedOutputItem)adapter);
+                    adapter = source;
 
-                    adapter = adapter.Parent;
+                    while (adapter != null && adapter is UIAdaptedOutputItem)
+                    {
+                        if (!allAdaptersInConnection.Contains((UIAdaptedOutputItem)adapter))
+                            allAdaptersInConnection.Add((UIAdaptedOutputItem)adapter);
+
+                        adapter = adapter.Parent;
+                    }
                 }
             }
 
@@ -148,7 +153,7 @@ namespace Oatc.OpenMI.Gui.Core
                 oprDecorators[n].item_id = allAdaptersInConnection[n].Id;
                 oprDecorators[n].factory = allAdaptersInConnection[n].Factory.Persist(oprPath);
 
-                IList<IArgument> ars = ((ITimeSpaceAdaptedOutput)allAdaptersInConnection[n].Output).Arguments;
+                IList<IArgument> ars = ((ITimeSpaceAdaptedOutput)allAdaptersInConnection[n].TimeSpaceOutput).Arguments;
               
                 oprDecorators[n].arguments = DecoratorArgs(new List<IArgument>(ars).ToArray());
             }
@@ -178,17 +183,75 @@ namespace Oatc.OpenMI.Gui.Core
 
             for (int n = 0; n < connection.Links.Count; ++n)
             {
-				source = connection.Links[n].Source;
+                Link link = connection.Links[n];
+                source = link.Source;
 
-                while (source.Parent != null && source.Parent != source)
+                oprConnectionLink oprLink = new oprConnectionLink()
                 {
+                    target_item_id = link.Target.Id
+                };
+
+
+                oprSourceItem source_item = new oprSourceItem()
+                {
+                      source_item_id = source.Id,
+                      source_item_is_adaptedoutput = source is UIAdaptedOutputItem,
+                      source_item_adpatedoutput_index = source is UIAdaptedOutputItem ? allAdaptersInConnection.IndexOf(source as UIAdaptedOutputItem) : -1,
+                };
+
+                oprLink.source_item_id = source_item;
+
+                source = source.Parent;
+
+                while(source != null)
+                {
+                    oprSourceItem tempItem = new oprSourceItem()
+                    {
+                        source_item_id = source.Id,
+                        source_item_is_adaptedoutput = source is UIAdaptedOutputItem,
+                        source_item_adpatedoutput_index = source is UIAdaptedOutputItem ? allAdaptersInConnection.IndexOf(source as UIAdaptedOutputItem) : -1,
+                    };
+
+                    source_item.parent_item_id = tempItem;
+                    source_item = tempItem;
                     source = source.Parent;
                 }
 
-                links[n] = new oprConnectionLink();
-                links[n].target_item_id = connection.Links[n].Target.Id;
-				links[n].source_item_id = source.Id;
-                links[n].decorated = Decorated(connection.Links[n], allAdaptersInConnection).ToArray();
+                oprSourceItem[] source_items = new oprSourceItem[link.Sources.Count];
+
+                for(int i = 0; i < source_items.Length ; i++)
+                {
+                    source = link.Sources[i];
+
+                    source_item = new oprSourceItem()
+                    {
+                        source_item_id = source.Id,
+                        source_item_is_adaptedoutput = source is UIAdaptedOutputItem,
+                        source_item_adpatedoutput_index = source is UIAdaptedOutputItem ? allAdaptersInConnection.IndexOf(source as UIAdaptedOutputItem) : -1,
+                    };
+
+                    source = source.Parent;
+
+                    source_items[i] = source_item;
+
+
+                    while (source != null)
+                    {
+                        oprSourceItem tempItem = new oprSourceItem()
+                        {
+                            source_item_id = source.Id,
+                            source_item_is_adaptedoutput = source is UIAdaptedOutputItem,
+                            source_item_adpatedoutput_index = source is UIAdaptedOutputItem ? allAdaptersInConnection.IndexOf(source as UIAdaptedOutputItem) : -1,
+                        };
+
+                        source_item.parent_item_id = tempItem;
+                        source_item = tempItem;
+                        source = source.Parent;
+                    }
+
+                }
+                oprLink.source_item_ids = source_items;   
+                links[n] = oprLink;
             }
 
             return links;
@@ -213,7 +276,7 @@ namespace Oatc.OpenMI.Gui.Core
 
 			foreach (UIOutputItem source in outputs)
 			{
-				if (source.Output is ITimeSpaceAdaptedOutput)
+				if (source.TimeSpaceOutput is ITimeSpaceAdaptedOutput)
 				{
 					decorator = new oprConnectionLinkDecorated();
                     decorator.index = allAdaptersInConnection.IndexOf((UIAdaptedOutputItem)source);
@@ -420,7 +483,8 @@ namespace Oatc.OpenMI.Gui.Core
             if (opr.connections == null)
                 return connections;
 
-            UIOutputItem source;
+            Dictionary<string, UIAdaptedOutputItem> adaptedOutputs = new Dictionary<string, UIAdaptedOutputItem>();
+
             UIInputItem target;
 
             UIModel uiSourceModel, uiTargetModel;
@@ -430,14 +494,6 @@ namespace Oatc.OpenMI.Gui.Core
             Dictionary<string, UIInputItem> targets = new Dictionary<string, UIInputItem>();
             List<Link> links = new List<Link>();
 
-            string[] ids;
-            UIAdaptedFactory factory;
-            oprConnectionDecoratorFactory[] oprFactories;
-            oprConnectionDecoratorArgument[][] oprArguments;
-
-            UIOutputItem adapted;
-
-            int nDecorators;
 
             foreach (oprConnection connection in opr.connections)
             {
@@ -461,48 +517,43 @@ namespace Oatc.OpenMI.Gui.Core
                 foreach (ITimeSpaceInput item in uiTargetModel.LinkableComponent.Inputs)
                     targets.Add(item.Id, new UIInputItem(item));
 
-                nDecorators =  connection.decorators != null ? connection.decorators.Length : 0;
+                # region delete later
+                //nDecorators =  connection.decorators != null ? connection.decorators.Length : 0;
 
-                ids = new string[nDecorators];
-                oprFactories = new oprConnectionDecoratorFactory[nDecorators];
-                oprArguments = new oprConnectionDecoratorArgument[nDecorators][];
+                //ids = new string[nDecorators];
+                //oprFactories = new oprConnectionDecoratorFactory[nDecorators];
+                //oprArguments = new oprConnectionDecoratorArgument[nDecorators][];
 
-                for (int n = 0; n < nDecorators; ++n)
-                {
-                    ids[n] = connection.decorators[n].item_id;
-                    oprFactories[n] = connection.decorators[n].factory;
-                    oprArguments[n] = connection.decorators[n].arguments;
-                }
+                //for (int n = 0; n < nDecorators; ++n)
+                //{
+                //    ids[n] = connection.decorators[n].item_id;
+                //    oprFactories[n] = connection.decorators[n].factory;
+                //    oprArguments[n] = connection.decorators[n].arguments;
+                //}
 
-                links.Clear();
+                #endregion
+
+                links = new List<Link>();
 
                 foreach (oprConnectionLink oprLink in connection.links)
                 {
-                    source = sources[oprLink.source_item_id];
+                   
                     target = targets[oprLink.target_item_id];
 
-					adapted = null;
+                    oprSourceItem srcItem = oprLink.source_item_id;
+                    List<UIOutputItem> sourcesm = new List<UIOutputItem>();
+                    UIOutputItem source = BuildOutputItemChain(uiSourceModel.LinkableComponent, srcItem, connection.decorators, sources, adaptedOutputs, oprPath, target);
 
-                    if (oprLink.decorated != null)
+
+                    foreach(oprSourceItem item in oprLink.source_item_ids)
                     {
-                        foreach (oprConnectionLinkDecorated decorated in oprLink.decorated)
-                        {
-                            // TODO ADH modify XSD so index mandatory?
-                            Debug.Assert(decorated.indexSpecified);
-
-                            factory = new UIAdaptedFactory();
-                            factory.Initialise(oprFactories[decorated.index], source.Component, oprPath);
-
-                            adapted = factory.NewAdaptedUIOutputItem(
-								ids[decorated.index], source, target);
-                            
-							SetArguments(oprArguments[decorated.index], (ITimeSpaceAdaptedOutput)adapted.Output);
-
-                            source = adapted;
-                        }
+                        UIOutputItem tempSrc = BuildOutputItemChain(uiSourceModel.LinkableComponent, item, connection.decorators, sources, adaptedOutputs, oprPath, target);
+                        sourcesm.Add(tempSrc);
                     }
 
-					// Just telling target about most decorated source,
+
+
+                    // Just telling target about most decorated source,
 					// not the intermediates (& visa versa).
 					// Probably the safest option re ensuring UI works
 					// in maximum number of cases. 
@@ -510,16 +561,136 @@ namespace Oatc.OpenMI.Gui.Core
 					// TODO ADH: However, might want
 					// to make explicit in Standard?
 
-					target.Provider = source;
-					source.AddConsumer(target);
-					
-					links.Add(new Link(source, target));
+                    if (target.ExchangeItem is IBaseMultiInput)
+                    {
+                        IBaseMultiInput mtarget = (IBaseMultiInput)target.ExchangeItem;
+                        
+                        foreach(UIOutputItem tempout in sourcesm)
+                        {
+                            mtarget.AddProvider(tempout);
+                            tempout.AddConsumer(mtarget);
+                        }
+                    }
+                    else
+                    {
+                        target.Provider = source;
+                        source.AddConsumer(target);
+                    }
+
+                    Link tempLink = new Link(sourcesm, target);
+                    //tempLink.Source = source;
+
+					links.Add(tempLink);
                 }
 
                 uiConnection.Links = links;
             }
 
             return connections;
+        }
+
+        static UIOutputItem BuildOutputItemChain(IBaseLinkableComponent sourceComp, oprSourceItem sourceItem, oprConnectionDecorator[] decorators,
+            Dictionary<string, UIOutputItem> sources, Dictionary<string, UIAdaptedOutputItem> existingAdaptedOutputs, DirectoryInfo oprPath , UIInputItem target)
+        {
+            UIOutputItem src = null;
+
+            if(sourceItem.source_item_is_adaptedoutput)
+            {
+                UIOutputItem parent = null;
+                oprSourceItem parentItem =sourceItem.parent_item_id;
+
+                Debug.Assert(parentItem != null);
+
+                if (existingAdaptedOutputs.ContainsKey(sourceItem.source_item_id))
+                {
+                    src = existingAdaptedOutputs[sourceItem.source_item_id];
+                }
+                else
+                {
+                    if (parentItem.source_item_is_adaptedoutput)
+                    {
+                        if (existingAdaptedOutputs.ContainsKey(parentItem.source_item_id))
+                        {
+                            parent = existingAdaptedOutputs[parentItem.source_item_id];
+                        }
+                        else
+                        {
+                            parent = BuildOutputItemChain(sourceComp, parentItem, decorators, sources, existingAdaptedOutputs, oprPath, target);
+
+                        }
+                    }
+                    else
+                    {
+                        parent = sources[parentItem.source_item_id];
+                    }
+
+                    #region delete later
+
+                    //if (srcItem.source_item_is_adaptedoutput)
+                    //{
+                    //    Debug.Assert(srcItem.source_item_adpatedoutput_index >= 0);
+
+                    //    factory = new UIAdaptedFactory();
+
+                    //    factory.Initialise(oprFactories[srcItem.source_item_adpatedoutput_index], uiSourceModel.LinkableComponent, oprPath);
+
+                    //    adapted = factory.NewAdaptedUIOutputItem(ids[srcItem.source_item_adpatedoutput_index], source, target);
+
+                    //    SetArguments(oprArguments[srcItem.source_item_adpatedoutput_index], (ITimeSpaceAdaptedOutput)adapted.Output);
+
+
+                    //    source = adapted;
+
+                    //}
+                    //else
+                    //{
+                    //    source = sources[srcItem.source_item_id];
+                    //}
+
+                    //UIOutputItem currentSource = source;
+                    //UIOutputItem parentSource = null;
+
+                    //while(srcItem.parent_item_id != null)
+                    //{
+                    //    oprSourceItem parentItem = srcItem.parent_item_id;
+
+                    //    if(parentItem.source_item_is_adaptedoutput)
+                    //    {
+                    //        Debug.Assert(parentItem.source_item_adpatedoutput_index >= 0);
+
+                    //        factory = new UIAdaptedFactory();
+                    //        factory.Initialise(oprFactories[parentItem.source_item_adpatedoutput_index], uiSourceModel.LinkableComponent, oprPath);
+                    //        parentSource = factory.NewAdaptedUIOutputItem(ids[parentItem.source_item_adpatedoutput_index], source, target);
+                    //        SetArguments(oprArguments[parentItem.source_item_adpatedoutput_index], (ITimeSpaceAdaptedOutput)parentSource.Output);
+
+
+                    //    }
+                    //    else
+                    //    {
+                    //        parentSource = sources[parentItem.source_item_id];
+                    //    }
+
+                    //    currentSource.Parent = parentSource;
+                    //    srcItem = parentItem;
+                    //}
+
+                    #endregion
+
+                    UIAdaptedFactory factory = new UIAdaptedFactory();
+                    oprConnectionDecorator decorator = decorators[sourceItem.source_item_adpatedoutput_index];
+                    factory.Initialise(decorator.factory, sourceComp, oprPath);
+                    src = factory.NewAdaptedUIOutputItem(decorator.item_id, parent, target);
+                    SetArguments(decorator.arguments, (ITimeSpaceAdaptedOutput)src.TimeSpaceOutput);
+                    src.Parent = parent;
+                    existingAdaptedOutputs.Add(src.Id, src as UIAdaptedOutputItem);
+                }
+            }
+            else
+            {
+                src = sources[sourceItem.source_item_id];
+            }
+
+            return src;
         }
 
         static List<UIConnection> DeserializeConnectionsV1(guiComposition opr, List<UIModel> models)

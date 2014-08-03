@@ -224,13 +224,12 @@ public partial class oprModel
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
 public partial class oprConnection 
 {
-    
     private oprConnectionLink[] linksField;
     
     private oprConnectionDecorator[] decoratorsField;
-    
+
     private int source_model_indexField;
-    
+
     private bool source_model_indexFieldSpecified;
     
     private int target_model_indexField;
@@ -254,7 +253,7 @@ public partial class oprConnection
     
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-    [System.Xml.Serialization.XmlArrayItemAttribute("decorator", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
+    [System.Xml.Serialization.XmlArrayItemAttribute("adapted_outputs", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
     public oprConnectionDecorator[] decorators 
     {
         get 
@@ -280,7 +279,7 @@ public partial class oprConnection
             this.source_model_indexField = value;
         }
     }
-    
+
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
     public bool source_model_indexSpecified 
@@ -334,28 +333,30 @@ public partial class oprConnectionLink
 {
     
     private oprConnectionLinkDecorated[] decoratedField;
-    
-    private string source_item_idField;
+
+    private oprSourceItem[] source_item_idFields;
+
+    private oprSourceItem source_item_idField;
     
     private string target_item_idField;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("decorated", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-    public oprConnectionLinkDecorated[] decorated 
-    {
-        get
-        {
-            return this.decoratedField;
-        }
-        set 
-        {
-            this.decoratedField = value;
-        }
-    }
+    //[System.Xml.Serialization.XmlElementAttribute("decorated", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+    ///public oprConnectionLinkDecorated[] decorated 
+    //{
+    //    get
+    //    {
+    //        return this.decoratedField;
+    //    }
+    //    set 
+    //    {
+    //        this.decoratedField = value;
+    //    }
+    //}
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string source_item_id 
+    [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+    public oprSourceItem source_item_id 
     {
         get 
         {
@@ -367,7 +368,23 @@ public partial class oprConnectionLink
             this.source_item_idField = value;
         }
     }
-    
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayAttribute("multi_input_exchangeitem_sources", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+    [System.Xml.Serialization.XmlArrayItemAttribute("source", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+    public oprSourceItem[] source_item_ids
+    {
+        get
+        {
+            return this.source_item_idFields;
+        }
+
+        set
+        {
+            this.source_item_idFields = value;
+        }
+    }
+
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
     public string target_item_id 
@@ -383,6 +400,87 @@ public partial class oprConnectionLink
         }
     }
 }
+
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+public partial class oprSourceItem
+{
+    private string source_item_idField;
+
+    private bool source_item_is_adaptedoutput_field;
+
+    private int source_item_adpatedoutput_index_field;
+
+    private oprSourceItem parent_item_idfield;
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string source_item_id
+    {
+        get
+        {
+            return this.source_item_idField;
+        }
+
+        set
+        {
+            this.source_item_idField = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+    public oprSourceItem parent_item_id
+    {
+        get
+        {
+            return this.parent_item_idfield;
+        }
+
+        set
+        {
+            this.parent_item_idfield = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public bool source_item_is_adaptedoutput
+    {
+        get
+        {
+            return this.source_item_is_adaptedoutput_field;
+        }
+
+        set
+        {
+            this.source_item_is_adaptedoutput_field = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public int source_item_adpatedoutput_index
+    {
+        get
+        {
+            return this.source_item_adpatedoutput_index_field;
+        }
+
+        set
+        {
+            this.source_item_adpatedoutput_index_field = value;
+        }
+    }
+
+}
+
+
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]

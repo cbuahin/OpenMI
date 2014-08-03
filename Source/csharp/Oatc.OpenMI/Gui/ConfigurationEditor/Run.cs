@@ -293,7 +293,7 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
                         break;
 				}
 
-				Refresh();
+				//Refresh();
 			}
 		}
 		
@@ -323,8 +323,7 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
 		{
 
 
-				if (e.UserState != null
-					&& (e.UserState is CompositionRun.State))
+				if (e.UserState != null && (e.UserState is CompositionRun.State))
 				{
 					CompositionRun.State state = (CompositionRun.State)e.UserState;
                     ProgressStatus currStatus = status[state.OprIndex];
@@ -362,7 +361,7 @@ namespace Oatc.OpenMI.Gui.ConfigurationEditor
                                 progress.Value, elapsed);
                         }
 
-                        dataGridViewStatus.Refresh();
+                        dataGridViewStatus.InvalidateRow(state.OprIndex);
                     }
                  
 					_logCache.Add(state);

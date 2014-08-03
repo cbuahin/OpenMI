@@ -427,7 +427,7 @@ namespace Oatc.OpenMI.Gui.Core
             {
                 foreach (UIModel model in _models)
                 {
-                    model.LinkableComponent.StatusChanged += LinkableComponent_StatusChanged;
+                   // model.LinkableComponent.StatusChanged += LinkableComponent_StatusChanged;
                 }
 
                 if (!runInSameThread)
@@ -449,12 +449,12 @@ namespace Oatc.OpenMI.Gui.Core
 
         void LinkableComponent_ExchangeItemValueChanged(object sender, ExchangeItemChangeEventArgs e)
         {
-            throw new NotImplementedException();
+           
         }
 
         void LinkableComponent_StatusChanged(object sender, LinkableComponentStatusChangeEventArgs e)
         {
-            throw new NotImplementedException();
+           
         }
 
 
@@ -505,38 +505,36 @@ namespace Oatc.OpenMI.Gui.Core
         /// </summary>
         private void RunThreadFunction()
         {
-            ITimeSpaceComponent trigger = GetTrigger();
+            ITimeSpaceComponent triggered = GetTrigger();
 
-            Debug.Assert(trigger != null);
+            //Debug.Assert(trigger != null);
 
-            Thread.Sleep(0);
+            //Thread.Sleep(0);
 
             try
             {
-                bool allComponentFinished = false;
-                while (!allComponentFinished)
+
+                foreach (UIModel iComponent in _models)
                 {
-                    foreach (UIModel model in _models)
-                    {
-                        model.LinkableComponent.Update();
-                    }
-
-                    // check if components are finished
-                    allComponentFinished = true;
-                    foreach (UIModel model in _models)
-                    {
-                        if (model.LinkableComponent.Status != LinkableComponentStatus.Done)
-                        {
-                            allComponentFinished = false;
-                        }
-
-                        if (model.LinkableComponent.Status == LinkableComponentStatus.Failed)
-                        {
-                            log.Error("Component has failed: " + model.LinkableComponent);
-                            return;
-                        }
-                    }
+                    iComponent.LinkableComponent.Initialize();
+                    iComponent.LinkableComponent.Prepare();
                 }
+                // See comment on WaitingForFinish additional state
+                while (triggered.Status != LinkableComponentStatus.Finishing
+                        && triggered.Status != LinkableComponentStatus.Failed)
+                {
+                 
+                    triggered.Update();
+                }
+
+                foreach (UIModel iComponent in _models)
+                {
+                    iComponent.LinkableComponent.Finish();
+
+                    if (iComponent.LinkableComponent is IDisposable)
+                        ((IDisposable)iComponent.LinkableComponent).Dispose();
+                }
+
             }
             catch (Exception e)
             {

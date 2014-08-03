@@ -130,6 +130,12 @@ namespace Oatc.OpenMI.Gui.Core
 
 		#region IInput Members
 
+
+        public ITimeSpaceInput TimeSpaceInput
+        {
+            get { return _item as ITimeSpaceInput; }
+        }
+       
 		public IBaseOutput Provider
 		{
 			get { return ((ITimeSpaceInput)_item).Provider; }
@@ -167,13 +173,17 @@ namespace Oatc.OpenMI.Gui.Core
             {
                 return _parent;
             }
+            set
+            {
+                _parent = value;
+            }
         }
 
+        public ITimeSpaceOutput TimeSpaceOutput
+        {
+            get { return _item as ITimeSpaceOutput; }
+        }
 
-		public ITimeSpaceOutput Output
-		{
-			get { return (ITimeSpaceOutput)_item; }
-		}
 
 		#region Output Members
 
@@ -245,7 +255,11 @@ namespace Oatc.OpenMI.Gui.Core
             _decoratorId = decoratorId;
 		}
 
- 
+       public ITimeSpaceAdaptedOutput TimeSpaceAdaptedOutput
+       {
+           get { return _item as ITimeSpaceAdaptedOutput; }
+       }
+
        public UIAdaptedFactory Factory
        {
            get { return _factory; }

@@ -48,6 +48,9 @@ namespace Oatc.OpenMI.Sdk.Backbone
   /// <summary>
   /// An TimeSpace input that can handle multiple providers
   /// </summary>
-  public interface ITimeSpaceMultiInput : ITimeSpaceInput, IBaseMultiInput { }
+  public interface ITimeSpaceMultiInput : ITimeSpaceInput, IBaseMultiInput 
+  {
+  
+  }
 
 }

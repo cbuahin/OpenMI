@@ -15,9 +15,9 @@ namespace Oatc.OpenMI.Sdk.Spatial
     double _b;
 
     public LinearOperationAdaptedOutput(ITimeSpaceOutput adaptee)
-      : base("LinearOperation", adaptee)
+      : base(adaptee.Id + " => LinearOperation", adaptee)
     {
-      Caption = "y = A*x + B";
+        Caption = adaptee.Id + " => y = A*x + B";
       Description = "Performs a linear operation on the form: y = Ax + B";
       Arguments.Add(new ArgumentDouble("A", 1.0) { Description = "A in y = A*x + B" });
       Arguments.Add(new ArgumentDouble("B", 0.0) { Description = "B in y = A*x + B" });

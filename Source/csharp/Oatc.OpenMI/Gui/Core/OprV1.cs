@@ -50,7 +50,8 @@ using System.Xml.Serialization;
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
 [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-public partial class guiComposition {
+public partial class guiComposition 
+{
     
     private guiCompositionModel[] modelsField;
     
@@ -60,32 +61,44 @@ public partial class guiComposition {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayItemAttribute("model", IsNullable=false)]
-    public guiCompositionModel[] models {
-        get {
+    public guiCompositionModel[] models 
+    {
+        get 
+        {
             return this.modelsField;
         }
-        set {
+        
+        set
+        {
             this.modelsField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayItemAttribute("uilink", IsNullable=false)]
-    public guiCompositionUilink[] links {
-        get {
+    public guiCompositionUilink[] links 
+    {
+        get 
+        {
             return this.linksField;
         }
-        set {
+
+        set 
+        {
             this.linksField = value;
         }
     }
     
     /// <remarks/>
-    public guiCompositionRunproperties runproperties {
-        get {
+    public guiCompositionRunproperties runproperties
+    {
+        get
+        {
             return this.runpropertiesField;
         }
-        set {
+        
+        set
+        {
             this.runpropertiesField = value;
         }
     }
@@ -97,7 +110,8 @@ public partial class guiComposition {
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public partial class guiCompositionModel {
+public partial class guiCompositionModel 
+{
     
     private string omiField;
     
@@ -111,55 +125,74 @@ public partial class guiCompositionModel {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string omi {
-        get {
+    public string omi 
+    {
+        get 
+        {
             return this.omiField;
         }
-        set {
+        
+        set 
+        {
             this.omiField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute(DataType="integer")]
-    public string rect_x {
-        get {
+    public string rect_x 
+    {
+        get 
+        {
             return this.rect_xField;
         }
-        set {
+
+        set
+        {
             this.rect_xField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute(DataType="integer")]
-    public string rect_y {
-        get {
+    public string rect_y 
+    {
+        get 
+        {
             return this.rect_yField;
         }
-        set {
+
+        set 
+        {
             this.rect_yField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute(DataType="integer")]
-    public string rect_width {
-        get {
+    public string rect_width 
+    {
+        get 
+        {
             return this.rect_widthField;
         }
-        set {
+       
+        set
+        {
             this.rect_widthField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute(DataType="integer")]
-    public string rect_height {
-        get {
+    public string rect_height 
+    {
+        get 
+        {
             return this.rect_heightField;
         }
-        set {
+        set 
+        {
             this.rect_heightField = value;
         }
     }
@@ -171,17 +204,19 @@ public partial class guiCompositionModel {
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public partial class guiCompositionUilink {
+public partial class guiCompositionUilink 
+{
     
     private guiCompositionUilinkLink[] linkField;
     
     private string model_providingField;
     
     private string model_acceptingField;
-    
+
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute("link")]
-    public guiCompositionUilinkLink[] link {
+    public guiCompositionUilinkLink[] link
+    {
         get {
             return this.linkField;
         }
@@ -200,7 +235,7 @@ public partial class guiCompositionUilink {
             this.model_providingField = value;
         }
     }
-    
+
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
     public string model_accepting {
@@ -219,7 +254,8 @@ public partial class guiCompositionUilink {
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public partial class guiCompositionUilinkLink {
+public partial class guiCompositionUilinkLink 
+{
     
     private guiCompositionUilinkLinkDataoperation[] dataoperationField;
     

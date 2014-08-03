@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMI.Standard2", "OpenMI.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWMMOpenMIComponent", "..\..\..\SWMMOpenMIComponent\Source\SWMMOpenMIComponent\SWMMOpenMIComponent.csproj", "{A29A0CB5-CDC2-442C-BA25-38D477DCC9B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationProfiler", "..\..\..\ApplicationProfiler\ApplicationProfiler.csproj", "{EC3C8079-89B2-4526-A798-9D9D4F345CFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,10 @@ Global
 		{A29A0CB5-CDC2-442C-BA25-38D477DCC9B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A29A0CB5-CDC2-442C-BA25-38D477DCC9B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A29A0CB5-CDC2-442C-BA25-38D477DCC9B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC3C8079-89B2-4526-A798-9D9D4F345CFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC3C8079-89B2-4526-A798-9D9D4F345CFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC3C8079-89B2-4526-A798-9D9D4F345CFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC3C8079-89B2-4526-A798-9D9D4F345CFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

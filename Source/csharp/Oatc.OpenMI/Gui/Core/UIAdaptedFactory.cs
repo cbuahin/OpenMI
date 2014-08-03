@@ -32,7 +32,7 @@ using System.Text;
 using System.Collections;
 using System.Reflection;
 using System.IO;
-
+using System.Linq;
 using OpenMI.Standard2;
 using Oatc.OpenMI.Sdk.Backbone;
 using OpenMI.Standard2.TimeSpace;
@@ -177,13 +177,17 @@ namespace Oatc.OpenMI.Gui.Core
 
         public UIAdaptedOutputItem NewAdaptedUIOutputItem(string decoratorId, UIOutputItem parent, ITimeSpaceInput target)
         {
-            Identifier identifier = new Identifier(decoratorId);
+        
+            IIdentifiable[] ids = _factory.GetAvailableAdaptedOutputIds(parent.TimeSpaceOutput, target);
 
-            IBaseAdaptedOutput iAdapted = Factory.CreateAdaptedOutput(identifier, parent, target);
+            IIdentifiable found = (from n in ids
+                                  where n.Id == decoratorId select n).FirstOrDefault();
 
-            UIAdaptedOutputItem item = new UIAdaptedOutputItem(this, identifier, (ITimeSpaceAdaptedOutput)iAdapted, parent);
+            IBaseAdaptedOutput iAdapted = _factory.CreateAdaptedOutput(found, parent.TimeSpaceOutput, target);
 
-            parent.AddAdaptedOutput((IBaseAdaptedOutput)item.Output);
+            UIAdaptedOutputItem item = new UIAdaptedOutputItem(this, found, (ITimeSpaceAdaptedOutput)iAdapted, parent);
+
+            parent.AddAdaptedOutput(item.TimeSpaceAdaptedOutput);
 
             return item;
         }

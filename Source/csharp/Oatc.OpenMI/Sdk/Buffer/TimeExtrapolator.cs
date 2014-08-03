@@ -40,7 +40,7 @@ namespace Oatc.OpenMI.Sdk.Buffer
         }
 
       public TimeExtrapolator(ITimeSpaceOutput adaptee)
-          : base(timeExtrapolatorId, adaptee)
+          : base(adaptee.Id + " => " + timeExtrapolatorId, adaptee)
         {
         }
     }

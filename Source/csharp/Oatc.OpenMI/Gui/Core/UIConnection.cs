@@ -194,13 +194,13 @@ namespace Oatc.OpenMI.Gui.Core
 
             foreach(UIOutputItem source in Sources)
             {
-                UIOutputItem parent = source.Parent;
+                UIOutputItem parent = source;
                 
                 bool found = false;
 
-                while(parent != null)
+                while(parent.Parent != null)
                 {
-                    if (parent == output || parent.ExchangeItem == output.ExchangeItem)
+                    if (parent.Parent == output || parent.Parent.ExchangeItem == output.ExchangeItem)
                     {
                         found = true;
                        break;
